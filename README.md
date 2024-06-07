@@ -5,3 +5,6 @@
    - rate limit
    - manipulate request headers : authorization
    - monitoring
+
+spring cloud gateway routes 
+   - id ,predicates,filters,url
