@@ -5,3 +5,9 @@ https://howtodoinjava.com/java/multi-threading/java-runnable-vs-callable/
 2.
 https://stackoverflow.com/questions/21300924/difference-between-executors-newfixedthreadpool1-and-executors-newsinglethread 
 https://www.concretepage.com/java/java-executors-newsinglethreadexecutor
+3.
+newSingleThreadExecutor() vs newFixedThreadPool(1)
+Main difference between the two is the type of queue used. newSingleThreadExecutor() uses an unbounded queue, 
+while Executors.newFixedThreadPool(1) uses a fixed-size queue. If the application submits many tasks to the thread pool,
+the unbounded queue of newSingleThreadExecutor() can lead to out-of-memory errors, 
+while the fixed-size queue of Executors.newFixedThreadPool(1) prevents the number of queued tasks from exceeding a certain limit.
