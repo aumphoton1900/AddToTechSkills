@@ -1,0 +1,7 @@
+Executors 
+=========
+1. difference between callable and Runnable ? 
+https://howtodoinjava.com/java/multi-threading/java-runnable-vs-callable/
+2.
+https://stackoverflow.com/questions/21300924/difference-between-executors-newfixedthreadpool1-and-executors-newsinglethread 
+https://www.concretepage.com/java/java-executors-newsinglethreadexecutor
