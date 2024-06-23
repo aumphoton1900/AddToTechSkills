@@ -1,8 +1,8 @@
-
+1.
+https://vladmihalcea.com/optimistic-locking-version-property-jpa-hibernate/
 However, this session-based database interaction is no longer the norm, especially when accessing services over the Internet. 
 This is because you can no longer hold onto a database connection across multiple HTTP requests. 
 For this reason, the ACID guarantees no longer hold when your application-level transaction spans over 
 multiple HTTP requests as well as physical database transactions.
-
 One example of an anomaly that can happen because reads and writes happen in different database transactions is the lost update phenomenon.
 
