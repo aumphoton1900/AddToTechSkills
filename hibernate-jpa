@@ -7,4 +7,5 @@ multiple HTTP requests as well as physical database transactions.
 One example of an anomaly that can happen because reads and writes happen in different database transactions is the lost update phenomenon.
 
 https://www.logicbig.com/tutorials/spring-framework/spring-data/pessimistic-locking-and-lock-annotation.html
+https://stackoverflow.com/questions/4509086/what-is-the-difference-between-persist-and-merge-in-jpa-and-hibernate
 
