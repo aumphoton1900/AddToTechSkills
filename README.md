@@ -30,4 +30,4 @@ Q3 : why java not have jre after java 8 onwards?
 Security Problems: Assume we have a JAR and inside that jar we have 2 packages.
  exports com.geeksforgeeks.demo.impl;
 
-Q4 : jvm /jdk /jre ?
+Q4 : jvm /jre /jdk ?
