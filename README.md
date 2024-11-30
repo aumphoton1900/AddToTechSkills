@@ -21,3 +21,13 @@ So, how do we know if a request is likely to fail? Yeah, this can be known by re
 sent to other microservices. For example, 4 out of 5 requests sent failed or timeout,
 then most likely the next request will also encounter the same thing.
 
+Q3 : why java not have jre after java 8 onwards?
+ - modular jar file. 
+ - In module-info.Java, we can mention all the dependencies/which modules are needed at the run time. [requires module3;
+ -  Now at the compile time with the help of module-info.Java, compiler will get to know that what are classes needed to run the application and at the compilation time only compiler will check that the corresponding classes/packages are present inside the module or not. If the required classes are present then the code will compile successfully otherwise it will throw compilation errors at the compile time only.
+ -  We can resolve this issue with JPMS. Jigsaw breaks up the JDK itself into many modules e.g. Java.sql contains the familiar SQL classes, Java.io contains the familiar IO classes etc. As per requirement, we can use appropriate module. No need to use the entire JDK.
+ -  Version conflicts: [requires module3;]
+Security Problems: Assume we have a JAR and inside that jar we have 2 packages.
+ exports com.geeksforgeeks.demo.impl;
+
+Q4 : jvm /jdk /jre ?
