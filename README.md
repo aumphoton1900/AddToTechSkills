@@ -35,3 +35,5 @@ Q5 : Difference between ClassNotFoundException vs NoClassDefFoundError in Java ?
 https://javarevisited.blogspot.com/2011/07/classnotfoundexception-vs.html#google_vignette
 List 
 https://javagoal.com/copyonwritearraylist-in-java/
+
+https://soshace.com/2020/09/11/spring-cloud-config-refresh-strategies/
