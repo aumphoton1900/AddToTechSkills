@@ -37,3 +37,8 @@ List
 https://javagoal.com/copyonwritearraylist-in-java/
 
 https://soshace.com/2020/09/11/spring-cloud-config-refresh-strategies/
+
+In the case of using Spring Cloud Config Server; Spring Cloud offers the following methods to refresh the properties in config clients.
+By calling the /actuator/refresh endpoint exposed on the config client via the Spring Actuator.
+By calling the /actuator/bus-refresh endpoint exposed on the config client integrated with Spring Cloud Bus.
+By calling the /monitor endpoint exposed on the config server integrated with Spring Cloud Bus.
