@@ -1,1 +1,15 @@
+Files
+1. public static Stream<String> lines​(Path path) throws IOException
+Read all lines from a file as a Stream. Bytes from the file are decoded into characters using the UTF-8 charset.
+Returns: the lines from the file as a Stream
+Throws:
+IOException - if an I/O error occurs opening the file
+SecurityException - In the case of the default provider, and a security manager is installed, 
+the checkRead method is invoked to check read access to the file.
+
+1.2   public static Stream<String> lines(Path path) throws IOException
+1.3   public static Stream<String> lines(Path path,Charset cs) throws IOException
+      Read all lines from a file as a Stream.
+https://www.logicbig.com/how-to/code-snippets/jcode-java-io-files-lines.html
+
 
