@@ -23,3 +23,44 @@ When using Spring Boot, an appropriate bean of type PlatformTransactionManager w
 so we just need to simply inject it. 
 Otherwise, we should manually register a PlatformTransactionManager bean.
 
+1) Class DefaultTransactionDefinition
+All Implemented Interfaces:
+Serializable, TransactionDefinition
+Direct Known Subclasses:
+DefaultTransactionAttribute, TransactionTemplate
+
+PREFIX_ISOLATION  Prefix for the isolation constants defined in TransactionDefinition.
+PREFIX_PROPAGATION Prefix for the propagation constants defined in TransactionDefinition.
+PREFIX_TIMEOUT Prefix for transaction timeout values in description strings.
+READ_ONLY_MARKER Marker for read-only transactions in description strings.
+
+Fields inherited from interface org.springframework.transaction.TransactionDefinition
+ISOLATION_DEFAULT, ISOLATION_READ_COMMITTED, 
+ISOLATION_READ_UNCOMMITTED, ISOLATION_REPEATABLE_READ, 
+ISOLATION_SERIALIZABLE, 
+
+PROPAGATION_MANDATORY, 
+PROPAGATION_NESTED, 
+PROPAGATION_NEVER, 
+PROPAGATION_NOT_SUPPORTED, 
+PROPAGATION_REQUIRED, 
+PROPAGATION_REQUIRES_NEW, 
+PROPAGATION_SUPPORTS, 
+TIMEOUT_DEFAULT
+
+final void setIsolationLevel(int isolationLevel) : Set the isolation level.
+final void setIsolationLevelName(String constantName)
+Set the isolation level by the name of the corresponding constant in TransactionDefinition — for example, "ISOLATION_DEFAULT".
+final void setName(String name) Set the name of this transaction.
+final void setPropagationBehavior(int propagationBehavior) Set the propagation behavior.
+final void setPropagationBehaviorName(String constantName)
+Set the propagation behavior by the name of the corresponding constant in TransactionDefinition — for example, "PROPAGATION_REQUIRED".
+
+TransactionTemplate
+Template class that simplifies programmatic transaction demarcation and transaction exception handling.
+TransactionTemplate(PlatformTransactionManager transactionManager, TransactionDefinition transactionDefinition)
+Construct a new TransactionTemplate using the given transaction manager, taking its default settings from the given transaction definition.
+
+<T> T execute(TransactionCallback<T> action)
+Execute the action specified by the given callback object within a transaction.
+
