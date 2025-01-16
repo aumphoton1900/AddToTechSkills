@@ -7,4 +7,14 @@ If for whatever reason we can’t separate them, we can still use Spring APIs to
 Using TransactionTemplate
 TransactionTemplate provides a set of callback-based APIs to manage transactions manually. 
 In order to use it, we should first initialize it with a PlatformTransactionManager.
-
+// test annotations
+class ManualTransactionIntegrationTest {
+    @Autowired
+    private PlatformTransactionManager transactionManager;
+    private TransactionTemplate transactionTemplate;
+    @BeforeEach
+    void setUp() {
+        transactionTemplate = new TransactionTemplate(transactionManager);
+    } 
+    // omitted
+}
