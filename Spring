@@ -3,3 +3,8 @@ Transaction Management
 Mixing the database I/O with other types of I/O in a transactional context isn’t a great idea.
 So, the first solution for these sorts of problems is to separate these types of I/O altogether.
 If for whatever reason we can’t separate them, we can still use Spring APIs to manage transactions manually.
+
+Using TransactionTemplate
+TransactionTemplate provides a set of callback-based APIs to manage transactions manually. 
+In order to use it, we should first initialize it with a PlatformTransactionManager.
+
