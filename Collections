@@ -1,3 +1,18 @@
 Set
-1. how HashSet , LinkedhashSet work internally in java ?
+=========
+1. how HashSet , LinkedhashSet work internally in java ? [javaconceptoftheday]
+2. how linkedhashSet maintain insertion order in java ?
+  each key,value pair are instances of Map.Entry in java 
+  insertion order are maintained by adding two new fields to this class
+ Class Entry<K,V>  extends HashMap.Entry<K,V> {
+  Entry<k,v> before,after.
+ }
+ // a doubly linkedlist.
+
+
+Queue
+=======
+1. a ds where elements are added from one end tail of queue , removed (head).
+ PriorityQueue , ArrayDeque,LinkedList.
+
 
