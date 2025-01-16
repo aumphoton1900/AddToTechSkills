@@ -11,3 +11,45 @@ Main difference between the two is the type of queue used. newSingleThreadExecut
 while Executors.newFixedThreadPool(1) uses a fixed-size queue. If the application submits many tasks to the thread pool,
 the unbounded queue of newSingleThreadExecutor() can lead to out-of-memory errors, 
 while the fixed-size queue of Executors.newFixedThreadPool(1) prevents the number of queued tasks from exceeding a certain limit.
+
+4.CompletableFuture 
+CompletableFuture is a class introduced in Java 8 that allows us to write asynchronous, non-blocking code. 
+
+A Future is used as a reference to the result of an asynchronous computation. 
+It provides an isDone() method to check whether the computation is done or not, 
+and a get() method to retrieve the result of the computation when it is done.
+
+- Running asynchronous computation using runAsync() -
+  If you want to run some background task asynchronously and don’t want to return anything from the task, 
+  then you can use CompletableFuture.runAsync() method. 
+  It takes a Runnable object and returns CompletableFuture<Void>.
+- Run a task asynchronously and return the result using supplyAsync() -
+- CompletableFuture.supplyAsync() is your companion. 
+   It takes a Supplier<T> and returns CompletableFuture<T> where 
+   T is the type of the value obtained by calling the given supplier -
+   A Supplier<T> is a simple functional interface which represents a supplier of results. 
+   It has a single get() method where you can write your background task and return the result.
+
+// Variations of runAsync() and supplyAsync() methods
+static CompletableFuture<Void>	runAsync(Runnable runnable)
+static CompletableFuture<Void>	runAsync(Runnable runnable, Executor executor)
+static <U> CompletableFuture<U>	supplyAsync(Supplier<U> supplier)
+static <U> CompletableFuture<U>	supplyAsync(Supplier<U> supplier, Executor executor)
+
+Java Concurrency API defines the following three executor interfaces that covers everything that 
+is needed for creating and managing threads -
+
+Executor - A simple interface that contains a method called execute() to launch a task specified by a Runnable object.
+
+ExecutorService - A sub-interface of Executor that adds functionality to manage the lifecycle of the tasks. 
+It also provides a submit() method whose overloaded versions can accept a Runnable as well as a Callable object. 
+Callable objects are similar to Runnable except that the task specified by a Callable object can also return a value. 
+We’ll learn about Callable in more detail, in the next blog post.
+
+ScheduledExecutorService - A sub-interface of ExecutorService. It adds functionality to schedule the execution of the tasks.
+Apart from the above three interfaces, The API also provides an Executors class that contains 
+factory methods for creating different kinds of executor services.
+
+https://www.callicoder.com/java-8-completablefuture-tutorial/
+https://www.callicoder.com/java-executor-service-and-thread-pool-tutorial/
+ 
