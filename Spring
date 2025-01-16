@@ -1,1 +1,5 @@
-
+Transaction Management
+1.
+Mixing the database I/O with other types of I/O in a transactional context isn’t a great idea.
+So, the first solution for these sorts of problems is to separate these types of I/O altogether.
+If for whatever reason we can’t separate them, we can still use Spring APIs to manage transactions manually.
