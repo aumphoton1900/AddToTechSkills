@@ -18,3 +18,8 @@ class ManualTransactionIntegrationTest {
     } 
     // omitted
 }
+The PlatformTransactionManager helps the template to create, commit or roll back transactions.
+When using Spring Boot, an appropriate bean of type PlatformTransactionManager will be automatically registered,
+so we just need to simply inject it. 
+Otherwise, we should manually register a PlatformTransactionManager bean.
+
