@@ -1,2 +1,3 @@
 1. https://www.javatpoint.com/transaction-isolation-levels-in-dbms
-
+Among these four properties, with the help of isolation, the database can determine 
+how the transaction integrity is visible to the system and the user.
