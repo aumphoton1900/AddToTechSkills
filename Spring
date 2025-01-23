@@ -141,5 +141,62 @@ in the range and commits
 We can set the isolation level of a transaction by @Transactional::isolation. It has these five enumerations in 
 Spring: DEFAULT, READ_UNCOMMITTED, READ_COMMITTED, REPEATABLE_READ, SERIALIZABLE.
 
+==========================
+(1.) How to test controller ?
 
+@WebMvcTest(controllers = {LibraryAssetController.class})
+public class LibraryAssetControllerUnitTest {
+    private final LibraryAsset bookThingsFallApart =
+            LibraryAsset.builder().assetTitle("Things Fall Apart").assetCode("0385474547")
+                    .editionYear((short) 1958).creatorName("Chinua Achebe").publisherName("William Heinemann")
+                    .priceUSD("17.95").assetCategory(EntityCharacteristics.BOOK_FICTION)
+                    .assetType(EntityCharacteristics.BOOK_PAPERBACK).build();
 
+    private final LibraryAsset mediaTAJazz =
+            LibraryAsset.builder().assetTitle("Trans Atlantic Jazz").assetCode("0385474548")
+                    .editionYear((short) 2001).creatorName("Jazperience").publisherName("L. Asle Roe")
+                    .priceUSD("9.95").assetCategory(EntityCharacteristics.MEDIA_AUDIO)
+                    .assetType(EntityCharacteristics.MEDIA_AUDIO).build();
+
+    private final List<LibraryAsset> baseAssets = Arrays.asList(this.bookThingsFallApart, this.mediaTAJazz);
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    private LibraryAssetService assetService;
+
+    // Tests with the @Test annotation.
+
+}
+
+@Test
+    public void whenGetAllAssets_thenControlFlowCorrect() throws Exception {
+        Mockito.when(this.assetService.getAllAssets()).thenReturn(this.baseAssets);
+
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/assets/v1/all"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
+                .andExpect(
+                        MockMvcResultMatchers.jsonPath("$[0].assetCode")
+                                .value(this.bookThingsFallApart.getAssetCode())
+                ).andExpect(
+                        MockMvcResultMatchers.jsonPath("$[1].assetCode")
+                                .value(this.mediaTAJazz.getAssetCode())
+                );
+
+        Mockito.verify(this.assetService, Mockito.times(1)).getAllAssets();
+    }
+
+(2.) 
+What Are @WebMvcTest and @SpringBootTest
+The @WebMvcTest annotation is used to create MVC (or more specifically controller) related tests. 
+It can also be configured to test for a specific controller. It mainly loads and makes testing of the web layer easy.
+The @SpringBootTest annotation is used to create a test environment by loading a full application context 
+(like classes annotated with @Component and @Service, DB connections, etc). It looks for the main class (which has the @SpringBootApplication annotation) and 
+uses it to start the application context.
+Both of these annotations were introduced in Spring Boot 1.4.
+
+https://www.baeldung.com/spring-mockmvc-vs-webmvctest
+https://www.baeldung.com/junit-datajpatest-repository
