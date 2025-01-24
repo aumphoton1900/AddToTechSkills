@@ -55,4 +55,19 @@ dependency>
 This will include the jaxws-api Jar file in your project when you will build your maven java project.
 
 Getting Ready for Java 11/JDK 11 and Deprecated Java EE Modules JAXB, JAX-WS, JAF, JTA, CORBA.
+3.1
+---
+class Singleton implements Serializable {
+ 
+    // public instance initialized when loading the class
+    public static Singleton instance = new Singleton();
+ 
+    private Singleton()
+    {
+        // private constructor
+    }
+ 
+    // implement readResolve method
+    protected Object readResolve() { return instance; }
+}
 
