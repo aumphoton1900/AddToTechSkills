@@ -15,4 +15,24 @@ https://www.logicbig.com/how-to/code-snippets/jcode-java-io-files-lines.html
 Memory Management 
 ==================
 https://javarush.com/en/groups/posts/en.917.garbage-collector-in-java
+Permgen vs Metaspace 
+
+Java 11 changes
+-----------------
+Removal of Java EE and CORBA Modules
+
+In JDK 11, the Java EE and CORBA modules were removed. These modules were deprecated for removal in JDK 9.
+
+The removed modules were:
+
+java.xml.ws: Java API for XML Web Services (JAX-WS), Web Services Metadata for the Java Platform, and 
+SOAP with Attachments for Java (SAAJ)
+java.xml.bind: Java Architecture for XML Binding (JAXB)
+java.xml.ws.annotation: The subset of the JSR-250 Common Annotations defined by Java SE to support web services
+java.corba: CORBA
+java.transaction: The subset of the Java Transaction API defined by Java SE to support CORBA Object Transaction Services
+java.activation: JavaBeans Activation Framework
+java.se.ee: Aggregator module for the six modules above
+jdk.xml.ws: Tools for JAX-WS
+jdk.xml.bind: Tools for JAXB
 
