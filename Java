@@ -36,4 +36,16 @@ java.se.ee: Aggregator module for the six modules above
 jdk.xml.ws: Tools for JAX-WS
 jdk.xml.bind: Tools for JAXB
 
-java.lang.ClassNotFoundException: javax.xml.ws.WebServiceFeature in Java 11
+a) 
+java.lang.ClassNotFoundException: javax.xml.ws.WebServiceFeature in Java 11.
+Caused by: java.lang.ClassNotFoundException: javax.xml.ws.WebServiceFeature
+
+
+After java 11 changes.
+dependency>
+    <groupId>javax.xml.ws</groupId>
+    <artifactId>jaxws-api</artifactId>
+    <version>2.3.1</version>
+</dependency>
+This will include the jaxws-api Jar file in your project when you will build your maven java project.
+
