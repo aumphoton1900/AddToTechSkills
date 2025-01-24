@@ -12,4 +12,7 @@ the checkRead method is invoked to check read access to the file.
       Read all lines from a file as a Stream.
 https://www.logicbig.com/how-to/code-snippets/jcode-java-io-files-lines.html
 
+Memory Management 
+==================
+https://javarush.com/en/groups/posts/en.917.garbage-collector-in-java
 
