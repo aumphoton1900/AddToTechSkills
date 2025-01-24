@@ -12,6 +12,9 @@ the checkRead method is invoked to check read access to the file.
       Read all lines from a file as a Stream.
 https://www.logicbig.com/how-to/code-snippets/jcode-java-io-files-lines.html
 
+class loader  - application ,Extension , 
+bootstrap - serve as parent of 
+
 Memory Management 
 ==================
 https://javarush.com/en/groups/posts/en.917.garbage-collector-in-java
@@ -40,6 +43,8 @@ a)
 java.lang.ClassNotFoundException: javax.xml.ws.WebServiceFeature in Java 11.
 Caused by: java.lang.ClassNotFoundException: javax.xml.ws.WebServiceFeature
 
+https://crunchify.com/java-jdk-11-and-details-on-deprecated-java-ee-modules-including-jaxb-jax-ws-jaf-jta-corba/
+https://www.studytonight.com/post/solved-caused-by-javalangclassnotfoundexception-javaxxmlwswebservicefeature-in-java-11
 
 After java 11 changes.
 dependency>
@@ -48,4 +53,6 @@ dependency>
     <version>2.3.1</version>
 </dependency>
 This will include the jaxws-api Jar file in your project when you will build your maven java project.
+
+Getting Ready for Java 11/JDK 11 and Deprecated Java EE Modules JAXB, JAX-WS, JAF, JTA, CORBA.
 
