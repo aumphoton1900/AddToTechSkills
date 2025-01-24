@@ -36,3 +36,4 @@ java.se.ee: Aggregator module for the six modules above
 jdk.xml.ws: Tools for JAX-WS
 jdk.xml.bind: Tools for JAXB
 
+java.lang.ClassNotFoundException: javax.xml.ws.WebServiceFeature in Java 11
