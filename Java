@@ -71,4 +71,4 @@ class Singleton implements Serializable {
     protected Object readResolve() { return instance; }
 }
 -----------
-https://tarunjain07.medium.com/notes-java8-stream-terminal-vs-non-terminal-operation-etc-945c0644468d
+
