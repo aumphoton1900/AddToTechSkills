@@ -1,0 +1,7 @@
+1. can we apply streams method on a hashmap  ? yes or no
+2.Stream<T>	peek(Consumer<? super T> action)
+3. javascript : include 
+4.
+rest template doesn't support get request with body . for more details you can refer this article.
+If you are on Java 11 I would suggest you to use java.net.HttpClient which will fulfill your need.
+https://stackoverflow.com/questions/69805693/sending-get-request-via-rest-template-with-json-request-body-getting-failed-with/70557119#:~:text=rest%20template%20doesn't%20support,net.
