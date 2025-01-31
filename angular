@@ -1,1 +1,10 @@
 https://www.freetimelearning.com/online-quiz/angular-quiz-que-ans.php?Which-of-the-following-is-not-a-hook-application-life-cycle?&id=4
+Two of the most commonly used operators in RxJS are mergeMap and concatMap . 
+
+What Is OpenAPI?
+OpenAPI Specification (formerly Swagger Specification) is an API description format for REST APIs. An OpenAPI file allows you to describe your entire API, including:
+
+Available endpoints (/users) and operations on each endpoint (GET /users, POST /users)
+Operation parameters Input and output for each operation
+Authentication methods
+Contact information, license, terms of use, and other information
