@@ -204,3 +204,7 @@ https://www.baeldung.com/junit-datajpatest-repository
 (3.)
  https://docs.spring.io/spring-boot/docs/1.0.0.RELEASE/reference/html/production-ready-metrics.html
 https://www.dineshonjava.com/spring-boot-actuator-complete-guide/
+
+MCQ :
+pathparameter
+https://swagger.io/docs/specification/v3_0/describing-parameters/#:~:text=Path%20parameters%20are%20variable%20parts,denoted%20with%20curly%20braces%20%7B%20%7D%20.
