@@ -1,0 +1,23 @@
+set 
+
+1]EnumSet
+ it will never throw ConcurrentModificationException.
+ Null elements are not permitted.
+ Set<MyEnum> s = Collections.synchronizedSet(EnumSet.noneOf(MyEnum.class));
+
+EnumSet is an abstract class and it provides two concrete implementations, java.util.RegularEnumSet and java.util.JumboEnumSet. 
+The main difference between RegularEnumSet and 
+JumboEnumSet is that the former uses a long variable to store elements while later uses a long[] to store its element. 
+
+Since RegularEnumSet uses a long variable, which is a 64-bit data type, it can only hold that much of an element. 
+
+That's why when an empty EnumSet is created using EnumSet.noneOf() method, it chooses RegularEnumSet 
+if the key universe (number of enum instances in Key Enum) 
+is less than or equal to 64 and JumboEnumSet if the key universe is more than 64.
+
+2]CopyOnWriteArraySet / ConcurrentHashSet
+  ==========================================
+https://javagoal.com/java-copyonwritearrayset/
+
+
+
