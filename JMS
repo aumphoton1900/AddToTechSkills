@@ -1,3 +1,9 @@
 1.
 https://codingharbour.com/apache-kafka/what-is-a-consumer-group-in-kafka/
 
+In the topic post, I also mentioned that records remain in the topic even after being consumed. 
+This allows multiple consumers to consume the same message, but it also allows one more thing: 
+the same consumer can re-consume the records it already read, by simply rewinding its consumer offset.
+This is very useful when you e.g. had a bug in your consumer and want to re-read the records after fixing the bug.
+
+
