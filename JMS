@@ -7,4 +7,13 @@ the same consumer can re-consume the records it already read, by simply rewindin
 This is very useful when you e.g. had a bug in your consumer and want to re-read the records after fixing the bug.
 
 https://codingharbour.com/apache-kafka/how-to-create-kafka-consumer-in-java/
+1]
+consumer.subscribe(Collections.singleton("java_topic"));
+while (true) {
+    ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+    for (ConsumerRecord<String, String> record : records) {
+        System.out.println("Message received: " + record.value());
+    }
+    consumer.commitAsync();
+}
 
