@@ -12,7 +12,7 @@ keytool -genkeypair -alias <alias> -keypass <keypass> -validity <validity> -stor
       keytool -list -storepass <storepass> 
       keytool -list -v -alias <alias> -storepass <storepass> 
  videos 
-1. https://www.youtube.com/watch?v=viOds2uniC0
+1. https://www.youtube.com/watch?v=UNZzilk8bo8
 2. https://www.youtube.com/watch?v=NH49dTEYPg0
 
 type of keystore 
