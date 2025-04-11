@@ -1,4 +1,10 @@
-1. keystore 
+1. certificates
+https://knowledge.digicert.com/quovadis/ssl-certificates/
+ssl-general-topics/common-java-keytool-commands#:~:text=Introduction,hold%20multiple%20certificates%20within%20it.
+
+1.
+
+keystore 
   https://www.baeldung.com/keytool-intro
 keytool -genkeypair -alias <alias> -keypass <keypass> -validity <validity> -storepass <storepass>
 
