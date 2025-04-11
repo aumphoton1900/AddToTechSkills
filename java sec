@@ -11,9 +11,15 @@ keytool -genkeypair -alias <alias> -keypass <keypass> -validity <validity> -stor
  1.1] 4. Listing Certificates in the Keystore
       keytool -list -storepass <storepass> 
       keytool -list -v -alias <alias> -storepass <storepass> 
-
-    
  videos 
 1. https://www.youtube.com/watch?v=viOds2uniC0
-2. https://www.youtube.com/watch?v=UNZzilk8bo8
+2. https://www.youtube.com/watch?v=NH49dTEYPg0
+
+type of keystore 
+- JKS 
+- JCEKS java cryptography extension ks
+- PKCS#12
+- PKCS#11
+- windows-my/windows-root
+- 3rd party keystore (bouncy castle / iaik)
 
