@@ -1,0 +1,10 @@
+1. keystore 
+  https://www.baeldung.com/keytool-intro
+keytool -genkeypair -alias <alias> -keypass <keypass> -validity <validity> -storepass <storepass>
+
+ 1.1] 4. Listing Certificates in the Keystore
+      keytool -list -storepass <storepass> 
+      keytool -list -v -alias <alias> -storepass <storepass> 
+
+    
+ 
