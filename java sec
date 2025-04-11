@@ -13,4 +13,7 @@ keytool -genkeypair -alias <alias> -keypass <keypass> -validity <validity> -stor
       keytool -list -v -alias <alias> -storepass <storepass> 
 
     
- 
+ videos 
+1. https://www.youtube.com/watch?v=viOds2uniC0
+2. https://www.youtube.com/watch?v=UNZzilk8bo8
+
