@@ -23,3 +23,12 @@ type of keystore
 - windows-my/windows-root
 - 3rd party keystore (bouncy castle / iaik)
 
+Q2 : how to generate keys and store them in keystore ?
+$keytool -genkey 
+it will generate a key pair along with a self signed certificate. 
+it will generate key store in home directory. 
+
+#keytool --list -rfc 
+will generate certificate in pem format.
+
+https://www.youtube.com/watch?v=06gJR9YtV9s
