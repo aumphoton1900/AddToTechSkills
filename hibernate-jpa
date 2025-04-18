@@ -12,3 +12,11 @@ https://stackoverflow.com/questions/4509086/what-is-the-difference-between-persi
 https://medium.com/@rajibrath20/the-best-way-to-map-a-onetomany-relationship-with-jpa-and-hibernate-dbbf6dba00d3#:~:text=The%20inverse%20side%20of%20a%20bidirectional%20relationship%20must,entity%20that%20is%20the%20owner%20of%20the%20relationship.
 
 2. why hibernate/jdbc can not use for global transaction mgmt but only for local transaction management.
+3. cache 
+https://medium.com/@himani.prasad016/caching-in-hibernate-3ad4f479fcc0
+1st - session 
+2nd - sessionFactory | CacheConcurrencyStrategy.
+read_only ,read_write,nonstrict_read_write, transactional
+
+
+
