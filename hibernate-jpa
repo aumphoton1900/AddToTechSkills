@@ -23,12 +23,24 @@ NONSTRICT_READ_WRITE,
 READ_WRITE, and 
 TRANSACTIONAL.
 
-hibernate cache invalidate 
+hibernate cache , invalidate 
 ------------------------------------
 To ensure data consistency, Hibernate provides a cache synchronization mechanism that 
 automatically updates the cache when the database is updated. This mechanism is called cache invalidation. 
 When an entity is updated, Hibernate invalidates the corresponding cache entry,
 and the next time the entity is accessed, it is fetched from the database and stored in the cache.
+
+>>To enable query caching in Hibernate, you need to set the hibernate.cache.use_query_cache property to true.
+   spring.jpa.properties.hibernate.cache.use_query_cache=true
+   spring.jpa.properties.hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.EhCacheRegionFactory.
+@Repository
+public interface AuthorRepository extends CrudRepository<Author, Integer> {
+    @QueryHints({ @QueryHint(name = "org.hibernate.cacheable", value ="true") })
+    Author findByName(String name);
+}
+https://www.baeldung.com/spring-data-jpa-query-hints
+----------------------------------------------------------------
+
 
 
 
