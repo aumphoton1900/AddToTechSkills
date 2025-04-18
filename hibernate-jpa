@@ -23,6 +23,13 @@ NONSTRICT_READ_WRITE,
 READ_WRITE, and 
 TRANSACTIONAL.
 
+hibernate cache invalidate 
+------------------------------------
+To ensure data consistency, Hibernate provides a cache synchronization mechanism that 
+automatically updates the cache when the database is updated. This mechanism is called cache invalidation. 
+When an entity is updated, Hibernate invalidates the corresponding cache entry,
+and the next time the entity is accessed, it is fetched from the database and stored in the cache.
+
 
 
 
