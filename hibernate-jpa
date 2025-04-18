@@ -16,7 +16,15 @@ https://medium.com/@rajibrath20/the-best-way-to-map-a-onetomany-relationship-wit
 https://medium.com/@himani.prasad016/caching-in-hibernate-3ad4f479fcc0
 1st - session 
 2nd - sessionFactory | CacheConcurrencyStrategy.
-read_only ,read_write,nonstrict_read_write, transactional
+The cache concurrency strategy determines how multiple threads access the cache. 
+Hibernate supports multiple cache concurrency strategies such as 
+READ_ONLY, 
+NONSTRICT_READ_WRITE, 
+READ_WRITE, and 
+TRANSACTIONAL.
+
+
+
 
 
 
