@@ -39,6 +39,7 @@ public interface AuthorRepository extends CrudRepository<Author, Integer> {
     Author findByName(String name);
 }
 https://www.baeldung.com/spring-data-jpa-query-hints
+https://medium.com/@javatechie/spring-data-jpa-query-hints-for-better-performance-1144b089ba03
 ----------------------------------------------------------------
 
 
