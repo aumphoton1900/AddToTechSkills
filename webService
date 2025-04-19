@@ -1,0 +1,36 @@
+1. spring soap
+https://abhinnpandey.medium.com/using-soap-with-java-spring-boot-a-step-by-step-guide-16d1e0643840
+@Endpoint
+public class CalculatorServiceEndpoint {
+    private final CalculatorService calculatorService;
+@Autowired
+    public CalculatorServiceEndpoint(CalculatorService calculatorService) {
+        this.calculatorService = calculatorService;
+    }
+    @PayloadRoot(namespace = "http://your-namespace.com", localPart = "addRequest")
+    @ResponsePayload
+    public AddResponse add(@RequestPayload AddRequest request) {
+        AddResponse response = new AddResponse();
+        response.setResult(calculatorService.add(request.getA(), request.getB()));
+        return response;
+    }
+    @PayloadRoot(namespace = "http://your-namespace.com", localPart = "subtractRequest")
+    @ResponsePayload
+    public SubtractResponse subtract(@RequestPayload SubtractRequest request) {
+        SubtractResponse response = new SubtractResponse();
+        response.setResult(calculatorService.subtract(request.getA(), request.getB()));
+        return response;
+    }
+}
+
+2. asyn soap 
+https://stackoverflow.com/questions/60324772/make-asynchronous-soap-call-in-spring-webflux
+https://stackoverflow.com/questions/49685056/reactive-spring-webclient-making-a-soap-call
+https://stackoverflow.com/questions/34368029/how-to-send-a-soap-request-using-webservicetemplate
+
+
+
+3.  webservice timeout 
+https://stackoverflow.com/questions/6733744/how-to-set-timeout-in-spring-webservicetemplate
+As stated in the introduction, a marshaller serializes an object to XML, and an unmarshaller deserializes XML stream to an objec.
+
