@@ -256,7 +256,11 @@ https://stackoverflow.com/questions/12671909/need-to-use-both-soapaction-and-pay
 8. soap in spring.
 https://docs.spring.io/spring-ws/site/reference/html/server.html
 
+8.1 ) soap is synchronous or asynchronous ?
+    spring soap is synchronous or asynchronous
 
+9) jaxb vs sax vs dom vs stax 
+https://stackoverflow.com/questions/7709928/jaxb-vs-dom-and-sax
 
 
 
