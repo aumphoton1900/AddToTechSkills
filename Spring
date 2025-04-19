@@ -216,3 +216,34 @@ Spring Boot - Multithreading | Process Millions of Records in Batches | Hands-on
 5. Async 
 https://www.youtube.com/watch?v=R_gejlOXR7g
 
+6. soap : baeldung / jax-ws 
+   wsdl : udemy 
+  webservice can be deployed as war file to application server like wildfly , glassfish.
+ wsimport : xml to java classes [soap ] till java version 1.8 
+ jaxws-maven-plugin or maven-jaxb2-plugin : java version > 1.8
+
+https://javaee.github.io/tutorial/jaxws002.html
+soap - how to create client code 
+ mvn clean jaxws:wsimport 
+jakarta.xml.ws : jakarta.xml.ws-api 
+com.sun.xml.ws : jaxws-rt 
+com.sun.xml.ws : jaxws-ri 
+plugin = com.sun.xml.ws : jaxws-maven-plugin 
+configuration : wsdlUrls , packageName - where java code generate
+
+Q6.1 : how to consume a soap webservice in java using JAX-WS RI and wsimport 
+       utility for java 11.
+generated pojo annotated with annotation for xml marshaller , unmarshaller.
+eg :@XmlAccerssorType , @XmlType ,@XmlSchemaType
+
+@WebServiceClient(name = "",wdslLocation = "")
+class A exptends javax.xml.ws.Service - provide method to interact with web service .
+@webEndpoint(name = "CountryServiceImplPort() {}
+
+6.2 alternatively u can use other jax-ws implementation like  , apache cxf , apache axis2 , spring to do same.
+https://www.baeldung.com/java-soap-web-service
+https://medium.com/@salmankhan_27014/consuming-soap-based-web-services-in-java-e6a1645606ca
+
+
+
+
