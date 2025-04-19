@@ -244,6 +244,15 @@ class A exptends javax.xml.ws.Service - provide method to interact with web serv
 https://www.baeldung.com/java-soap-web-service
 https://medium.com/@salmankhan_27014/consuming-soap-based-web-services-in-java-e6a1645606ca
 
+7. SOAP
+========
+7.1 ) SOAP over JMS allows you to use the JMS transport with SOAP messages, 
+and is an alternative messaging mechanism to the standard SOAP over HTTP messaging.
+https://stackoverflow.com/questions/15705892/what-is-the-purpose-of-ws-addressing?rq=3
+https://stackoverflow.com/questions/12671909/need-to-use-both-soapaction-and-payloadroot-in-single-application?rq=3
+
+
+
 
 
 
