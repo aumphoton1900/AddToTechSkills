@@ -10,4 +10,5 @@ spring-servlet.xml : act as front controller servlet and provide a single point 
                  take in incoming url , uses hanlermapping to  define a mapping between 
                  requests and handler objects.
 
-                 
+2. applicationContext vs servletContext ?
+https://stackoverflow.com/questions/31931848/applicationcontext-and-servletcontext                 
