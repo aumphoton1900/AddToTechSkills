@@ -2,6 +2,12 @@
 https://www.baeldung.com/spring-applicationcontext.-vs-spring-servlet-xml
 web.xml -> applicationContext.xml -> spring-servlet.xml 
 
+Example:
+web. xml defines mappings between URL paths and the servlets that handle requests with those paths. 
+The web server uses this configuration to identify the servlet to handle a given request and call the class 
+method that corresponds to the request method. For example: the doGet() method for HTTP GET requests.
+
+
 when developing a j2ee (web) application , you declare contextloaderlistener in web.xml 
 also a contextConfigLocation is also defined to indicate the xml configuration file.
 
@@ -11,4 +17,16 @@ spring-servlet.xml : act as front controller servlet and provide a single point 
                  requests and handler objects.
 
 2. applicationContext vs servletContext ?
-https://stackoverflow.com/questions/31931848/applicationcontext-and-servletcontext                 
+
+
+https://stackoverflow.com/questions/31931848/applicationcontext-and-servletcontext 
+2.1 
+ContextLoaderListener vs DispatcherServlet
+ContextLoaderListener adds the web application's root context to the ServletContext after creating it. 
+Depending on the controller layer technology 
+(Sprouts or Spring MVC), this context can be used to load and unload the beans that are handled by Spring.
+
+2.2 
+Loading	The file applicationContext.xml is loaded by ContextLoaderListener.	
+The file spring-servlet.xml is loaded by DispatcherServlet.
+
