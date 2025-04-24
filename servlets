@@ -29,4 +29,4 @@ Depending on the controller layer technology
 2.2 
 Loading	The file applicationContext.xml is loaded by ContextLoaderListener.	
 The file spring-servlet.xml is loaded by DispatcherServlet.
-
+https://www.baeldung.com/spring-applicationcontext-vs-spring-servlet-xml
