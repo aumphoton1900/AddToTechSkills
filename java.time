@@ -1,3 +1,40 @@
 1. The Unix epoch is the time 00:00:00 UTC on 1 January 1970. The Instant class can be used to represent timestamps, durations, and intervals.
 2. Instant values can be obtained from various sources including the clock time, network time, and database time. 
 
+LocalTime 
+===========
+1. A time without a time-zone in the ISO-8601 calendar system, such as 10:15:30.
+
+LocalDateTime	atDate​(LocalDate date)	
+Combines this time with a date to create a LocalDateTime.
+
+OffsetTime	atOffset​(ZoneOffset offset)	
+Combines this time with an offset to create an OffsetTime.
+
+Example-01
+------------
+public static void LocalDate_eg01() {
+        LocalTime time = LocalTime.of(10, 30, 0); // 10:30 AM
+        LocalDate date = LocalDate.of(2025, 5, 3); // May 3, 2025
+
+        LocalDateTime dateTime = time.atDate(date);
+
+        System.out.println("LocalTime: " + time);
+        System.out.println("LocalDate: " + date);
+        System.out.println("LocalDateTime: " + dateTime); // Output: 2025-05-03T10:30
+    }
+days between99
+LocalTime: 10:30
+LocalDate: 2025-05-03
+LocalDateTime: 2025-05-03T10:30
+
+Example-02
+---------------
+    LocalDate date1 = LocalDate.now();
+		LocalDate date2 = date1.plusDays(99);
+		long dD = ChronoUnit.DAYS.between(date1, date2);
+o/p : 99 days
+
+
+
+
