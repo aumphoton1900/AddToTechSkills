@@ -35,6 +35,12 @@ Example-02
 		long dD = ChronoUnit.DAYS.between(date1, date2);
 o/p : 99 days
 
+Q2 : difference between java.util.date vs java.time.Localdate ?
+How to find the number of days between two dates in Java?
+
+Since java.util.Date class implements Comparable interface it's easy to figure out whether 
+a date comes before or after another date, or whether two dates are equal to each other as shown here, but when it comes to 
+finding out how many days between two dates? we don't have a simple method like daysBetween(date1, date2) in the JDK library.
 
 
 
