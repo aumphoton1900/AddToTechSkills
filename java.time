@@ -1,2 +1,3 @@
 1. The Unix epoch is the time 00:00:00 UTC on 1 January 1970. The Instant class can be used to represent timestamps, durations, and intervals.
-2. 
+2. Instant values can be obtained from various sources including the clock time, network time, and database time. 
+
