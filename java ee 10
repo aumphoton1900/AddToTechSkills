@@ -15,4 +15,7 @@ from the javax namespace to the jakarta namespace.
 This is a significant shift, as not only your application but also all its dependencies must be upgraded to accommodate \
 this namespace change.
 
-  
+  2] steps to migrate java ee 7 to java ee 10 .
+how-to-migrate-from-java-ee-to-jakarta-ee-tips-and-best-practices-f19530c3bb1d
+https://medium.com/@AlexanderObregon/how-to-migrate-from-java-ee-to-jakarta-ee-tips-and-best-practices-f19530c3bb1d
+
