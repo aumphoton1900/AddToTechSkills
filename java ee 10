@@ -36,3 +36,8 @@ Here’s how you can update the dependencies in your Maven configuration:
     <scope>provided</scope>
 </dependency>
 
+----------------------------------------
+It’s important to review all project dependencies for any indirect usage of old Java EE APIs and update them accordingly. 
+This might require checking third-party libraries or 
+frameworks that are being used in your project to ensure they have been updated to support Jakarta EE.
+
