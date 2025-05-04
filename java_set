@@ -19,5 +19,37 @@ is less than or equal to 64 and JumboEnumSet if the key universe is more than 64
   ==========================================
 https://javagoal.com/java-copyonwritearrayset/
 
+3]sortedSet vs NavigableSet 
+----------------------------
+Methods lower(E), return elements respectively less than
+floor(E),  less than or equal
+ceiling(E), , greater than or equal
+higher(E)  greater than a given element.
+
+return elements respectively less than, less than or equal, greater than or equal, and 
+greater than a given element, returning null if there is no such element.
+
+A SortedSet extended with navigation methods reporting closest matches for given search targets.
+
+java 10 
+static <E> Set<E> copyOf​(Collection<? extends E> coll)
+
+java 9 
+ of()
+
+java 8 
+default Spliterator<E> spliterator()
+
+others
+---------
+SortedSet<E>	headSet​(E toElement)	
+Returns a view of the portion of this set whose elements are strictly less than toElement.
+NavigableSet<E>	headSet​(E toElement, boolean inclusive)	
+Returns a view of the portion of this set whose elements are less than (or equal to, if inclusive is true) toElement.
+
+SortedSet<E>	tailSet​(E fromElement)	
+Returns a view of the portion of this set whose elements are greater than or equal to fromElement.
+NavigableSet<E>	tailSet​(E fromElement, boolean inclusive)	
+Returns a view of the portion of this set whose elements are greater than (or equal to, if inclusive is true) fromElement.
 
 
