@@ -1,5 +1,8 @@
 Spring transactions 
+
 1.https://www.demo2s.com/g/java/how-to-choose-a-transaction-manager-implementation-in-spring-transaction-management.html
+2.https://stackoverflow.com/questions/12390888/differences-between-requires-new-and-nested-propagation-in-spring-transactions
+
 
 ----------------------------------------
 2. NESTED Propagation + jta transaction manager + spring ?
