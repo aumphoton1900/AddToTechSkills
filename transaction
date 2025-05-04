@@ -42,5 +42,6 @@ Spring's @Transactional with PROPAGATION_NESTED and a JTA transaction manager ca
 However, it's important to consider the specific transaction manager and its support for nested transactions, 
 as well as the underlying data access technology (JDBC, JPA etc.).
 ------------------------------------------------------------
+3. https://stackoverflow.com/questions/12390888/differences-between-requires-new-and-nested-propagation-in-spring-transactions
 
 
