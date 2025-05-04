@@ -96,5 +96,32 @@ days between99
 -----------------------------------------------------
 Example-04 
 
+Duration also can be accessed using other duration-based units, such as minutes and hours. 
+In addition, the DAYS unit can be used and is treated as exactly equal to 24 hours. 
+You convert a Duration to these time units using these conversion methods:
+
+long toDays(): Gets the number of days in this duration.
+long toHours(): Gets the number of hours in this duration.
+long toMillis(): Converts this duration to the total length in milliseconds.
+long toMinutes(): Gets the number of minutes in this duration.
+long toNanos(): Converts this duration to the total length in nanoseconds expressed as a long.
+And these methods available since Java 9:
+
+long toDaysPart(): Extracts the number of days in the duration.
+int toHoursPart(): Extracts the number of hours part in the duration.
+int toMillisPart(): Extracts the number of milliseconds part of the duration.
+int toMinutesPart(): Extracts the number of minutes part in the duration.
+int toNanosPart(): Get the nanoseconds part within seconds of the duration.
+long toSeconds(): Gets the number of seconds in this duration.
+int toSecondsPart(): Extracts the number of seconds part in the duration.
+
+--------------------------
+Example-05
+
+BTW, if you are using JDK 8 then you and use java.time.Period class to calculate 
+the difference between two dates in Java. Here is an example of calculating the date and 
+time difference in Java 8, it's super easy and not error-prone like earlier API. 
+There is another class called, 
+java.time.Duration, which is good to calculate a time difference between two instants.
 
 
