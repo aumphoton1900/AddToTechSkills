@@ -41,3 +41,13 @@ It’s important to review all project dependencies for any indirect usage of ol
 This might require checking third-party libraries or 
 frameworks that are being used in your project to ensure they have been updated to support Jakarta EE.
 
+2.3)
+Refactor Your Code
+Refactoring your code to use the new jakarta.* namespace is perhaps the most labor-intensive part of the migration. 
+This step involves updating import statements and fully-qualified class names throughout your codebase.
+
+Manual Refactoring: This can be done manually but is only recommended for smaller projects 
+due to its error-prone nature. You would need to search and replace all occurrences of javax.* with jakarta.* in your source files.
+Automated Migration Tools: For larger codebases, consider using an automated migration tool 
+to streamline the process. The Eclipse Transformer, for example, 
+is a comprehensive tool designed for this purpose. It can be executed as follows:
