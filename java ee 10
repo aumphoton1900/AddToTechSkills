@@ -19,3 +19,20 @@ this namespace change.
 how-to-migrate-from-java-ee-to-jakarta-ee-tips-and-best-practices-f19530c3bb1d
 https://medium.com/@AlexanderObregon/how-to-migrate-from-java-ee-to-jakarta-ee-tips-and-best-practices-f19530c3bb1d
 
+2.1 ) The most significant change is the shift in the namespace from javax.* to jakarta.*.
+2.2 ) Update Your Dependencies
+Updating dependencies is a critical step in migrating to Jakarta EE as it ensures that your application 
+utilizes the latest libraries, which are compliant with the new jakarta.* namespace. This process involves 
+replacing all the Java EE dependencies 
+with their respective Jakarta EE counterparts in your project’s build configuration files, such as Maven or Gradle.
+
+For Maven projects, modify the pom.xml to include the Jakarta EE libraries. 
+Here’s how you can update the dependencies in your Maven configuration:
+
+<dependency>
+    <groupId>jakarta.platform</groupId>
+    <artifactId>jakarta.jakartaee-api</artifactId>
+    <version>9.1.0</version>
+    <scope>provided</scope>
+</dependency>
+
