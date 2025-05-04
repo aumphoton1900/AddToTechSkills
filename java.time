@@ -42,5 +42,59 @@ Since java.util.Date class implements Comparable interface it's easy to figure o
 a date comes before or after another date, or whether two dates are equal to each other as shown here, but when it comes to 
 finding out how many days between two dates? we don't have a simple method like daysBetween(date1, date2) in the JDK library.
 
+Example-03 
+-----------------------
+public long until​(Temporal endExclusive, TemporalUnit unit)
+Calculates the amount of time until another time in terms of the specified unit.
+
+public static void duration_eg01() {
+		 
+
+				// Creating Durations
+		        System.out.println("--- Examples --- ");
+
+		        Duration oneHours = Duration.ofHours(1);
+		        System.out.println(oneHours.getSeconds() + " seconds");
+
+		        Duration oneHours2 = Duration.of(1, ChronoUnit.HOURS);
+		        System.out.println(oneHours2.getSeconds() + " seconds");
+
+				// Test Duration.between
+		        System.out.println("\n--- Duration.between --- ");
+
+		        LocalDateTime oldDate = LocalDateTime.of(2016, Month.AUGUST, 31, 10, 20, 55);
+		        LocalDateTime newDate = LocalDateTime.of(2016, Month.NOVEMBER, 9, 10, 21, 56);
+
+		        System.out.println(oldDate);
+		        System.out.println(newDate);
+
+		        //count seconds between dates ]
+		        long op = ChronoUnit.DAYS.between(oldDate, newDate);
+		        
+		        Duration duration = Duration.between(oldDate, newDate);
+                 Period pd   =  Period.between(oldDate.toLocalDate(), newDate.toLocalDate());
+		        System.out.println(duration.getSeconds() + " seconds");
+		        System.out.println(pd.getDays() + " days");
+		        System.out.println(op + ":: days");
+		        System.out.println(duration.toDays() + ":: days");
+		        System.out.println(op + ":: days");
+	}
+
+days between99
+--- Examples --- 
+3600 seconds
+3600 seconds
+
+--- Duration.between --- 
+2016-08-31T10:20:55
+2016-11-09T10:21:56
+6048061 seconds
+9 days
+70:: days
+70:: days
+70:: days
+-----------------------------------------------------
+Example-04 
+
 
 
