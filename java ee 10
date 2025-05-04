@@ -51,3 +51,5 @@ due to its error-prone nature. You would need to search and replace all occurren
 Automated Migration Tools: For larger codebases, consider using an automated migration tool 
 to streamline the process. The Eclipse Transformer, for example, 
 is a comprehensive tool designed for this purpose. It can be executed as follows:
+===================================================
+https://medium.com/@AlexanderObregon/how-to-migrate-from-java-ee-to-jakarta-ee-tips-and-best-practices-f19530c3bb1d
