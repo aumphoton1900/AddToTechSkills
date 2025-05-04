@@ -1,4 +1,46 @@
 Spring transactions 
 1.https://www.demo2s.com/g/java/how-to-choose-a-transaction-manager-implementation-in-spring-transaction-management.html
 
+----------------------------------------
+2. NESTED Propagation + jta transaction manager + spring ?
+
+Spring's @Transactional annotation, combined with a JTA transaction manager, offers a way to manage transactions, including nested ones. 
+Here's a breakdown:
+
+1. Transaction Propagation:
+PROPAGATION_NESTED: This setting allows an inner transaction to be nested within an outer one. It uses savepoints,
+meaning that if the inner transaction rolls back, the outer transaction can still continue. 
+
+This is typically mapped onto JDBC savepoints.
+How it Works: If an existing transaction is present, a savepoint is created. If the inner transaction fails, 
+it rolls back to that savepoint, but the outer transaction remains active. If no transaction exists, 
+it behaves like PROPAGATION_REQUIRED, starting a new transaction.
+
+2. JTA Transaction Manager:
+JTA (Java Transaction API) is a standard for managing distributed transactions.
+Spring's JtaTransactionManager integrates with JTA implementations, allowing Spring to manage transactions across multiple resources.
+Not all JTA implementations support nested transactions. Some might, but it's not guaranteed.
+
+3. Spring's Role:
+Spring provides a unified interface for transaction management through PlatformTransactionManager.
+It allows you to declaratively manage transactions using @Transactional annotation.
+It also supports programmatic transaction management using TransactionTemplate.
+
+4. Key Considerations:
+PROPAGATION_NESTED relies on JDBC savepoints. It works out of the box with DataSourceTransactionManager.
+JtaTransactionManager might support nested transactions depending on the underlying JTA implementation.
+If you're using JPA, JpaTransactionManager only supports nested transactions for JDBC connections, 
+unless the nestedTransactionAllowed flag is set to true.
+When a method annotated with @Transactional is called within the same bean, the annotation may 
+be ignored because it relies on Spring's proxy mechanism.
+
+5. Alternatives:
+PROPAGATION_REQUIRES_NEW: This creates a new transaction, suspending the existing one. 
+It's different from PROPAGATION_NESTED, which uses savepoints.
+In summary:
+Spring's @Transactional with PROPAGATION_NESTED and a JTA transaction manager can be used for nested transactions. 
+However, it's important to consider the specific transaction manager and its support for nested transactions, 
+as well as the underlying data access technology (JDBC, JPA etc.).
+------------------------------------------------------------
+
 
