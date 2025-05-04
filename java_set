@@ -52,4 +52,40 @@ Returns a view of the portion of this set whose elements are greater than or equ
 NavigableSet<E>	tailSet​(E fromElement, boolean inclusive)	
 Returns a view of the portion of this set whose elements are greater than (or equal to, if inclusive is true) fromElement.
 
+3] concurrentSkipListSet
+------------------------------
+ConcurrentSkipListSet is a thread-safe, concurrent alternative to TreeSet in Java. 
+It is particularly useful when you need a sorted set that can be accessed and modified by multiple threads simultaneously without causing issues.
+Here are the key scenarios where using ConcurrentSkipListSet is beneficial:
+Concurrent Access:
+When multiple threads need to read, add, or remove elements from a sorted set concurrently, 
+ConcurrentSkipListSet ensures thread safety without requiring explicit synchronization.
 
+Sorted Data:
+If you need to maintain elements in sorted order , 
+while allowing concurrent operations, this set provides the necessary functionality.
+
+Navigable Operations:
+It supports navigable set operations like floor, ceiling, higher, and lower, enabling efficient searching and retrieval of elements based on their order.
+
+High Concurrency:
+It is designed for high concurrency and avoids contention between threads, unlike synchronized collections like TreeSet. 
+Scalability:
+It provides better scalability compared to synchronized collections, as it uses a lock-free algorithm based on skip lists.
+However, there are some considerations to keep in mind:
+Performance:
+While it offers good performance for concurrent operations, it might be slightly slower than TreeSet in single-threaded scenarios due to the overhead of maintaining concurrency.
+
+Weakly Consistent Iterators:
+Iterators and spliterators returned by ConcurrentSkipListSet are weakly consistent, 
+meaning they might not reflect all changes made to the set during iteration.
+
+Size Operation:
+The size() method is not a constant-time operation and requires traversal of the elements, which can be inaccurate if the set is modified concurrently.
+
+Bulk Operations:
+Bulk operations like addAll, removeAll, and retainAll are not guaranteed to be performed atomically. 
+
+Null Elements:
+This class does not permit the use of null elements. 
+====================================================
