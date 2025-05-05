@@ -12,6 +12,13 @@ LinkedHashSet,
 TreeSet
 
 
+3. Thread Safe HashSet Using ConcurrentHashMap Instance Methods
+So far, we have looked at the static method of ConcurrentHashMap. 
+Next, we’ll tackle the instance methods available for ConcurrentHashMap to create thread-safe Set instances. 
+There are two methods available, newKeySet() and newKeySet(defaultValue) which slightly differ from each other.
+
+
+
 
 1]EnumSet
  it will never throw ConcurrentModificationException.
