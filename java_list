@@ -35,5 +35,6 @@ Reason: CopyOnWriteArrayList provide some more flexibility than synchronization.
 2. If one thread performing read operation meanwhile another thread can write operation concurrently.
 3. One thread can perform write operation while other threads can execute read operations simultaneously.
 
+https://javagoal.com/java-copyonwritearrayset/
 --------------------------------------------
 
