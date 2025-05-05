@@ -10,6 +10,7 @@ HashSet,
 JobStateReasons, 
 LinkedHashSet, 
 TreeSet
+https://www.baeldung.com/java-concurrent-hashset-concurrenthashmap
 
 
 3. Thread Safe HashSet Using ConcurrentHashMap Instance Methods
