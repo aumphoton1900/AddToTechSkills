@@ -1,5 +1,18 @@
 set 
 
+All Known Implementing Classes:
+AbstractSet, 
+ConcurrentHashMap.KeySetView, 
+ConcurrentSkipListSet, 
+CopyOnWriteArraySet, 
+EnumSet, 
+HashSet, 
+JobStateReasons, 
+LinkedHashSet, 
+TreeSet
+
+
+
 1]EnumSet
  it will never throw ConcurrentModificationException.
  Null elements are not permitted.
@@ -44,7 +57,7 @@ The CopyOnWriteArraySet is thread-safe and it internally uses the CopyOnWriteArr
     public CopyOnWriteArraySet() {
         al = new CopyOnWriteArrayList<E>();
     }
-
+https://javagoal.com/java-copyonwritearrayset/
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
