@@ -15,6 +15,16 @@ That's why when an empty EnumSet is created using EnumSet.noneOf() method, it ch
 if the key universe (number of enum instances in Key Enum) 
 is less than or equal to 64 and JumboEnumSet if the key universe is more than 64.
 
+When we plan to use an EnumSet we have to take into consideration some important points:
+
+It can contain only enum values and all the values have to belong to the same enum
+It doesn’t allow to add null values, throwing a NullPointerException in an attempt to do so
+It’s not thread-safe, so we need to synchronize it externally if required
+The elements are stored following the order in which they are declared in the enum
+It uses a fail-safe iterator that works on a copy, so it won’t throw aÂ ConcurrentModificationException if the collection is modified when iterating over it
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 2]CopyOnWriteArraySet / ConcurrentHashSet
   ==========================================
 https://javagoal.com/java-copyonwritearrayset/
@@ -112,6 +122,8 @@ public ConcurrentSkipListSet() {
 A scalable concurrent NavigableSet implementation based on a ConcurrentSkipListMap. 
 The elements of the set are kept sorted according to their natural 
 ordering, or by a Comparator provided at set creation time, depending on which constructor is used.
+======================================================
+
 
 
 ------------------------------------------------
