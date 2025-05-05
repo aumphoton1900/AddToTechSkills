@@ -89,3 +89,29 @@ Bulk operations like addAll, removeAll, and retainAll are not guaranteed to be p
 Null Elements:
 This class does not permit the use of null elements. 
 ====================================================
+ConcurrentSkipListSet()	
+Constructs a new, empty set that orders its elements according to their natural ordering.
+
+ConcurrentSkipListSet(Collection<? extends E> c)	
+Constructs a new set containing the elements in the specified collection, that orders its elements according to their natural ordering.
+
+ConcurrentSkipListSet(Comparator<? super E> comparator)	
+Constructs a new, empty set that orders its elements according to the specified comparator.
+
+ConcurrentSkipListSet(SortedSet<E> s)	
+Constructs a new set containing the same elements and using the same ordering as the specified sorted set.
+
+null - x
+---------------------------------------------------
+private final ConcurrentNavigableMap<E,Object> m;
+public ConcurrentSkipListSet() {
+        m = new ConcurrentSkipListMap<E,Object>();
+}
+
+
+A scalable concurrent NavigableSet implementation based on a ConcurrentSkipListMap. 
+The elements of the set are kept sorted according to their natural 
+ordering, or by a Comparator provided at set creation time, depending on which constructor is used.
+
+
+------------------------------------------------
