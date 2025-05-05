@@ -39,6 +39,15 @@ else
   ==========================================
 https://javagoal.com/java-copyonwritearrayset/
 
+The CopyOnWriteArraySet is thread-safe and it internally uses the CopyOnWriteArrayList for all of its operations.
+ private final CopyOnWriteArrayList<E> al;
+    public CopyOnWriteArraySet() {
+        al = new CopyOnWriteArrayList<E>();
+    }
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 3]sortedSet vs NavigableSet 
 ----------------------------
 Methods lower(E), return elements respectively less than
