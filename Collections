@@ -2,18 +2,15 @@ Set
 =========
 1. how HashSet , LinkedhashSet work internally in java ? [javaconceptoftheday]
 2. how linkedhashSet maintain insertion order in java ?
-  each key,value pair are instances of Map.Entry in java 
-  insertion order are maintained by adding two new fields to this class
- Class Entry<K,V>  extends HashMap.Entry<K,V> {
-  Entry<k,v> before,after.
- }
- // a doubly linkedlist.
 
 To maintain the order of insertion we need 2 more pointers at every 
 Node(besides the next pointer required for LinkedList functionality). 
 So besides this linkedList, another doubly-linked-list is also maintained 
 in the hashmap which is used to handle the insertion order.
 So the LinkedHashMap Node(named LinkedHashMapEntry) will look like:
+https://javahungry.blogspot.com/2015/09/how-linkedhashset-works-internally-in-java.html
+
+
 
 
 Queue
