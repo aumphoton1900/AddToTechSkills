@@ -32,3 +32,14 @@ it will generate key store in home directory.
 will generate certificate in pem format.
 
 https://www.youtube.com/watch?v=06gJR9YtV9s
+3]
+In Java, authentication can be achieved through several methods, 
+including basic authentication (username/password), 
+token-based authentication (JWT), and 
+certificate-based authentication (SSL/TLS).
+
+Additionally, Java supports multi-factor authentication, 
+OAuth 2.0, and biometric authentication.
+These methods can be implemented using various 
+frameworks like Spring Security or the Java Authentication and Authorization Service (JAAS). 
+
