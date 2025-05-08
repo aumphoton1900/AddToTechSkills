@@ -159,3 +159,110 @@ Spring Boot provides auto-configuration for WebServiceTemplate, which can simpli
 
 This information should help you create a SOAP web service client using Spring, Java 11, and WebServiceTemplate.
 Remember to adjust the code and configurations to match your specific service requirements.
+
+==================================================
+getWebServiceTemplate + async spring
+
+WebServiceTemplate in Spring is primarily designed for synchronous SOAP web service interactions. 
+To achieve asynchronous behavior with it, you can use Spring's @Async annotation in conjunction with a thread pool.
+Here's how you can accomplish this:
+
+Enable Asynchronous Processing:
+Add the @EnableAsync annotation to your Spring configuration class. This enables Spring's asynchronous method execution capability.
+Java
+
+    import org.springframework.context.annotation.Configuration;
+    import org.springframework.scheduling.annotation.EnableAsync;
+
+    @Configuration
+    @EnableAsync
+    public class AsyncConfig {
+    }
+Create an Asynchronous Service Method:
+Create a service class and annotate the method that uses WebServiceTemplate with @Async. 
+This will cause the method to be executed in a separate thread. 
+
+Java
+
+    import org.springframework.scheduling.annotation.Async;
+    import org.springframework.stereotype.Service;
+    import org.springframework.ws.client.core.WebServiceTemplate;
+
+    @Service
+    public class MyWebService {
+
+        private final WebServiceTemplate webServiceTemplate;
+
+        public MyWebService(WebServiceTemplate webServiceTemplate) {
+            this.webServiceTemplate = webServiceTemplate;
+        }
+
+        @Async
+        public void callWebServiceAsync(Object requestPayload) {
+            Object response = webServiceTemplate.marshalSendAndReceive(requestPayload);
+            // Process the response
+        }
+    }
+Configure Thread Pool (Optional):
+If you need more control over thread management, you can configure a custom TaskExecutor bean. 
+This lets you specify the thread pool size, queue capacity, and other properties.
+
+Java
+
+    import org.springframework.context.annotation.Bean;
+    import org.springframework.context.annotation.Configuration;
+    import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
+    @Configuration
+    public class AsyncConfig {
+
+        @Bean(name = "taskExecutor")
+        public ThreadPoolTaskExecutor taskExecutor() {
+            ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+            executor.setCorePoolSize(5); // Set the core pool size
+            executor.setMaxPoolSize(10); // Set the maximum pool size
+            executor.setQueueCapacity(25); // Set the queue capacity
+            executor.initialize();
+            return executor;
+        }
+    }
+Use the Asynchronous Service Method:
+Call the asynchronous method from your controller or other service classes. The method will be executed in a separate thread, allowing your application to continue processing other requests.
+Java
+
+    import org.springframework.web.bind.annotation.GetMapping;
+    import org.springframework.web.bind.annotation.RestController;
+
+    @RestController
+    public class MyController {
+
+        private final MyWebService myWebService;
+
+        public MyController(MyWebService myWebService) {
+            this.myWebService = myWebService;
+        }
+
+        @GetMapping("/call-web-service")
+        public String callWebService() {
+            Object requestPayload = ...; // Create your request payload
+            myWebService.callWebServiceAsync(requestPayload);
+            return "Web service call initiated asynchronously";
+        }
+    }
+Important Considerations:
+Thread Safety:
+Ensure that the WebServiceTemplate is properly configured and thread-safe if multiple threads will be using it concurrently.
+
+Error Handling:
+Implement proper error handling within the asynchronous method.
+
+Response Handling:
+Since the method is asynchronous, you might need to use callbacks or other mechanisms to handle the response.
+
+Alternative:
+For more advanced asynchronous and reactive scenarios, consider using Spring WebFlux and WebClient, 
+which is designed for non-blocking, reactive HTTP requests.
+By using @Async with WebServiceTemplate, you can achieve asynchronous web service calls in your Spring application, 
+improving performance and responsiveness.
+
+++++++++++++++++++++++++++++++++++++++++
