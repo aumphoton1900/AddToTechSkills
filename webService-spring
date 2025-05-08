@@ -72,3 +72,90 @@ Ensure you have the correct versions of the required dependencies to avoid compa
 By following these steps and adding the necessary dependencies, you can successfully create and 
 consume SOAP web services in Spring with Java 11.
 
+=============================================================
+2]
+Here's a breakdown of how to create a SOAP web service client using Spring, Java 11, and WebServiceTemplate:
+
+1. Project Setup:
+Spring Boot: Use Spring Initializr to create a new project with the "Spring Web Services" dependency.
+Java 11: Ensure your project is configured to use Java 11 or later.
+Maven/Gradle: Use a build tool like Maven or Gradle for dependency management.
+
+2. WSDL (Web Services Description Language):
+Obtain WSDL:
+You'll need the WSDL file of the SOAP service you want to consume. 
+This file describes the service's operations, data types, etc.
+
+Generate Java Classes:
+Use a tool (like jaxb2-maven-plugin in Maven) to generate Java classes from the WSDL. 
+These classes represent the data structures used in the SOAP messages.
+
+3. WebServiceTemplate:
+Purpose:
+WebServiceTemplate is a Spring class used to simplify sending and receiving SOAP messages.
+Configuration:
+Create a WebServiceTemplate bean, configuring it with a message factory (e.g., SaajSoapMessageFactory) and 
+a marshaller/unmarshaller (e.g., Jaxb2Marshaller).
+
+The Jaxb2Marshaller is used to convert Java objects to XML and vice versa using JAXB (Java Architecture for XML Binding).
+Set the contextPath on the Jaxb2Marshaller to the package containing your generated classes.
+
+4. Sending SOAP Requests:
+Create Request Object:
+Use the generated Java classes to create an object representing the request you want to send.
+Send Message:
+Use WebServiceTemplate's marshalSendAndReceive method to send the request and receive a response. 
+This method takes the request object and the URI of the SOAP service.
+
+Handle Response:
+The method returns an object representing the SOAP response. Use the generated classes to extract the data from this object.
+
+5. Example Code Snippet:
+Java
+
+import org.springframework.ws.client.core.WebServiceTemplate;
+import org.springframework.ws.soap.client.core.SoapActionCallback;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
+import javax.xml.soap.MessageFactory;
+
+// ...
+
+SaajSoapMessageFactory messageFactory = new SaajSoapMessageFactory(MessageFactory.newInstance());
+messageFactory.afterPropertiesSet();
+
+Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+marshaller.setContextPath("com.example.generated"); // Replace with your package
+
+WebServiceTemplate webServiceTemplate = new WebServiceTemplate(messageFactory);
+webServiceTemplate.setMarshaller(marshaller);
+webServiceTemplate.setUnmarshaller(marshaller);
+
+GetCountryRequest request = new GetCountryRequest();
+request.setName("Spain");
+
+GetCountryResponse response = (GetCountryResponse) webServiceTemplate.marshalSendAndReceive(
+        "http://localhost:8080/ws/countries", // Replace with your service URI
+        request,
+        new SoapActionCallback("http://example.com/GetCountryRequest") // Replace with your soap action
+);
+
+System.out.println(response.getCountry().getCapital());
+
+Key Considerations:
+Error Handling: Implement proper error handling for network issues and SOAP faults.
+Security: If your service requires authentication, configure the WebServiceTemplate with appropriate security settings.
+Interceptors: Use client interceptors to modify SOAP messages before sending or after receiving.
+WSDL Location: Make sure the WSDL is accessible to your application.
+SOAP Action: You might need to specify the SOAP action in the request.
+
+Message Factory: SaajSoapMessageFactory is a common choice, but others may be available.
+Marshaller/Unmarshaller: Jaxb2Marshaller is a common choice for JAXB-based marshalling.
+
+Additional Tips:
+Use logging to debug SOAP messages.
+Consider using a tool like SoapUI to test your SOAP service independently.
+Spring Boot provides auto-configuration for WebServiceTemplate, which can simplify setup.
+
+This information should help you create a SOAP web service client using Spring, Java 11, and WebServiceTemplate.
+Remember to adjust the code and configurations to match your specific service requirements.
