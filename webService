@@ -79,6 +79,106 @@ Review Stacktraces: Carefully analyze the stack traces to identify the root caus
 Configure Message Factory: You can configure the SaajSoapMessageFactory with a custom MessageFactory if needed.
 By addressing these issues and ensuring the proper dependencies and configurations, you can successfully use SaajSoapMessageFactory in Java 17 applications.
 
+======================================
+soap | java jax-ws
+
+Here's information about creating a SOAP web service using JAX-WS in Java 11:
+Key Concepts
+JAX-WS:
+Java API for XML Web Services, a standard for creating SOAP-based web services. It simplifies the process by handling the conversion of Java objects to and from SOAP messages.
+SOAP:
+Simple Object Access Protocol, an XML-based messaging protocol for exchanging structured information in web services.
+WSDL:
+Web Services Description Language, an XML document describing web services, their operations, and data types.
+Service Endpoint Interface (SEI):
+A Java interface that declares the methods a client can invoke on the service. While not mandatory, it's a good practice. 
+Implementation Bean Class:
+The Java class that implements the service's logic.
+Steps to Create a JAX-WS SOAP Service
+Create a Service Endpoint Implementation Class:
+Annotate the class with @WebService to mark it as a web service endpoint.
+Use @WebMethod to expose specific methods to web service clients.
+Java
+
+    import javax.jws.WebMethod;
+    import javax.jws.WebService;
+
+    @WebService
+    public class Hello {
+        @WebMethod
+        public String sayHello(String name) {
+            return "Hello, " + name + "!";
+        }
+    }
+Publish the Endpoint:
+Use javax.xml.ws.Endpoint API to publish the web service.
+Specify the address at which the service will be available.
+Java
+
+    import javax.xml.ws.Endpoint;
+
+    public class HelloPublisher {
+        public static void main(String[] args) {
+            Endpoint.publish("http://localhost:8080/hello", new Hello());
+            System.out.println("Service published at http://localhost:8080/hello");
+        }
+    }
+Generate Client Code (if needed):
+Use the wsimport tool (part of the JDK before Java 11 and can be added as a dependency in Java 11) to generate client-side classes from the WSDL file.
+This tool creates proxy classes that simplify communication with the web service.
+Code
+
+    wsimport -keep -d <output_dir> <wsdl_url>
+In Java 11, JAX-WS is not included in the JDK. You need to add dependencies like:
+Code
+
+        <dependency>
+            <groupId>jakarta.xml.ws</groupId>
+            <artifactId>jakarta.xml.ws-api</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.metro</groupId>
+            <artifactId>webservices-rt</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+For JAXB (Java Architecture for XML Binding), add these dependencies:
+Code
+
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>4.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+Create a Client:
+Use the generated proxy classes to invoke the service methods.
+The JAX-WS runtime handles the underlying SOAP messaging.
+Java
+
+    import com.example.helloservice.Hello;
+    import com.example.helloservice.HelloService;
+
+    public class HelloClient {
+        public static void main(String[] args) {
+            HelloService service = new HelloService();
+            Hello port = service.getHelloPort();
+            String response = port.sayHello("Client");
+            System.out.println("Response: " + response);
+        }
+    }
+Important Considerations
+Java 11+: JAX-WS is no longer part of the standard JDK. You need to add it as a dependency (Jakarta EE).
+Maven/Gradle: Use a build tool to manage dependencies and simplify the build process.
+WSDL: You can start with either a WSDL file or an implementation bean class. 
+Testing: Tools like SoapUI can be used to test the web service endpoints.
+This provides a basic overview of how to create a SOAP web service using JAX-WS in Java 11. 
+Remember to adapt the code and configurations based on your specific requirements.
+
 
 
 
