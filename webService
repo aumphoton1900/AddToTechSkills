@@ -1,3 +1,5 @@
+https://www.baeldung.com/maven-wsdl-stubs
+
 1. spring soap
 https://abhinnpandey.medium.com/using-soap-with-java-spring-boot-a-step-by-step-guide-16d1e0643840
 @Endpoint
@@ -33,4 +35,50 @@ https://stackoverflow.com/questions/34368029/how-to-send-a-soap-request-using-we
 3.  webservice timeout 
 https://stackoverflow.com/questions/6733744/how-to-set-timeout-in-spring-webservicetemplate
 As stated in the introduction, a marshaller serializes an object to XML, and an unmarshaller deserializes XML stream to an objec.
+
+++++++++++++++++++++++++++++++++++++++++++++++
+java 17 :: SaajSoapMessageFactory
+
+SaajSoapMessageFactory is a class in Spring Web Services that creates SOAP messages using the SAAJ (SOAP with Attachments API for Java) API. It is used to handle SOAP messages in web service applications.
+Key Features:
+It wraps a SAAJ MessageFactory, allowing for the creation of SOAP messages.
+It can use SAAJ 1.3, 1.2, or 1.1, depending on what is available.
+You can inject a MessageFactory or use the setMessageFactory property.
+The setSoapVersion property is ignored if a MessageFactory is injected.
+It supports both SOAP 1.1 and SOAP 1.2.
+Java 17 Compatibility:
+SaajSoapMessageFactory should work with Java 17.
+However, there might be issues related to the module system introduced in Java 9 and later.
+javax.xml.soap classes are not part of the default module in Java 9 and later.
+Common Issues and Solutions:
+java.lang.NoClassDefFoundError: javax/xml/soap/SOAPException: This error occurs because the javax.xml.soap package is not available by default in Java 9 and later.
+To resolve this, you need to add the jakarta.xml.soap-api dependency to your project.
+For example, in Maven, you would add:
+Code
+
+    <dependency>
+        <groupId>jakarta.xml.soap</groupId>
+        <artifactId>jakarta.xml.soap-api</artifactId>
+        <version>2.0.0</version>
+    </dependency>
+Unable to create SAAJ meta-factory:
+This error can occur if the SAAJ implementation is not found.
+Ensure that you have a SAAJ implementation on your classpath.
+This is usually provided by the jakarta.xml.soap dependency.
+Provider SAAJMetaFactoryImpl not found:
+This also indicates missing SAAJ implementation.
+Double-check the dependencies and classpath configuration.
+Dynamic Protocol Issues:
+The default implementation of the "dynamic protocol" might not support the createMessage() method, which is used by SaajSoapMessageFactory to write responses, thus only supporting reading requests.
+A custom MessageFactory implementation may be needed to support both requests and responses with dynamic protocols.
+Troubleshooting Tips:
+Check Dependencies: Ensure you have the correct jakarta.xml.soap-api dependency.
+Verify Classpath: Make sure all required JARs are in your classpath.
+Use a Compatible SAAJ Implementation: Ensure the SAAJ implementation is compatible with Java 17.
+Review Stacktraces: Carefully analyze the stack traces to identify the root cause of the issue.
+Configure Message Factory: You can configure the SaajSoapMessageFactory with a custom MessageFactory if needed.
+By addressing these issues and ensuring the proper dependencies and configurations, you can successfully use SaajSoapMessageFactory in Java 17 applications.
+
+
+
 
