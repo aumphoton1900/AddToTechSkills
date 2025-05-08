@@ -179,6 +179,10 @@ Testing: Tools like SoapUI can be used to test the web service endpoints.
 This provides a basic overview of how to create a SOAP web service using JAX-WS in Java 11. 
 Remember to adapt the code and configurations based on your specific requirements.
 
+===========================================
+For later JDK versions, we can use jaxws-maven-plugin by MojoHaus as described here.
+Alternatively, org.jvnet.jaxb2‘s maven-jaxb2-plugin can 
+come in handy as detailed in Invoking a SOAP Web Service in Spring.
 
 
 
