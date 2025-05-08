@@ -203,3 +203,17 @@ public class EmployeeServiceClient {
     }
 }
 
+At client 
+
+3.3. CountryService Interface
+The CountryService interface acts as a proxy to the actual web service. 
+It declares the findByName() method as defined in the server:
+
+@WebService(name = "CountryService", targetNamespace = "http://server.ws.soap.baeldung.com/")
+@SOAPBinding(style = SOAPBinding.Style.RPC)
+public interface CountryService {
+    @WebMethod
+    @WebResult(partName = "return")
+    public Country findByName(@WebParam(name = "arg0") String arg0);
+}
+
