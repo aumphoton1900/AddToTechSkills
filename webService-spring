@@ -1,0 +1,74 @@
+1]
+https://www.baeldung.com/java-soap-web-service
+Here's how to use Spring with SOAP and Java 11:
+
+Key Considerations
+Java 11 Compatibility:
+Java 11 removed some key XML and SOAP libraries from the JDK. When using Spring Web Services with 
+Java 11 or later, you need to explicitly add these dependencies to your project.
+
+Spring Web Services:
+Spring Web Services (Spring-WS) is the primary framework for building SOAP-based web services in Spring.
+Steps to Use Spring SOAP with Java 11
+Project Setup:
+Create a Spring Boot project using Spring Initializr or your preferred method.
+Add the spring-boot-starter-web-services dependency.
+Add Missing Dependencies:
+Include the necessary XML and SOAP libraries in your pom.xml (Maven) or build.gradle (Gradle) file. 
+The exact dependencies can vary, but typically include:
+
+jakarta.xml.ws:jakarta.xml.ws-api
+com.sun.xml.ws:jaxws-rt
+
+jakarta.jws:jakarta.jws-api
+Code
+
+    <!-- Example in pom.xml -->
+    <dependency>
+      <groupId>jakarta.xml.ws</groupId>
+      <artifactId>jakarta.xml.ws-api</artifactId>
+      <version>4.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.ws</groupId>
+      <artifactId>jaxws-rt</artifactId>
+      <version>4.0.2</version>
+    </dependency>
+       <dependency>
+          <groupId>jakarta.jws</groupId>
+          <artifactId>jakarta.jws-api</artifactId>
+          <version>3.0.0</version>
+      </dependency>
+Define Your Web Service:
+Create a class annotated with @Endpoint to expose your SOAP service.
+Use annotations like @PayloadRoot, @RequestPayload, and @ResponsePayload to handle SOAP messages.
+Create a WSDL:
+A WSDL (Web Services Description Language) file is necessary to describe your service's contract. 
+Spring can generate this automatically or you can create it manually.
+
+Testing:
+Use a tool like SoapUI to test your SOAP service.
+You can also create a client within your Spring application using WebServiceTemplate.
+Example (Conceptual)
+Java
+
+// Service Endpoint
+@Endpoint
+public class MyServiceEndpoint {
+
+    @PayloadRoot(namespace = "http://yournamespace", localPart = "MyRequest")
+    @ResponsePayload
+    public MyResponse handleRequest(@RequestPayload MyRequest request) {
+        // ... process request and return response
+    }
+}
+Key Points
+JAX-WS:
+Spring Web Services utilizes JAX-WS (Java API for XML Web Services) under the hood.
+WSDL:
+The WSDL file is crucial for clients to understand the structure and operations of your SOAP service.
+Dependency Management:
+Ensure you have the correct versions of the required dependencies to avoid compatibility issues.
+By following these steps and adding the necessary dependencies, you can successfully create and 
+consume SOAP web services in Spring with Java 11.
+
