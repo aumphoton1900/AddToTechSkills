@@ -262,5 +262,25 @@ https://docs.spring.io/spring-ws/site/reference/html/server.html
 9) jaxb vs sax vs dom vs stax 
 https://stackoverflow.com/questions/7709928/jaxb-vs-dom-and-sax
 
+10. logging 
 
-
+Java Spring
+Starting from Spring Framework 5.0, a Commons Logging bridge has been incorporated within the spring-jcl module. 
+This bridge can detect the presence of Log4j 2.x API and SLF4J 1.7 API in the classpath. 
+The bridge selects the first available logging implementation from these APIs and uses it for logging. 
+If none of these APIs are present, the bridge defaults to the Java platform's core logging facilities, 
+also known as JUL or java.util.logging.
+The variant of Commons Logging provided by Spring is specifically designed for infrastructure 
+logging purposes within the core framework and its extensions. For logging requirements within the application code, 
+it is recommended to directly use Log4j 2.x, SLF4J, or JUL.
+Spring Boot has become the de facto standard for logging in Spring-based applications. 
+However, it is important to note that logging in Spring Boot is based on the same logging abstraction 
+layer used in the Spring framework. Therefore, the same principles and concepts that apply to 
+logging in Spring Boot also apply to logging in other Spring-based applications that use the 
+Spring framework's logging abstraction layer.
+Spring Boot uses Commons Logging for all internal logging but leaves the underlying log implementation open. 
+Default configurations are provided for Java Util Logging, Log4j2, and Logback. 
+In each case, loggers are pre-configured to use console output, with optional file output also available.
+https://portal.securecodewarrior.com/#/courses/course-task/71d3fa27-a74f-4a37-9d55-2224b5306900/
+e4351243-a515-4af1-84f2-54365b32481e/
+51df3cf6-5a9f-4597-9588-09346451b571/987bcd1d-d7f3-41a1-98c7-9029321349f5
