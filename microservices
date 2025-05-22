@@ -1,1 +1,17 @@
+1. Microservices Design pattern
+   1. Database per service pattern
+      Dedicated database for each service:
 
+2. 12 factor app : 
+
+3. need for microservice design pattern 
+ -  The Need for Microservices Design Patterns
+
+ Service orchestration: Ensuring that multiple, 
+independent services communicate seamlessly to execute complex business processes. 
+Fault tolerance: In a distributed system, a failure in one service shouldn’t lead to a system-wide collapse. 
+Data consistency: Unlike monolithic systems where you can rely on ACID transactions in a single database,
+microservices often have their own databases, making transactional consistency a big concern. 
+Service discoverability: How services locate each other in a dynamically scaling environment.
+
+4. SOA vs Microservices 
