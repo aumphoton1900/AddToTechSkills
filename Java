@@ -82,4 +82,42 @@ This new syntax uses the -> operator instead of the traditional :
 for case labels. When a case matches, only the code to the right of the -> is executed, 
 and there's no fall-through to the next case.
 
+Furthermore, this also allows us to use multiple options as case labels. 
+Here is an example of how to use the enhanced switch statement with multi-value labels:
+
+int value = 5;
+switch (value) {
+    case 1 -> System.out.println("One");
+    case 2 -> System.out.println("Two");
+    case 3, 4 -> System.out.println("Three or Four");
+    default -> System.out.println("Invalid value");
+}
+Below example shows the summary of types that are allowed in a case label till Java 21:
+
+public String testType(Object obj) {  
+    return switch (obj) { 
+        case null -> "NULL value"; 
+        case String str -> "It's a String";  
+        case Size s -> "Enum Type"; 
+        case Point p -> "Records Type"; 
+        case Employee e -> "Custom Object's Type"; 
+        case int[] ai -> "Array Type"; 
+        case Employee e when e.getName().equals("John") -> "Conditional Statement";  
+        default -> "Unknown"; 
+     }; 
+} 
+
+public enum Size {  
+   SMALL, MEDIUM, LARGE; 
+} 
+public record Point(int i, int j) { ..... } 
+public class Employee{ ..... }
+https://javatechonline.com/java-17-features/
+
+In the example above, record is a new type introduced in Java 14. To know more about records type, 
+kindly go through record type in Java 14 under Java 14 features.
+
+The ‘when’ clause is added in Java 21 which allows us to include conditional statement in a case label.
+This is called a guarded pattern label. 
+For a separate comprehensive guide on Guarded Patterns with examples, kindly visit Guarded Pattern in Java 21.
 
