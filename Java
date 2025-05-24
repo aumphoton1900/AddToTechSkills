@@ -71,4 +71,15 @@ class Singleton implements Serializable {
     protected Object readResolve() { return instance; }
 }
 -----------
+<<Java 17 changes >>
+1.
+switch statement was limited to byte, short, char, int, Byte, Character, Short, Integer, String, and Enum types.
+to use patterns to match against the value of an object of any type.
+
+Note: case statements can now be written as `case …expression ->’ instead of  ‘case expression:’ since Java 12.
+Java 12 introduced an enhanced switch expression syntax that eliminates the need for break statements. 
+This new syntax uses the -> operator instead of the traditional : 
+for case labels. When a case matches, only the code to the right of the -> is executed, 
+and there's no fall-through to the next case.
+
 
