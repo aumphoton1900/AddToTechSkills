@@ -221,3 +221,8 @@ op - 2
 Q3 : equals return false 
 Q4 : equals return true
 https://medium.com/@bhangalekunal2631996/understanding-the-equals-and-hashcode-contract-in-java-937197742b5a
+
+==================
+If two objects are equal according to the equals method, they must have the same hash code.
+If two objects have the same hash code, they might be equal according to the equals method.
+
