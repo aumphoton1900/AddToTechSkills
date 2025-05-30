@@ -41,8 +41,15 @@ public interface AuthorRepository extends CrudRepository<Author, Integer> {
 https://www.baeldung.com/spring-data-jpa-query-hints
 https://medium.com/@javatechie/spring-data-jpa-query-hints-for-better-performance-1144b089ba03
 ----------------------------------------------------------------
+4. embedded vs embeddedId ?
 
+Typically, embeddable classes share the same table as the Entity 
+in which they are embedded.If the id field exists 
+in embeddable class (class annotated with @Embeddable) then 
+to embed the embeddable class inside entity class, 
+instead of @Embedded we have to use @EmbeddedId annotation.
 
+------------------------------------------------------------------
 
 
 
