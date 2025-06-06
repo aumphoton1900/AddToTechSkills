@@ -1,4 +1,10 @@
 1. 
+Identiy Provider is a service that stores and manages digital identity . company use these services 
+to allow thier employees / users to connect with resources they need . 
+they provide a way to manage , access , add or remove privileges , while security maintains tight. 
+
+
+
 https://docs.spring.io/spring-authorization-server/reference/guides/how-to-social-login.html
 
 spring - ldap with authentication 
@@ -18,6 +24,8 @@ what type of authenitcation to use , use configure(HttpSecurity http) ;
 dn - distinguish name 
 
 2. SAML 
+used to exchange authentication-authorization data between two party identity provider , service provider. 
+
 
 
 
