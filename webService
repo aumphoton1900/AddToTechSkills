@@ -222,3 +222,42 @@ https://www.baeldung.com/spring-resttemplate-json-list
 https://medium.com/code-kings/java-json-gson-how-to-access-a-nested-array-with-gson-3067df1991ba
 https://www.callicoder.com/configuring-spring-boot-to-use-gson-instead-of-jackson/
 https://www.baeldung.com/spring-rest-template-error-handling
+
+RestTemplate itself is a synchronous client, meaning it blocks the current thread until a response is received. To handle asynchronous operations with RestTemplate, you can employ a few strategies: 
+1. Using AsyncRestTemplate (Deprecated)
+Spring previously provided AsyncRestTemplate, which is now deprecated. It uses a ListenableFuture to handle responses asynchronously.
+This approach is generally not recommended for newer projects due to its deprecation.
+2. Using @Async Annotation
+You can annotate a method that uses RestTemplate with @Async. This allows the method to run in a separate thread, making the call non-blocking for the original thread.
+Spring manages the thread pool for these asynchronous methods.
+This approach is suitable when you need the asynchronous effect without needing a non-blocking client.
+3. Using CompletableFuture
+You can wrap the RestTemplate call in a CompletableFuture. This allows you to perform the call in a separate thread and manage the result asynchronously.
+It provides a more flexible way to handle the result, including chaining operations and handling exceptions.
+4. Using WebClient (Recommended)
+For Spring 5 and above, WebClient is the recommended approach for asynchronous and non-blocking HTTP calls.
+WebClient is built on top of non-blocking I/O and provides a more reactive approach to handling HTTP requests.
+It offers better performance and resource utilization compared to RestTemplate for asynchronous tasks.
+Example using @Async
+Java
+
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+@Service
+public class MyService {
+
+    private final RestTemplate restTemplate;
+
+    public MyService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
+    @Async
+    public void fetchDataAsync(String url) {
+        try {
+            String response = restTemplate.getForObject(url, String.class);
+            System.out.println("Async Response: " + response);
+        } catch (Exception e) {
+===============================================
