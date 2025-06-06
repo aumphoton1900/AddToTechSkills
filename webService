@@ -217,3 +217,7 @@ public interface CountryService {
     public Country findByName(@WebParam(name = "arg0") String arg0);
 }
 
+4.1 rest webservice 
+https://www.baeldung.com/spring-resttemplate-json-list
+https://medium.com/code-kings/java-json-gson-how-to-access-a-nested-array-with-gson-3067df1991ba
+
