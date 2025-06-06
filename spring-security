@@ -42,8 +42,29 @@ dn - distinguish name
 2. SAML 
 used to exchange authentication-authorization data between two party identity provider , service provider. 
 SSO : open id connect (OIDC) / SAML / WSF 
+a person want to use the service from the service provider. 
+ service provider gets authentication from the identity  provider to grant authorization to user. 
+
+a identity provider , provides  identity of the user , who is trying to access the service provider. 
+send authenitcation data along with user's access right to service . 
+
+open standard protocol for sso , defines how service providers and identity  providers excahnge identity informations . 
+saml is xml based std to exchange authentication and authorization based data b/w two parties . 
+example - let mutiple web services are there , saml provide sso , authnticate once with identity provider .
+identiy provider is where your identiy is established and authenticated . 
+it is a service that store and manage didgital service.
+
+example - okta / oauth0 / microsoft / google 
+a SAML enabled service provider , is a service provider that supports saml protocol for sso.
+it means , user can login to service provider , with credential from trusted identiy provider. 
+without having to create a separate account for the service provider. 
+some of popular saml enabled service provider example - 
+salesforce , microsoft 365 , google workspace , okta. 
 
 
+
+
+ 
 
 
 
