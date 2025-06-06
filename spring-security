@@ -40,11 +40,15 @@ what type of authenitcation to use , use configure(HttpSecurity http) ;
 dn - distinguish name 
 
 2. SAML 
+What is SAML? A Comprehensive Guide with Examples : ByteMonk
+
 used to exchange authentication-authorization data between two party identity provider , service provider. 
 SSO : open id connect (OIDC) / SAML / WSF 
 a person want to use the service from the service provider. 
 sp redirect user to idp , user authenticate with idp. 
-idp redirect backs the user to service provider , with saml assertion.
+idp redirect backs the user to service provider , with saml assertion ( contain user information and rights) 
+sp validates the saml assertion and grants access to resource. 
+
 
 
 service provider gets authentication from the identity  provider .
@@ -73,10 +77,21 @@ saml assertion : an xml file exchanged b/w service provider and idp , to exchang
 https://www.youtube.com/watch?v=4ULlJEupV-I
 
 
+3] oauth vs saml 
+oauth 2.0  
+authorization only valid for 3rd party access 
+while saml is for sso and idenity . 
+in corporate environment saml can be used to implement sso . 
+you login once to your corporate n/w , to gain access to various services like email , internet applciations , cloud resources . 
 
 
-
+oauth - allow 3rd party app need  to access users data or perform action on their behalf , without exposing user credentials or without having 
+        full ctrl over users idenitity.
+        an extension of oauth - oidc is used for authentication. 
+oauth 2.0 + json web token - 
  
+usage of saml : sso + idenity federation : govt org , healthcare 
+
 
 
 
