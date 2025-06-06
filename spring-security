@@ -10,6 +10,12 @@ spring-security-ldap
 >>  
 spring.io/guides/gs/authenticating-ldap
 
+how to tell to authenticate with ldap ;  authenitcationManagerBuilder , 
+use configure (AuthenticationManagerBuilder auth) ; 
+
+>>
+what type of authenitcation to use , use configure(HttpSecurity http) ; 
+
 
 
 
