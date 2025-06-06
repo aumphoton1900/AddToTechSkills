@@ -43,7 +43,13 @@ dn - distinguish name
 used to exchange authentication-authorization data between two party identity provider , service provider. 
 SSO : open id connect (OIDC) / SAML / WSF 
 a person want to use the service from the service provider. 
- service provider gets authentication from the identity  provider to grant authorization to user. 
+sp redirect user to idp , user authenticate with idp. 
+idp redirect backs the user to service provider , with saml assertion.
+
+
+service provider gets authentication from the identity  provider .
+  
+to grant authorization to user. 
 
 a identity provider , provides  identity of the user , who is trying to access the service provider. 
 send authenitcation data along with user's access right to service . 
@@ -60,6 +66,12 @@ it means , user can login to service provider , with credential from trusted ide
 without having to create a separate account for the service provider. 
 some of popular saml enabled service provider example - 
 salesforce , microsoft 365 , google workspace , okta. 
+
+saml assertion : an xml file exchanged b/w service provider and idp , to exchange information 
+                 about user identity and authorization status . so saml assertion used to implement sso.
+                 sign using digital certificates. 
+https://www.youtube.com/watch?v=4ULlJEupV-I
+
 
 
 
