@@ -1,9 +1,25 @@
 1. 
+https://www.youtube.com/watch?v=vSQomBMsjwE
 Identiy Provider is a service that stores and manages digital identity . company use these services 
 to allow thier employees / users to connect with resources they need . 
 they provide a way to manage , access , add or remove privileges , while security maintains tight. 
-
-
+- authentication 
+- sso 
+- SAML / xml based - pass credential from IDP to service provider. 
+- openid - authentication layer for oauth , open std for access delegation that many web service provider use today - 
+  amazon webservices . 
+  active directory 
+  facebook login 
+- user try to access the service provider , user is redirected to sso , ask to enter credentials , 
+    then sso send saml request to idp , IDP send a saml reply validating identity of user . 
+    then sso send saml assertion to service provider ,allowing access . 
+   example of sso provider -  
+        1. apple 
+        2. active directory 
+        3. continue with fb 
+        4. continue with google
+        5. sign in with okta
+     
 
 https://docs.spring.io/spring-authorization-server/reference/guides/how-to-social-login.html
 
