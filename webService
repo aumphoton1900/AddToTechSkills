@@ -221,3 +221,4 @@ public interface CountryService {
 https://www.baeldung.com/spring-resttemplate-json-list
 https://medium.com/code-kings/java-json-gson-how-to-access-a-nested-array-with-gson-3067df1991ba
 https://www.callicoder.com/configuring-spring-boot-to-use-gson-instead-of-jackson/
+https://www.baeldung.com/spring-rest-template-error-handling
