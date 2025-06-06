@@ -15,6 +15,9 @@ use configure (AuthenticationManagerBuilder auth) ;
 
 >>
 what type of authenitcation to use , use configure(HttpSecurity http) ; 
+dn - distinguish name 
+
+2. SAML 
 
 
 
