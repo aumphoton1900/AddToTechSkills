@@ -41,6 +41,7 @@ dn - distinguish name
 
 2. SAML 
 used to exchange authentication-authorization data between two party identity provider , service provider. 
+SSO : open id connect (OIDC) / SAML / WSF 
 
 
 
