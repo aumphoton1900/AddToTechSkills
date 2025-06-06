@@ -7,6 +7,9 @@ unboundid-ldapsdk
 spring-ldap-core 
 spring-security-ldap
 
+>>  
+spring.io/guides/gs/authenticating-ldap
+
 
 
 
