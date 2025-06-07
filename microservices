@@ -15,3 +15,20 @@ microservices often have their own databases, making transactional consistency a
 Service discoverability: How services locate each other in a dynamically scaling environment.
 
 4. SOA vs Microservices 
+
+5. client side load balancing
+Spring Cloud Ribbon is a Netflix-contributed library that provides several algorithmic options out of the box, 
+making it easier to implement client-side load balancing in a Spring Cloud-based microservices application.
+
+In Ribbon, the client-side load balancing is performed using a component called RestTemplate. 
+This component is marked as deprecated since Spring 5, but Ribbon still uses it. 
+To create a RestTemplate bean, you need to annotate it with @LoadBalanced to integrate it with Ribbon:
+
+@Bean
+@LoadBalanced
+public RestTemplate restTemplate() {
+    return new RestTemplate();
+}
+https://medium.com/@AlexanderObregon/exploring-client-side-load-balancing-with-spring-cloud-ribbon-59bf46af9b73
+
+
