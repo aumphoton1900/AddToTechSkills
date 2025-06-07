@@ -266,3 +266,56 @@ By using @Async with WebServiceTemplate, you can achieve asynchronous web servic
 improving performance and responsiveness.
 
 ++++++++++++++++++++++++++++++++++++++++
+async rest 
+Q1: hou can wrap the RestTemplate call in a CompletableFuture.
+
+import org.springframework.web.client.RestTemplate;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class RestTemplateAsync {
+
+  private final RestTemplate restTemplate;
+  private final ExecutorService executorService;
+
+  public RestTemplateAsync() {
+    this.restTemplate = new RestTemplate();
+    this.executorService = Executors.newFixedThreadPool(10); // example thread pool
+  }
+
+  public CompletableFuture<String> fetchDataAsync(String url) {
+    return CompletableFuture.supplyAsync(() -> {
+      return restTemplate.getForObject(url, String.class);
+    }, executorService);
+  }
+
+  public static void main(String[] args) {
+        RestTemplateAsync restTemplateAsync = new RestTemplateAsync();
+        CompletableFuture<String> future = restTemplateAsync.fetchDataAsync("https://example.com/api/data");
+
+        future.thenAccept(data -> {
+          System.out.println("Data received: " + data);
+        }).exceptionally(ex -> {
+           System.out.println("Error: " + ex.getMessage());
+           return null;
+        });
+
+        System.out.println("Request sent, continuing with other tasks...");
+    }
+}
+
+Explanation:
+CompletableFuture.supplyAsync(() -> { ... }, executorService):
+supplyAsync creates a new CompletableFuture that will be completed with the result of the Supplier (the lambda expression).
+The lambda expression contains the restTemplate.getForObject() call, which performs the HTTP request.
+The executorService is used to execute the Supplier in a separate thread, making the call asynchronous.
+future.thenAccept(data -> { ... }):
+This attaches a callback that will be executed when the CompletableFuture completes successfully.
+The data variable will contain the result of the HTTP request.
+future.exceptionally(ex -> { ... }):
+This attaches a callback that will be executed if the CompletableFuture completes exceptionally (e.g., an error during the HTTP request).
+The ex variable will contain the exception that occurred.
+Benefits of using CompletableFuture:
+=======================================
+
