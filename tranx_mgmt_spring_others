@@ -184,12 +184,37 @@ DriverManagerDatasource :: For Local TxMgmt using jdbc
 HibernateManagerDataSource :: For LocalTxMgmt using hibernate
 IBatchManagerDataSource :: For Local TxMgmt using hibernate
 ----------------------------------------
-DatasourceTransactionManager :: For Local TxMgmt using jdbc
-HibernateTransactionManager :: For LocalTxMgmt using hibernate
-iBatisTransactionManager :: For Local TxMgmt using hibernate
+DatasourceTransactionManager :: For Local TxMgmt using jdbc / spring jdbc
+HibernateTransactionManager :: For LocalTxMgmt using hibernate [ spring orm | spring data jpa]
+iBatisTransactionManager :: For Local TxMgmt using Ibatis orm / spring data jpa
 JTATransactionManager :: for gloabl TxMgmt using any technology
 
 all these are subclasses of PlatformTransactionManager(c)
+
+Let take transaction as built in advice - How to configure that built in advice 
+by choosing appropriate transaction manger
+what does this transaction manager tells ?
+I am a transaction service , it is internaly implemented as around advice + throws advice 
+based on transaction manager you choose 
+it internally decides wheteher it choose , whether you are looking for local / global transaction
+and using which technology. let say if you configure datasource transaction manager as advice class , 
+you must have persistence logic in dao class , either using plain jdbc or spring jdbc.
+-------------------------------------------
+Local TxMget using AspectjAop declarative approach 
+- you need to import "tx" ,"aop" namespace
+- you need to configure transaction manager as advice using <tx:advice> tag
+- you need to apply Tx attribute indicating Tx is required or not when b.method called using 
+  <tx:attribute> tag specify b.method names
+- renaming all cfgs are same as aop configurations
+note : since you arelloking for local transaction management using spring jdbc persistence logic 
+so you need to take datasourceTransactionManager as "tx" advice 
+first configure is as spring bean , then as tx advice and then as aspectj aop advice
+-----------------------------------------
+use case : transfer money operation between two accounts of same bank. (same db s/w)
+ -  if local transaction management is sufficient or not ? 
+ -  we apply Tx service as aop advice on service class methods because they directly apply on dao class methods.
+ - as dao class methods are invoked from service class methods.
+
 
 ------------------------------------------------------------
 
