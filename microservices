@@ -31,4 +31,28 @@ public RestTemplate restTemplate() {
 }
 https://medium.com/@AlexanderObregon/exploring-client-side-load-balancing-with-spring-cloud-ribbon-59bf46af9b73
 
+============================
+microservice transaction management - distributed tx mgmt 
+1.  Saga Pattern Example
 
+Implementing the Saga pattern in Spring involves using an event-driven approach. 
+Here’s a basic example using simple application events:
+
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.stereotype.Service;
+
+@Service
+public class OrderService {
+
+    private final ApplicationEventPublisher publisher;
+
+    public OrderService(ApplicationEventPublisher publisher) {
+        this.publisher = publisher;
+    }
+
+    public void createOrder(Order order) {
+        // publish an event to start the Saga
+        publisher.publishEvent(new OrderCreatedEvent(this, order));
+    }
+}
+========================================
