@@ -93,6 +93,13 @@ if conn2.commit() throws exception , conn1.commit() can not be rollback . [ sql 
 if conn2.rollback() throws exception , conn1.rollback() execution gives problem .
 same issue in case of hibernate , so both are not good for global transaction management. 
 
+
 ===================================================
 - weblogic application server 
 
+======================================
+For Global transaction management , 
+you need global transaction manager / distributed tx manager , who 
+perform commit and rollback operations on the multiple DBs  of same boundry ( belong to same tx) in single short. 
+ => generally you get distributed txmgr from application server logic (weblogic / glassfish and etc)... or from third pary 
+or from third party vendors like atomokis , narayana. 
