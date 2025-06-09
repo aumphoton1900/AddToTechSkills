@@ -103,3 +103,11 @@ you need global transaction manager / distributed tx manager , who
 perform commit and rollback operations on the multiple DBs  of same boundry ( belong to same tx) in single short. 
  => generally you get distributed txmgr from application server logic (weblogic / glassfish and etc)... or from third pary 
 or from third party vendors like atomokis , narayana. 
+
+===================
+Oracle Web Logic Server 
+ javax - > 1. jms   ;  
+           2. transaction - transactionManager , transactionSyncronizationRegistry , UserTransaction
+
+        
+
