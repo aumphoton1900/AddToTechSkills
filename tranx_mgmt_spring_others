@@ -87,6 +87,8 @@ try {
     connection.setAutoCommit(true);
     connection.close();
 }
+one connection for one connection db . 
+two connection for two db. 
 
 ===================================================
 - weblogic application server 
