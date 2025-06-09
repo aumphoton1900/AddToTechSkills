@@ -109,6 +109,36 @@ Oracle Web Logic Server
  javax - > 1. jms   ;  
            2. transaction - transactionManager , transactionSyncronizationRegistry , 
                             UserTransaction ( this is distributed transaction manager)
+in application server the distributed TxManager is placed in jndi registry , having fixed jndi name 
+in case weblogic server , the jndi name - javax.transaction.UserTransaction 
+=========================
+Distributed TxMgt using jta in programatic approach 
+public <RT> b.method(<params>) {
+  // get distributed Tx Mgmr from the jndi registry underlying server 
+  InitialContext ic = new InitialContext();
+UserTransaction ut = ic.lookup("javax/transaction/UserTransaction"); 
+// from server or some third party need to look up operation to get distributed transaction manager. 
+// begin distributed Tx 
+  ut.begin();
+...// what ever connection/session you create here you shall create using xa drivers. 
+// then only this 2pc protocl works nicely.
+.. // sql quesries to execute on multiple Dbs using multiple connections / sessions
+ // let say talk to 3 db , it will keep track of talk to 3 db within a boundry
+ut.commit() //data  modified in 10 dbs s/w ( 10 db data) will commit in single shot
+ // who will take care distributed transaction manager will take care. by using 2 pc protocol. 
+// if all perfectly modified 
+}
+catch(Exception ex) {
+ut.rollback(); // all 10 db data will rollback in single shot.
+}
+// this code gainst aop.
+do not use normal drivers , use xa drivers 
+-- services - datasources - new - generic data source - Data base drivers - xa databases drivers. 
+- after calling ut.begin() , if the code performing persistence operation on 3 dbs then will go 
+  tx boundry and 2pc protocol will be implemented on them.
+============================
+
+
 
 
         
