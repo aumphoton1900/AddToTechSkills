@@ -107,7 +107,9 @@ or from third party vendors like atomokis , narayana.
 ===================
 Oracle Web Logic Server 
  javax - > 1. jms   ;  
-           2. transaction - transactionManager , transactionSyncronizationRegistry , UserTransaction
+           2. transaction - transactionManager , transactionSyncronizationRegistry , 
+                            UserTransaction ( this is distributed transaction manager)
+
 
         
 
