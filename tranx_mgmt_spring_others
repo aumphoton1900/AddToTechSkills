@@ -137,6 +137,22 @@ do not use normal drivers , use xa drivers
 - after calling ut.begin() , if the code performing persistence operation on 3 dbs then will go 
   tx boundry and 2pc protocol will be implemented on them.
 ============================
+programatic transaction mgmt against aop.
+that's why people used to work with ejb for declerative approach. 
+
+Distributed Tx Mgmt using Ejb in declerative appraoch.
+======================================================
+// ejb component 
+ejb-jar.xml : 
+1. configure server managed distributed transaction manager by specifing its jndi name
+3. configure Ejb component.
+2. configure bussiness method of ejb component having TxMgmt service 
+
+=========================
+spring provide abstraction on multiple technology 
+if it give one mode of transaction code , it can internally generate hibernate code when it 
+choose hibernate as underlying technology.
+so it can generate jta code when choose jta as underlying technology
 
 
 
