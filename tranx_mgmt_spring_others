@@ -1,1 +1,15 @@
+1. https://www.youtube.com/watch?v=qUsh8ukxnlw&list=PLD245PhfkYpjbHZqpTNWjvL5eTgveqXSP
+before apprival of spring bean. 
+- work with jdbc/hibernate for local transaction management in programatic approach.
+- work with jta for global transaction management in programatic approach. 
+- work with ejb for global transaction managment for declarative approach. (xml)
+- hibernate code for local transaction management - java code (programatic) 
+
+
+JDBC
+In JDBC, local transaction management is achieved by using the java.sql.Connection interface. 
+By default, each SQL statement is executed within its own transaction (auto-commit mode). 
+To manage transactions explicitly, you need to disable auto-commit mode using connection.setAutoCommit(false).
+After disabling auto-commit, you can use connection.commit() to persist changes or 
+connection.rollback() to discard changes in case of errors.
 
