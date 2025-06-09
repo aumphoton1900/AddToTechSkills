@@ -89,6 +89,9 @@ try {
 }
 one connection for one connection db . 
 two connection for two db. 
+if conn2.commit() throws exception , conn1.commit() can not be rollback . [ sql , oracle]
+if conn2.rollback() throws exception , conn1.rollback() execution gives problem .
+same issue in case of hibernate , so both are not good for global transaction management. 
 
 ===================================================
 - weblogic application server 
