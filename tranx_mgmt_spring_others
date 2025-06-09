@@ -153,9 +153,43 @@ spring provide abstraction on multiple technology
 if it give one mode of transaction code , it can internally generate hibernate code when it 
 choose hibernate as underlying technology.
 so it can generate jta code when choose jta as underlying technology
+===================================
 
+may chnage local to global , global to local and vice versa. 
 
+Q1 :why go for spring transaction management , when you have multiple model of transaction managemnt . ?
+in other models of transaction management you should write differnt api code to perform transaction managemtn by using differnt 
+technology . so chaning from one transaction to other will need modififcation of code . 
+changing from local tx to global transaction and vice versa also modify the code . 
 
+since spring provides abstraction on multiple technology and frameworks , so it provide unified model 
+of transaction managemnt . that means it give single api or process for transaction management in aop style declarative but 
+makes you work with differnt technology like jdbc , hibernate and etc.
+also makes you to implement different types of transactions like local, global txn.
 
-        
+Q2 : differnt ways to implement spring transaction mgmt . 
+aspectj-aop declarative tx mgmt [xml]. 
+aspectj-aop annotation approach.
+aspectj-aop 100% code driven approach.
+aspectj-aop spring boot approach 
+
+in any approach you can use jdbc / jta / hibernate . and you can move local to global and from global to local.
+in spring transaction service is built-in advice , acting as around advice plus throws advice . 
+and you can get that advice by configuring appropriate txn manager. 
+
+based on this transaction manager , configuration , spring also understands Tx type local / global and 
+underlaying technology to use.
+-------------------------------------
+DriverManagerDatasource :: For Local TxMgmt using jdbc
+HibernateManagerDataSource :: For LocalTxMgmt using hibernate
+IBatchManagerDataSource :: For Local TxMgmt using hibernate
+----------------------------------------
+DatasourceTransactionManager :: For Local TxMgmt using jdbc
+HibernateTransactionManager :: For LocalTxMgmt using hibernate
+iBatisTransactionManager :: For Local TxMgmt using hibernate
+JTATransactionManager :: for gloabl TxMgmt using any technology
+
+all these are subclasses of PlatformTransactionManager(c)
+
+------------------------------------------------------------
 
