@@ -5,6 +5,69 @@ before apprival of spring bean.
 - work with ejb for global transaction managment for declarative approach. (xml)
 - hibernate code for local transaction management - java code (programatic) 
 
+- why you can not use jdbc/hiberante for global transaction management ? 
+
+For example, code that manages transactions using a JDBC connection cannot run within 
+a global JTA transaction. Because the application server is not involved in transaction management, 
+it cannot help ensure correctness across multiple resources.
+
+Hibernate, while excellent for managing local transactions, typically relies on a database's 
+built-in transaction management. 
+It cannot directly handle global transactions that span multiple databases or resources, 
+which require a more robust transaction manager like JTA (Java Transaction API). 
+
+Elaboration:
+1. Hibernate's Focus:
+Hibernate focuses on managing transactions within a single database connection (local transactions). 
+It uses the database's internal mechanisms to handle these transactions, such as BEGIN TRANSACTION, COMMIT, and ROLLBACK. 
+
+2. Global Transactions Need JTA:
+Global transactions, which involve multiple databases or resources, require a transaction manager that 
+can coordinate the transactions across all participating resources. This is typically handled by 
+JTA (Java Transaction API), which provides a standard way for applications to manage distributed transactions. 
+
+3. Hibernate's API Limitations:
+While Hibernate provides transaction management APIs, they are designed for managing local transactions 
+within a single database context. They don't offer the functionality needed to manage the 
+complexities of global transactions, especially when dealing with multiple databases. 
+
+4. Application Server Involvement:
+In environments where global transactions are needed (e.g., enterprise applications with multiple databases), 
+application servers (like JBoss) typically provide JTA implementations that handle global transaction management. 
+
+5. Example: Spring Framework:
+Frameworks like Spring can integrate with Hibernate and provide features for managing transactions, 
+including declarative transaction management via annotations like @Transactional. 
+However, Spring itself doesn't implement a global transaction manager. 
+It relies on the application server's JTA implementation for managing global transactions. 
+
+6. In summary:
+Hibernate's transaction management capabilities are well-suited for local transactions within a single database. 
+For global transactions, you'll need a dedicated transaction manager (like JTA) and potentially 
+the assistance of an application server. 
+
+
+
+
+2.]
+Hibernate
+Hibernate provides its own org.hibernate.Transaction interface to manage transactions. 
+You obtain a transaction using session.beginTransaction(). 
+Similar to JDBC, you use transaction.commit() to persist changes or transaction.rollback() to discard changes.
+
+Session session = sessionFactory.openSession();
+Transaction transaction = null;
+try {
+    transaction = session.beginTransaction();
+    // Perform database operations
+    transaction.commit();
+} catch (Exception e) {
+    if (transaction != null) transaction.rollback();
+} finally {
+    session.close();
+}
+
+
 
 JDBC
 In JDBC, local transaction management is achieved by using the java.sql.Connection interface. 
@@ -12,4 +75,19 @@ By default, each SQL statement is executed within its own transaction (auto-comm
 To manage transactions explicitly, you need to disable auto-commit mode using connection.setAutoCommit(false).
 After disabling auto-commit, you can use connection.commit() to persist changes or 
 connection.rollback() to discard changes in case of errors.
+
+Connection connection = dataSource.getConnection();
+try {
+    connection.setAutoCommit(false);
+    // Perform database operations
+    connection.commit();
+} catch (SQLException e) {
+    connection.rollback();
+} finally {
+    connection.setAutoCommit(true);
+    connection.close();
+}
+
+===================================================
+- weblogic application server 
 
