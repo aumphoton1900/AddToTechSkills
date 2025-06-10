@@ -217,4 +217,21 @@ use case : transfer money operation between two accounts of same bank. (same db 
 
 
 ------------------------------------------------------------
+namespace - a lib set of xml tags , idenified by url . like java package.
+---------------------------------------------------------------------
+Hikari is a JDBC DataSource implementation that provides a connection pooling mechanism. 
+Compared to other implementations, it promises to be lightweight and better performing.
+<bean id="hkCPDs" class ="com.zaxer.hikari.HikariDatasource">
+  <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+  <property name="jdbcUrl" value="oracle.jdbc.driver.OracleDriver" />
+  <property name="userName" value=""/>
+  <property name="password" value=""/>
+</bean>
+<bean id="template" class="org.springframeowrk.jdbc.core.jdbc.JdbcTemplate">
+ <constructor-arg name="dataSource" ref="hkCPDs" >
+</bean>
+<bean id ="bankDao" class="com.nt.dao.BankDaoImpl> 
+ <constructor-arg name="jit" ref="template" />
+</bean>
+
 
