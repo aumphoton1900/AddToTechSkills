@@ -234,4 +234,8 @@ Compared to other implementations, it promises to be lightweight and better perf
  <constructor-arg name="jit" ref="template" />
 </bean>
 
+in declerative tx mgmt roolbak exception if bussiness method throws unchecked ex.
+it will commit trx , if no exception is raised. 
+---------------------------------------------------
+
 
