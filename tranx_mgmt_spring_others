@@ -237,5 +237,11 @@ Compared to other implementations, it promises to be lightweight and better perf
 in declerative tx mgmt roolbak exception if bussiness method throws unchecked ex.
 it will commit trx , if no exception is raised. 
 ---------------------------------------------------
+https://www.youtube.com/watch?v=-iWx_YGplqc&list=PLD245PhfkYpjbHZqpTNWjvL5eTgveqXSP&index=2
+aop-beans.xml
+<bean id="dsTxMgr" class="DataSourceTransactionManager"/>
+  <constructor-arg name="dataSource" ref="hkCPDs"> 
+</bean>
 
+on which method you want to apply transaction ,specify through transaction-attribute. 
 
