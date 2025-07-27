@@ -382,3 +382,58 @@ e4351243-a515-4af1-84f2-54365b32481e/
 
 11.
 https://medium.com/axgr-dev/how-to-implement-multi-factor-authentication-with-spring-security-bb23aaf874e7
+
+12. spring cloud load balancing
+----------------------------
+Spring Boot microservice - Eureka, LoadBalancer and Feign
+
+Spring Cloud Ribbon is a Netflix-contributed library that provides several algorithmic 
+options out of the box, making it easier to implement client-side 
+load balancing in a Spring Cloud-based microservices application
+
+dependencies {
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon'
+}
+
+After including the necessary dependencies, you can annotate your Spring Boot main class with 
+@EnableDiscoveryClient. This annotation enables the service to register with a service registry such as Netflix's Eureka.
+
+@SpringBootApplication
+@EnableDiscoveryClient
+public class Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+}
+
+In Ribbon, the client-side load balancing is performed using a component called RestTemplate. 
+This component is marked as deprecated since Spring 5, but Ribbon still uses it. 
+To create a RestTemplate bean, you need to annotate it with @LoadBalanced to integrate it with Ribbon:
+
+@Bean
+@LoadBalanced
+public RestTemplate restTemplate() {
+    return new RestTemplate();
+}
+
+we can use RestTemplate to perform synchronous HTTP requests.
+how we can convert a JSON Array into three different object structures in Java: 
+Array of Object, 
+Array of POJO and 
+a List of POJO.
+
+ResponseEntity<Object[]> responseEntity =
+   restTemplate.getForEntity(BASE_URL, Object[].class);
+Object[] objects = responseEntity.getBody();
+return Arrays.stream(objects)
+  .map(object -> mapper.convertValue(object, User.class))
+  .map(User::getName)
+  .collect(Collectors.toList());
+
+
+
+
+
+
+
+
