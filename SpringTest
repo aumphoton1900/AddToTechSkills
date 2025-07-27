@@ -12,3 +12,5 @@ The @SpringBootTest annotation can be used when we need to bootstrap the entire 
 The annotation works by creating the ApplicationContext that will be utilized in our tests.
 
 Here is the article with clear examples on both scenarios Baeldung
+
+https://stackoverflow.com/questions/49635396/runwithspringrunner-class-vs-runwithmockitojunitrunner-class
