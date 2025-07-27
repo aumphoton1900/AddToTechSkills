@@ -14,3 +14,4 @@ The annotation works by creating the ApplicationContext that will be utilized in
 Here is the article with clear examples on both scenarios Baeldung
 
 https://stackoverflow.com/questions/49635396/runwithspringrunner-class-vs-runwithmockitojunitrunner-class
+https://stackoverflow.com/questions/58901288/springrunner-vs-springboottest
