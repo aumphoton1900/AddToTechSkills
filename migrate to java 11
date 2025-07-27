@@ -1,1 +1,36 @@
+1]
+
+In the Oracle release notes for Java 11, I found this:
+
+other-libs ➜ JEP 320 Remove the Java EE and CORBA Modules
+
+Remove the Java EE and CORBA modules from the Java SE Platform and the JDK. 
+These modules were deprecated in Java SE 9 with the declared intent to remove them in a future release (JEP 320).
+
+The following modules have been removed from Java SE 11 and JDK 11:
+
+java.xml.ws (JAX-WS, plus the related technologies SAAJ and Web Services Metadata)
+java.xml.bind (JAXB) 
+...etc
+
+According to what I read from Oracle, they removed Jax-WS from Java 11, 
+but it's still available under OpenJDK: JEP 320: Remove the Java EE and CORBA Modules. According to that page,
+
+This proposal assumes that developers who wish to compile or run applications on 
+the latest JDK can find and deploy alternate versions of the Java EE technologies. 
+The Reference Implementations (RIs) of JAX-WS and JAXB are a good starting point 
+because they are complete replacements for the java.xml.ws and java.xml.bind modules in JDK 9. 
+The RIs are available as Maven artifacts: (note that they must be deployed on the class path)
+
+com.sun.xml.ws : jaxws-ri (JAX-WS, plus SAAJ and Web Services Metadata)
+com.sun.xml.bind : jaxb-ri (JAXB)
+The tools for JAX-WS and JAXB are also available as Maven artifacts:
+
+wsgen and wsimport: com.sun.xml.ws : jaxws-tools, plus tool scripts
+schemagen and xjc: com.sun.xml.bind : jaxb-jxc and com.sun.xml.bind : jaxb-xjc, plus tool scripts
+Since you are on Java 8, you may still have to do more tweaking and/or migrate up to Java 9 first, 
+but from I can tell, this is your only path forward.
+
+So to summarize, Oracle removed Jax-WS and related technologies from Java 11, 
+but they are still available to download and use and here is the link to the Maven repo for (RIs) of JAX-WS and JAXB . 
 
