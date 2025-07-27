@@ -170,4 +170,31 @@ Exception in thread "main" java.util.ConcurrentModificationException
 	at java8.util.CopyOnWriteArrayListExample.concurrentModificationException_eg02(CopyOnWriteArrayListExample.java:57)
 	at java8.util.CopyOnWriteArrayListExample.main(CopyOnWriteArrayListExample.java:75)
 ------------------------------------------------------------------------
+> vector vs list
+
+Here’s a concise comparison of Vector and List in programming, focusing on their key differences:
+
+1. Memory Allocation
+Vector: Uses contiguous memory allocation, making it efficient for random access.
+List: Uses non-contiguous memory (linked nodes), which is better for frequent insertions and deletions.
+2. Performance
+Vector:
+Fast random access (O(1)).
+Slower for insertions/deletions in the middle or beginning (O(n)).
+List:
+Slower random access (O(n)).
+Faster insertions/deletions (O(1)) if the position is known.
+3. Synchronization (Java-specific)
+Vector: Synchronized, making it thread-safe but slower in single-threaded environments.
+List: Not synchronized, so it’s faster but requires external synchronization for thread safety.
+4. Use Cases
+Vector: Ideal for scenarios requiring frequent random access and dynamic resizing.
+List: Suitable for applications with frequent insertions/deletions and less random access.
+5. Default Size (Java-specific)
+Vector: May have a default size and grows dynamically.
+List: Does not have a default size.
+
+In summary, choose Vector for random access and List for dynamic, frequent modifications.
+
+---------------------------
 
