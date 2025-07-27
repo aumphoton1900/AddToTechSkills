@@ -431,6 +431,32 @@ return Arrays.stream(objects)
   .map(User::getName)
   .collect(Collectors.toList());
 
+The Jackson Deserializer actually deserializes JSON into a series of LinkedHashMap objects 
+when we ask it to produce Object as the target type. Post-processing with convertValue is an inefficient overhead.
+We can avoid it if we provide our desired type to Jackson in the first place.
+
+b)
+ ResponseEntity<User[]> responseEntity = 
+    restTemplate.getForEntity(BASE_URL, User[].class); 
+  User[] userArray = responseEntity.getBody();
+  return Arrays.stream(userArray) 
+    .map(User::getName) 
+    .collect(Collectors.toList());
+
+c)
+3.3. RestTemplate With User List and ParameterizedTypeReference
+
+ResponseEntity<List<User>> responseEntity = 
+  restTemplate.exchange(
+    BASE_URL,
+    HttpMethod.GET,
+    null,
+    new ParameterizedTypeReference<List<User>>() {}
+  );
+List<User> users = responseEntity.getBody();
+return users.stream()
+  .map(User::getName)
+  .collect(Collectors.toList());
 
 
 
