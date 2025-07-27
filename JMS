@@ -31,5 +31,25 @@ However, the same rules apply to it, ie. as ephemeral zNode,
 it’s destroyed once the consumer goes down and the registration process is made automatically by the consumer.
 
 
+synchronous vs asynchronous messaging jms 
+==========================================
+difference between synchronous and asynchronous jms
+JMS: Synchronous vs. Asynchronous Messaging
+In the context of the Java Message Service (JMS), the terms synchronous and asynchronous describe how messages 
+are consumed by a client application. 
+1. Synchronous messaging
+Definition: In synchronous messaging, a message consumer explicitly fetches a message from the destination 
+by calling a receive() method.
+Blocking behavior: The calling thread blocks or waits until a message arrives, or until a specified timeout period expires.
+Example: A client application repeatedly calls receive() on a queue until a message is available for processing.  
+2. Asynchronous messaging
+Definition: In asynchronous messaging, the client registers a MessageListener object with a consumer.
+Event-driven: The JMS provider delivers messages by calling the onMessage() method of the registered listener 
+whenever a message arrives at the destination.
+Non-blocking: The client application doesn't have to wait for messages to arrive; instead, it's notified when 
+a message is ready for processing.
+Example: A server application registers a MessageListener to process orders as they arrive in a queue without 
+blocking the main application thread
+
 
 
