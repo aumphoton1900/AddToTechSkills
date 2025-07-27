@@ -460,7 +460,12 @@ return users.stream()
 
 https://www.baeldung.com/spring-resttemplate-json-list
 
+GSON
+------
+to convert Java Objects into a JSON representation. 
+We can also use it the other way around, to convert a JSON string to an equivalent Java object.
 
+https://www.baeldung.com/gson-save-file
 
 
 
