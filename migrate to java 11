@@ -34,3 +34,53 @@ but from I can tell, this is your only path forward.
 So to summarize, Oracle removed Jax-WS and related technologies from Java 11, 
 but they are still available to download and use and here is the link to the Maven repo for (RIs) of JAX-WS and JAXB . 
 
+2]
+steps to migrate 
+migrating-from-jdk-8-to-jdk-11-for-jax-ws-libraries
+
+Migrating a Java application using JAX-WS libraries from JDK 8 to JDK 11 primarily involves addressing the removal of Java EE modules, including JAX-WS and JAXB, from the core JDK.
+Key Steps for Migration:
+Update Dependencies:
+JAX-WS and JAXB, previously bundled with JDK 8, are no longer part of JDK 11. You need to explicitly add them as external dependencies to your project.
+For Maven projects, add the necessary JAX-WS and JAXB runtime and API dependencies. For example:
+Code
+
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>2.3.5</version> <!-- Use a compatible version -->
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>2.3.3</version> <!-- Use a compatible version -->
+        </dependency>
+Ensure all other third-party libraries and frameworks used in your project are also updated to versions compatible with JDK 11.
+Compile and Resolve Issues:
+Update your build tools (e.g., Maven, Gradle) and their respective plugins to versions compatible with JDK 11. 
+For Maven, update the maven-compiler-plugin to target Java 11.
+
+Compile your application with JDK 11.
+Address any compilation errors related to removed APIs, deprecated packages, or unofficial access to internal APIs. 
+The jdeps and jdeprscan tools can help identify potential issues.
+
+Address Runtime Issues:
+Run your application with JDK 11.
+Monitor for runtime errors or warnings, especially those related to class loading or reflective access.
+If using internal APIs (e.g., sun.misc.Unsafe), consider migrating to supported alternatives like Variable 
+Handles introduced in later JDK versions.
+Consider Modularization (Optional but Recommended):
+
+While not strictly required for running on JDK 11, consider modularizing your application using the Java Module System (Jigsaw) 
+for better encapsulation and maintainability in the long run. This can be done incrementally.
+Important Considerations:
+Iterative Process:
+Migration is often an iterative process. Start by getting the application to run on JDK 11, then address compilation and runtime 
+issues, and finally consider modularization.
+
+Testing:
+Thoroughly test your application after migration to ensure all functionalities work 
+as expected and there are no regressions in behavior.
+
+
+
