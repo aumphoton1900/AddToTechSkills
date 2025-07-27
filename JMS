@@ -17,3 +17,19 @@ while (true) {
     consumer.commitAsync();
 }
 
+2.kafka 
+=========
+
+b. Kafka Consumers
+i. Offsets
+ZooKeeper is the default storage engine, for consumer offsets, in Kafka’s 0.9.1 release. 
+However, all information about how many messages Kafka consumer consumes by each consumer is stored in ZooKeeper.
+
+ii. Registry
+Consumers in Kafka also have their own registry as in the case of Kafka Brokers. 
+However, the same rules apply to it, ie. as ephemeral zNode, 
+it’s destroyed once the consumer goes down and the registration process is made automatically by the consumer.
+
+
+
+
