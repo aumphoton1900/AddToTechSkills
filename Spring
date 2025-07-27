@@ -425,6 +425,7 @@ a List of POJO.
 ResponseEntity<Object[]> responseEntity =
    restTemplate.getForEntity(BASE_URL, Object[].class);
 Object[] objects = responseEntity.getBody();
+ObjectMapper mapper = new ObjectMapper();
 return Arrays.stream(objects)
   .map(object -> mapper.convertValue(object, User.class))
   .map(User::getName)
