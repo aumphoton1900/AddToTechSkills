@@ -73,3 +73,101 @@ Key Features
 Fail-Safe Iteration: Iterators do not throw ConcurrentModificationException because they operate on a snapshot 
 of the array at the time of their creation.
 Best Use Case: Ideal for applications with frequent reads and infrequent writes, such as caching or event-listener lists.
+
+Example-01
+-----------
+
+public static void concurrentModificationException_eg01() {
+	        // Create a CopyOnWriteArrayList
+	        CopyOnWriteArrayList<String> list = new CopyOnWriteArrayList<>();
+
+	        // Add elements
+	        list.add("Apple");
+	        list.add("Banana");
+	        list.add("Cherry");
+
+	        // Iterate over the list
+	        System.out.println("Iterating over the list:");
+	        for (String fruit : list) {
+	            System.out.println(fruit);
+	        }
+
+	        // Modify the list while iterating
+	        System.out.println("\nModifying the list during iteration:");
+	        for (String fruit : list) {
+	            System.out.println(fruit);
+	            if (fruit.equals("Banana")) {
+	                list.add("Date"); // Safe modification
+	            }
+	        }
+
+	        // Display the updated list
+	        System.out.println("\nUpdated list:");
+	        for (String fruit : list) {
+	            System.out.println(fruit);
+	        }
+	    }
+
+
+Iterating over the list:
+Apple
+Banana
+Cherry
+
+Modifying the list during iteration:
+Apple
+Banana
+Cherry
+
+Updated list:
+Apple
+Banana
+Cherry
+Date
+
+
+ public static void concurrentModificationException_eg02() {
+	        // Create a CopyOnWriteArrayList
+	        List<String> list = new ArrayList<>();
+
+	        // Add elements
+	        list.add("Apple");
+	        list.add("Banana");
+	        list.add("Cherry");
+
+	        // Iterate over the list
+	        System.out.println("Iterating over the list:");
+	        for (String fruit : list) {
+	            System.out.println(fruit);
+	        }
+
+	        // Modify the list while iterating
+	        System.out.println("\nModifying the list during iteration:");
+	        for (String fruit : list) {
+	            System.out.println(fruit);
+	            if (fruit.equals("Banana")) {
+	                list.add("Date"); // Safe modification
+	            }
+	        }
+
+	        // Display the updated list
+	        System.out.println("\nUpdated list:");
+	        for (String fruit : list) {
+	            System.out.println(fruit);
+	        }
+	    }
+Iterating over the list:
+Apple
+Banana
+Cherry
+
+Modifying the list during iteration:
+Apple
+Banana
+Exception in thread "main" java.util.ConcurrentModificationException
+	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:911)
+	at java.util.ArrayList$Itr.next(ArrayList.java:861)
+	at java8.util.CopyOnWriteArrayListExample.concurrentModificationException_eg02(CopyOnWriteArrayListExample.java:57)
+	at java8.util.CopyOnWriteArrayListExample.main(CopyOnWriteArrayListExample.java:75)
+------------------------------------------------------------------------
+
