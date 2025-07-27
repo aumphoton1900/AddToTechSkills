@@ -458,6 +458,9 @@ return users.stream()
   .map(User::getName)
   .collect(Collectors.toList());
 
+https://www.baeldung.com/spring-resttemplate-json-list
+
+
 
 
 
