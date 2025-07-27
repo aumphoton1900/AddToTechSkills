@@ -23,6 +23,9 @@ When using Spring Boot, an appropriate bean of type PlatformTransactionManager w
 so we just need to simply inject it. 
 Otherwise, we should manually register a PlatformTransactionManager bean.
 
+
+
+
 1) Class DefaultTransactionDefinition
 All Implemented Interfaces:
 Serializable, TransactionDefinition
@@ -96,6 +99,98 @@ public class TestTransaction {
 }
 https://www.demo2s.com/java/spring-transactiontemplate-execute-transactioncallback-t-action.html
 https://www.demo2s.com/java/java-org-springframework-transaction-support-transactiontemplate.html
+[----------------------------notes on nested transaction-------------------]
+Implementing local distributed nested transactions in a Spring application can be complex, 
+as Spring's transaction management primarily supports local transactions within a single database or resource. 
+However, you can achieve this by carefully designing your application to handle nested transactions and 
+distributed scenarios. Here's an overview of the concepts and approaches:
+
+1. Nested Transactions in Spring
+
+Spring supports nested transactions using the PROPAGATION_NESTED propagation level. 
+This allows a sub-transaction to be rolled back independently of the parent transaction. 
+However, it requires the underlying database to support savepoints.
+
+Example:
+Copy the code
+@Service
+public class NestedTransactionService {
+
+    @Autowired
+    private SomeRepository someRepository;
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void parentTransaction() {
+        someRepository.save(new Entity("Parent"));
+
+        try {
+            childTransaction();
+        } catch (Exception e) {
+            // Handle child transaction failure
+        }
+    }
+
+    @Transactional(propagation = Propagation.NESTED)
+    public void childTransaction() {
+        someRepository.save(new Entity("Child"));
+        if (true) { // Simulate an error
+            throw new RuntimeException("Child transaction failed");
+        }
+    }
+}
+
+Key Points:
+The child transaction can roll back independently without affecting the parent.
+Ensure your database supports savepoints (e.g., PostgreSQL, MySQL with InnoDB).
+2. Distributed Transactions
+
+For distributed transactions (spanning multiple databases or services),
+Spring does not natively support them. Instead, you can use XA Transactions or eventual consistency patterns.
+
+XA Transactions with JTA
+
+Use a JTA (Java Transaction API) implementation like Atomikos or Bitronix to manage distributed transactions.
+
+Copy the code
+<!-- Maven Dependency for Atomikos -->
+<dependency>
+    <groupId>com.atomikos</groupId>
+    <artifactId>transactions-jta</artifactId>
+    <version>5.0.9</version>
+</dependency>
+
+
+Configure the JtaTransactionManager in Spring:
+
+Copy the code
+@Bean
+public PlatformTransactionManager transactionManager(UserTransactionManager userTransactionManager) {
+    return new JtaTransactionManager(userTransactionManager);
+}
+
+Eventual Consistency with Saga Pattern
+
+For microservices, consider the Saga pattern to manage distributed transactions. 
+Use tools like Spring Cloud or Axon Framework to orchestrate compensating actions.
+
+3. Combining Nested and Distributed Transactions
+
+Combining these two concepts requires careful design:
+
+Use nested transactions for operations within the same database.
+Use distributed transaction managers or event-driven approaches for cross-database or cross-service operations.
+Example Workflow:
+Start a parent transaction (local or distributed).
+Perform nested operations using PROPAGATION_NESTED.
+For distributed operations, use a Saga orchestrator or JTA.
+Challenges and Recommendations
+Performance: Distributed transactions can be slow due to network and coordination overhead.
+Complexity: Nested and distributed transactions add complexity; use them only when necessary.
+Database Support: Ensure your database supports the required features (e.g., savepoints for nested transactions).
+
+By combining Spring's transaction management with external tools like JTA or Saga frameworks,
+you can implement robust local distributed nested transactions tailored to your application's needs.
+
 
 2.@Transactional
  How to Use @Transactional
@@ -126,7 +221,7 @@ Some implementations of JTATransactionManager may also support this.
 JpaTransactionManager supports NESTED only for JDBC connections. 
 However, if we set the nestedTransactionAllowed flag to true, 
 it also works for JDBC access code in JPA transactions if our JDBC driver supports save points.
-
+[------------------ends-----------------------------]
 ===============================
 4. Transaction Isolation
 Isolation is one of the common ACID properties: Atomicity, Consistency, Isolation, and Durability. 
