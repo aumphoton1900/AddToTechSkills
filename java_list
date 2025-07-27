@@ -37,4 +37,22 @@ Reason: CopyOnWriteArrayList provide some more flexibility than synchronization.
 
 https://javagoal.com/java-copyonwritearrayset/
 --------------------------------------------
+ArrayList vs LinkedList 
+
+In Java, ArrayList and LinkedList are two implementations of the List interface, each with distinct characteristics and use cases. Here's a concise comparison:
+
+1. Underlying Data Structure
+ArrayList: Uses a dynamic array to store elements.
+LinkedList: Uses a doubly-linked list, where each node contains data and references to the next and previous nodes.
+2. Performance
+Access (Get/Set):
+ArrayList: Faster, as it provides O(1) time complexity for random access.
+LinkedList: Slower, as it requires O(n) time complexity to traverse nodes.
+Insertion/Deletion:
+ArrayList: Slower for operations in the middle or beginning, as it involves shifting elements (O(n)).
+LinkedList: Faster for insertion/deletion at the middle or beginning (O(1) if the node reference is known).
+Memory Usage:
+ArrayList: More memory-efficient as it only stores data.
+LinkedList: Consumes more memory due to node pointers (next and previous
+---------------------------------------------
 
