@@ -73,7 +73,12 @@ class Singleton implements Serializable {
 -----------
 <<Java 17 changes >>
 1.
-switch statement was limited to byte, short, char, int, Byte, Character, Short, Integer, String, and Enum types.
+switch statement was limited to 
+
+byte, short, char, int, 
+Byte, Character, Short, Integer, 
+String, and Enum types.
+
 to use patterns to match against the value of an object of any type.
 
 Note: case statements can now be written as `case …expression ->’ instead of  ‘case expression:’ since Java 12.
@@ -120,4 +125,59 @@ kindly go through record type in Java 14 under Java 14 features.
 The ‘when’ clause is added in Java 21 which allows us to include conditional statement in a case label.
 This is called a guarded pattern label. 
 For a separate comprehensive guide on Guarded Patterns with examples, kindly visit Guarded Pattern in Java 21.
+
+2]
+public class HelloWorld{
+
+  public static String getDayOfWeek(int dayNum) {
+    return switch (dayNum) {
+        case 1 -> "Monday";
+        case 2 -> "Tuesday";
+        case 3 -> "Wednesday";
+        case 4 -> "Thursday";
+        case 5 -> "Friday";
+        case 6 -> "Saturday";
+        case 7 -> "Sunday";
+        default -> "Invalid day";
+    };
+}
+
+     public static void main(String []args){
+        System.out.println(getDayOfWeek(3));
+     }
+} //wednesday
+
+Note: case statements can now be written as `case …expression ->’ instead of  ‘case expression:’ since Java 12.
+As shown in the example, since Java 12, the case statements now use the new arrow operator (->) to specify the pattern and 
+the result expression. It also eliminates the break statement at each case.
+
+record CreditCardPayment(String cardNumber) {}
+
+//Record class for PayPalPayment
+record PayPalPayment(String email) {}
+
+public class PaymentProcessing {
+
+    private static void processPayment(Object payment) {
+        String result = switch (payment) {
+            case CreditCardPayment cc ->
+                 "Processing Credit Card payment with card number: " + cc.cardNumber();
+            case PayPalPayment pp -> "Processing PayPal payment with email: " + pp.email();
+            case Integer amount -> "Processing Cash payment of $" + amount;
+            case null -> "Invalid payment method: null";
+            default -> "Unknown payment method.";
+        };
+        System.out.println(result);
+    }
+
+    public static void main(String[] args) {
+        processPayment(new CreditCardPayment("1234-5678-9876-5432"));
+        processPayment(new PayPalPayment("user@example.com"));
+        processPayment(500); 
+        processPayment(null); 
+    }
+}
+
+==============================
+
 
