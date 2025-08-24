@@ -188,6 +188,78 @@ This example demonstrates a simplified payment processing system that handles pa
 Here, case CreditCardPayment, and case PaypalPayment are type patterns, whereas case Integer is a variable pattern. 
 Case null explicitly handles null values to identify invalid payment methods. Default case catches all unsupported payment methods.
 
+2.b)
+enhanced switch statement with multi-value labels:
+
+Furthermore, this also allows us to use multiple options as case labels. 
+Here is an example of how to use the enhanced switch statement with multi-value labels:
+
+int value = 5;
+switch (value) {
+    case 1 -> System.out.println("One");
+    case 2 -> System.out.println("Two");
+    case 3, 4 -> System.out.println("Three or Four");
+    default -> System.out.println("Invalid value");
+}
+
+2.c ) Pattern Matching for instanceof
+Pattern Matching for instanceof
+Java 17 introduces a short way of pattern matching for the instanceof operator, 
+which helps to simplify the code required for type checks. With pattern matching, 
+you can extract the value of the checked object into a new variable if the check succeeds. 
+This new variable can then be used in following code. It eliminates the need to cast the object into the expected type.
+
+Note that this was a preview feature introduced under Java 14 Features. It has become 
+a permanent feature under the list of Java 17 features.
+
+Here is an example of how pattern matching can simplify code that uses the instanceof operator:
+
+// Old way with pattern matching (Before Java 17)
+
+if (obj instanceof String) {
+     String str = (String) obj;
+     System.out.println(str.length());
+}
+// New way with pattern matching (Since Java 17)
+
+if (obj instanceof String str) {
+    System.out.println(str.length());
+}
+
+2.d)
+Sealed Classes & Interfaces
+
+Sealed classes and interfaces offer a restriction whether classes/interfaces can extend/implement other classes/interfaces or not.
+In simple words, Sealed Classes work by specifying which classes or interfaces are allowed to extend or 
+implement a particular class or interface. This is achieved by using the “sealed” modifier on the parent class or 
+interface, and then specifying the allowed subclasses or implementing classes using the “permits” keyword.
+Sealed Classes were proposed by JEP 360 and delivered in JDK 15 as a preview feature. 
+They were proposed again, with some refinements, and delivered in JDK 16 as a preview feature. 
+Now in JDK 17, Sealed Classes are being finalized with no changes from JDK 16.\
+
+public sealed class Shape permits Circle, Square, Triangle {
+    // ...
+}
+In the example, the “sealed” modifier is used to specify that the Shape class is a sealed class. 
+The “permits” keyword is then used to specify the allowed subclasses of Shape, which are Circle, Square, and Triangle.
+
+2.e)
+Enhanced Pseudo-Random Number Generators
+“Enhanced Pseudo-Random Number Generators” introduced under Java 17 Features. 
+
+2.f)
+Restore Always-Strict Floating-Point Semantics
+
+2.g)
+Strongly Encapsulate JDK Internals
+
+The “Strongly Encapsulate JDK Internals” feature in Java 17 aims to further enhance 
+the encapsulation of internal APIs in the JDK (Java Development Kit). 
+The goal is to limit the use of internal APIs by third-party applications and libraries, 
+which can improve the security and stability of Java applications.
+
+
+
 ==============================
 
 
