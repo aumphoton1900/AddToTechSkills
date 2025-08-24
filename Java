@@ -178,6 +178,16 @@ public class PaymentProcessing {
     }
 }
 
+Switch Statements Since Java 17
+In addition to using constant patterns, the new feature of java 17 also allows developers to use variable patterns 
+and type patterns. A variable pattern allows you to match against a specific value and assign it to a variable. 
+A type pattern allows you to match against the type of a value.
+
+Here is an example that demonstrates the use of variable and type patterns:
+This example demonstrates a simplified payment processing system that handles payments via credit card, PayPal, or cash. 
+Here, case CreditCardPayment, and case PaypalPayment are type patterns, whereas case Integer is a variable pattern. 
+Case null explicitly handles null values to identify invalid payment methods. Default case catches all unsupported payment methods.
+
 ==============================
 
 
