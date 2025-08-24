@@ -51,12 +51,31 @@ Code
             <artifactId>jaxws-rt</artifactId>
             <version>2.3.5</version> <!-- Use a compatible version -->
         </dependency>
-        <dependency>
+
+       <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
             <version>2.3.3</version> <!-- Use a compatible version -->
         </dependency>
+
+Update Build Tools and Plugins:
+Ensure your Maven or Gradle version supports JDK 11.
+Update relevant plugins like the Maven Compiler Plugin to target Java 11
+
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version> <!-- Or a newer version -->
+            <configuration>
+                <source>11</source>
+                <target>11</target>
+            </configuration>
+        </plugin>
+
 Ensure all other third-party libraries and frameworks used in your project are also updated to versions compatible with JDK 11.
+
+----------------------
+
 Compile and Resolve Issues:
 Update your build tools (e.g., Maven, Gradle) and their respective plugins to versions compatible with JDK 11. 
 For Maven, update the maven-compiler-plugin to target Java 11.
