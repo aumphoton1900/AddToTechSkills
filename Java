@@ -307,6 +307,46 @@ Each thread gets a unique copy of the variable.
 Ideal for storing state information like user sessions, transactions, or temporary data specific to a thread.
 Eliminates the need for synchronisation when multiple threads access shared data.
 
+Example-01 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class Main {
+    
+  // Define a ThreadLocal to hold data for each thread
+    private static final ThreadLocal<Integer> threadLocal = ThreadLocal.withInitial(() -> 0);
+
+    public static void main(String[] args) {
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
+
+        // Submit 10 tasks to demonstrate ThreadLocal
+        for (int i = 1; i <= 10; i++) {
+            int threadId = i;
+            executorService.submit(() -> {
+                // Set a value in the ThreadLocal for the current thread
+                threadLocal.set(threadId);
+                System.out.println("Thread " + Thread.currentThread().getName() + " has set value: " + threadLocal.get());
+
+                // Simulate some work
+                try {
+                    System.out.println("Thread: " + Thread.currentThread().getName() + " is sleeping");
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+
+                // Retrieve and print the value from the ThreadLocal
+                System.out.println("Thread " + Thread.currentThread().getName() + " still has value: " + threadLocal.get());
+
+                threadLocal.remove();
+            });
+        }
+
+        // Shutdown the executor service
+        executorService.shutdown();
+    }    
+}
+
 
 
 
