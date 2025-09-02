@@ -1,2 +1,8 @@
 1. spring transaction management 
 https://www.youtube.com/watch?v=qUsh8ukxnlw&list=PLD245PhfkYpjbHZqpTNWjvL5eTgveqXSP
+2.Jmeter
+4. JMeter tutorial summary
+https://arshad404.medium.com/java-threadlocal-advanced-concurrency-synchronised-vs-threadlocal-d7d367eab14f
+In this JMeter example, we learned to use jmeter to perform performance testing 
+of a web application or rest api in simple steps. We learned to create test plan, 
+thread group, configure HTTP request and review results in JMeter.
