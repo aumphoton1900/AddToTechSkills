@@ -299,5 +299,14 @@ ThreadLocals: Improper use of ThreadLocal variables can lead to memory leaks, es
 in environments with thread pooling
 
 =================================================
+>> ThreadLocal 
+
+Q1 : when to use ThreadLocal ?
+
+Each thread gets a unique copy of the variable.
+Ideal for storing state information like user sessions, transactions, or temporary data specific to a thread.
+Eliminates the need for synchronisation when multiple threads access shared data.
+
+
 
 
