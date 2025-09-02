@@ -347,6 +347,10 @@ public class Main {
     }    
 }
 
+What is ThreadLocal?
+ThreadLocal is a class in Java's java.lang package that provides thread-local variables. 
+Each thread accessing such a variable 
+has its own independent copy, meaning changes made by one thread are not visible to other threads.
 
 
 
