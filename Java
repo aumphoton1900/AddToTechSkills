@@ -261,5 +261,43 @@ which can improve the security and stability of Java applications.
 
 
 ==============================
+>>> Memeory Leaks 
+
+What Does a Memory Leak in JVM Mean?
+
+A memory leak in the JVM (Java Virtual Machine) occurs when objects 
+in the heap memory are no longer needed by the application but cannot be garbage 
+collected because they are still being referenced. This leads to unnecessary retention of memory, 
+which depletes system resources over time and can eventually cause the application to crash with an OutOfMemoryError.
+
+Key Characteristics of a Memory Leak
+
+Unused but Referenced Objects: These objects remain in memory because the garbage collector cannot 
+identify them as unreferenced, even though they are no longer needed by the application.
+
+Performance Degradation: Over time, memory leaks can lead to slower application performance and increased latency.
+
+Application Crashes: If the memory usage exceeds the allocated heap size, the application may 
+terminate with a fatal error.
+
+
+Common Causes of Memory Leaks in JVM
+
+Static Fields: Static variables persist for the lifetime of the application. 
+If they hold references to large objects or collections, these objects cannot be garbage collected.
+
+Unclosed Resources: Failing to close resources like database connections, input streams, or 
+sockets can lead to memory leaks.
+
+Improper equals() and hashCode() Implementations: Misconfigured methods can cause duplicate 
+objects to accumulate in collections like HashMap or HashSet.
+
+Inner Classes: Non-static inner classes hold implicit references to their enclosing classes, 
+preventing garbage collection of the outer class.
+
+ThreadLocals: Improper use of ThreadLocal variables can lead to memory leaks, especially 
+in environments with thread pooling
+
+=================================================
 
 
