@@ -87,7 +87,7 @@ This ensures that the compiler treats null as an Object reference rather than a 
 https://stackoverflow.com/questions/15046763/passing-null-to-the-method-preferring-string-not-object
 https://javalaunchpad.com/method-overloading-in-java-essential-oca-java-8-tips-tricks/
 ========================
-Long Example :: autoboxin 
+Long Example :: autoboxing 
 
 (2.02)
 class MathUtils {
@@ -121,4 +121,115 @@ long version being called
 Widening primitive conversion in Java 
 refers to the automatic conversion of a smaller 
 primitive type to a larger one, ensuring no loss of information
+
+3.b) 
+narrow example
+
+class Demo {
+    
+    public void show(int x)
+    {
+        System.out.println("In int" + x);
+    }
+    public void show(String s)
+    {
+        System.out.println("In String" + s);
+    }
+    public void show(byte b)
+    {
+        System.out.println("In byte" + b);
+    }
+}
+
+public class UseDemo {
+    
+    public static void main(String[] args)
+    {
+        byte a = 25;
+        Demo obj = new Demo();
+
+        // it will go to
+        // byte argument
+        obj.show(a);
+
+        // String
+        obj.show("hello");
+
+        // Int
+        obj.show(250);
+
+        // Since char is
+        // not available, so the datatype
+        // higher than char in terms of
+        // range is int.
+        obj.show('A');
+
+        // String
+        obj.show("A");
+
+        // since float datatype
+        // is not available and so it's higher
+        // datatype, so at this step their
+        // will be an error.
+        obj.show(7.5);
+    }
+}
+ obj.show(7.5);
+           ^
+    method Demo.show(int) is not applicable
+      (argument mismatch; possible lossy conversion from double to int)
+    method Demo.show(String) is not applicable
+      (argument mismatch; double cannot be converted to String)
+    method Demo.show(byte) is not applicable
+      (argument mismatch; possible lossy conversion from double to byte)
+1 error
+error: compilation failed
+https://www.geeksforgeeks.org/java/method-overloading-in-java/
+--------------------------------------------
+
+4) Key Points of Method Overriding
+Same Method Signature: The method in the subclass must have the same name, return type, 
+and parameters as the method in the superclass.
+Access Modifier: The overriding method cannot have a more restrictive access modifier 
+than the method in the superclass (e.g., a protected method in the superclass cannot be 
+overridden as private in the subclass).
+
+Annotations: The @Override annotation is optional but recommended to ensure the method 
+is correctly overriding a superclass method.
+Runtime Polymorphism: Method overriding is resolved at runtime, enabling dynamic method dispatch.
+Example Code
+
+Copy code
+// Superclass
+class Animal {
+    void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+// Subclass
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+// Main Class
+public class Main {
+    public static void main(String[] args) {
+        Animal myAnimal = new Animal(); // Superclass reference
+        myAnimal.sound(); // Output: Animal makes a sound
+
+        Animal myDog = new Dog(); // Polymorphism
+        myDog.sound(); // Output: Dog barks
+    }
+}
+Explanation
+The sound() method in the Dog class overrides the sound() method in the Animal class.
+When the myDog object is created with a reference of type Animal, 
+the overridden method in the Dog class is called due to runtime polymorphism.
+This demonstrates how method overriding allows subclasses to provide 
+specific behavior while maintaining a consistent interface.
+--------------------------------------------------------------------
 
