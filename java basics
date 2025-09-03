@@ -43,4 +43,45 @@ The default constructor is implicit and only exists if no other constructors are
 If you need both a parameterized and a no-argument constructor, you must explicitly define the no-argument constructor.
 This behavior ensures that Java maintains flexibility while allowing developers to control object initialization. 
 
-  
+2] 
+overloading 
+
+Overloading does not depend on the return type of the method, 
+two methods cannot be overloaded by just changing the return type.
+
+In Java, when you pass null to an overloaded method, 
+the compiler determines which method to call based on the most specific type. 
+If you have overloaded methods that accept String and Object, and 
+you pass null, the method with the String parameter will be chosen because String is more specific than Object.
+
+Here’s an example:
+
+
+Copy code
+public class Test {
+    public void method(String str) {
+        System.out.println("String method called");
+    }
+
+    public void method(Object obj) {
+        System.out.println("Object method called");
+    }
+
+    public static void main(String[] args) {
+        Test test = new Test();
+        test.method(null); // Calls the String method
+    }
+}
+Explanation:
+The compiler chooses the most specific method (String in this case) because String is a subclass of Object.
+If there are multiple overloaded methods with equally specific types (e.g., String and Integer), 
+the compiler will throw an ambiguity error.
+
+Forcing Object Method:
+If you want to explicitly call the Object method, you can cast null to Object:
+
+Copy code
+test.method((Object) null); // Calls the Object method
+This ensures that the compiler treats null as an Object reference rather than a String.
+
+========================
