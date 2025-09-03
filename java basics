@@ -56,7 +56,7 @@ you pass null, the method with the String parameter will be chosen because Strin
 
 Here’s an example:
 
-
+2.01 
 Copy code
 public class Test {
     public void method(String str) {
@@ -87,3 +87,38 @@ This ensures that the compiler treats null as an Object reference rather than a 
 https://stackoverflow.com/questions/15046763/passing-null-to-the-method-preferring-string-not-object
 https://javalaunchpad.com/method-overloading-in-java-essential-oca-java-8-tips-tricks/
 ========================
+Long Example :: autoboxin 
+
+(2.02)
+class MathUtils {
+
+    //public static int add(int a, int b) {
+    //    System.out.println("int version being called");
+    //    return a + b;
+     //}
+    
+     public static long add(long a, long b) {
+        System.out.println("long version being called");
+        return a + b;
+    }
+    
+    public static int add(Integer a, Integer b) {
+        System.out.println("Integer version being called");
+        return a + b;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        System.out.println(MathUtils.add(3, 5));
+    }
+}
+long version being called
+8
+------------------
+3. widening conversion 
+
+Widening primitive conversion in Java 
+refers to the automatic conversion of a smaller 
+primitive type to a larger one, ensuring no loss of information
+
