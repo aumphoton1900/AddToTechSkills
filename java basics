@@ -265,4 +265,10 @@ The sound() method in the Dog class overrides the sound() method in the Animal c
 When the myDog object is created with a reference of type Animal, 
 the overridden method in the Dog class is called due to runtime polymorphism.
 ---------------------------------
+2. Type Promotion (Widening)
 
+When there’s no exact match, Java tries to promote the type to the next wider type in its type hierarchy, 
+following this order:
+— byte → short → int → long → float → double
+— char → int
+-------------------------------
