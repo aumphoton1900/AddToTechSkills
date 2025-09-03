@@ -232,4 +232,32 @@ the overridden method in the Dog class is called due to runtime polymorphism.
 This demonstrates how method overriding allows subclasses to provide 
 specific behavior while maintaining a consistent interface.
 --------------------------------------------------------------------
+class Animal {
+    void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+// Subclass
+class Dog extends Animal {
+   // @Override
+    //void sound() {
+    //    super.sound();
+    //    System.out.println("Dog barks");
+    //}
+}
+
+// Main Class
+public class Main {
+    public static void main(String[] args) {
+        Animal myAnimal = new Animal(); // Superclass reference
+        myAnimal.sound(); // Output: Animal makes a sound
+
+        Animal myDog = new Dog(); // Polymorphism
+        myDog.sound(); // Output: Dog barks
+    }
+}
+Animal makes a sound
+Animal makes a sound
+---------------------------------
 
