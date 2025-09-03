@@ -51,8 +51,9 @@ but cannot be found at runtime.Causes:
 Solution:
 Check that the class is accessible and that you’re using the correct ClassLoader to load it.
 
-
-
+NoClassDefFoundError in Java - Example and Scenarios
+1. A simple example of NoClassDefFoundError is class belongs to a missing JAR file or JAR was not added into classpath or sometimes jar's name has been changed by someone like in my case one of my colleagues has changed tibco.jar into tibco_v3.jar and the program is failing with java.lang.NoClassDefFoundError and I were wondering what's wrong.
+------------------------------------------------------------------------------------------------------------------
   
      
 https://javarevisited.blogspot.com/2011/07/classnotfoundexception-vs.html#google_vignette
