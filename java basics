@@ -84,4 +84,6 @@ Copy code
 test.method((Object) null); // Calls the Object method
 This ensures that the compiler treats null as an Object reference rather than a String.
 
+https://stackoverflow.com/questions/15046763/passing-null-to-the-method-preferring-string-not-object
+https://javalaunchpad.com/method-overloading-in-java-essential-oca-java-8-tips-tricks/
 ========================
