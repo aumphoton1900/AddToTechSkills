@@ -22,6 +22,8 @@ sent to other microservices. For example, 4 out of 5 requests sent failed or tim
 then most likely the next request will also encounter the same thing.
 
 Q3 : why java not have jre after java 8 onwards?
+https://stackoverflow.com/questions/63241080/i-am-not-able-to-find-jre-files-in-program-files
+
  - modular jar file. 
  - In module-info.Java, we can mention all the dependencies/which modules are needed at the run time. [requires module3;
  -  Now at the compile time with the help of module-info.Java, compiler will get to know that what are classes needed to run the application and at the compilation time only compiler will check that the corresponding classes/packages are present inside the module or not. If the required classes are present then the code will compile successfully otherwise it will throw compilation errors at the compile time only.
