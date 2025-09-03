@@ -272,3 +272,57 @@ following this order:
 — byte → short → int → long → float → double
 — char → int
 -------------------------------
+3. overriding staic method 
+
+Why Static Methods Cannot Be Overridden in Java
+
+In Java, static methods cannot be overridden because they are associated with the class 
+rather than any specific instance. Overriding relies on dynamic method dispatch, which 
+is based on runtime polymorphism and works with instance methods. Static methods, however, 
+are resolved at compile time, not runtime.
+
+If you attempt to "override" a static method in a subclass, it results in method hiding, 
+not true overriding. Here's an explanation of the behavior:
+
+Key Points
+Static Methods Belong to the Class: Static methods are tied to the class, 
+not an object. Overriding requires an instance of the class, which static methods do not depend on.
+Compile-Time Resolution: Static methods are resolved during compilation, 
+whereas overridden methods are resolved at runtime.
+Method Hiding: If a subclass defines a static method with the same signature 
+as a static method in the parent class, the subclass method hides the parent class method. This is not overriding.
+
+Example of Method Hiding
+
+Copy code
+class Parent {
+    static void display() {
+        System.out.println("Static method in Parent class");
+    }
+}
+
+class Child extends Parent {
+    static void display() {
+        System.out.println("Static method in Child class");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Parent obj1 = new Parent();
+        Parent obj2 = new Child();
+
+        obj1.display(); // Output: Static method in Parent class
+        obj2.display(); // Output: Static method in Parent class
+    }
+}
+Explanation of the Output
+obj1.display() calls the Parent class's static method because display() is resolved at compile time.
+obj2.display() also calls the Parent class's static method, even though obj2 is a reference to a Child object. 
+This is because static methods are not polymorphic and are resolved based on the reference type, not the object type.
+
+Error Scenarios
+If you try to override a static method and expect runtime polymorphism, it will not work as intended. However, 
+the code will not throw a compile-time error because Java allows method hiding.
+If you need polymorphic behavior, consider using instance methods instead of static methods.
+================================
