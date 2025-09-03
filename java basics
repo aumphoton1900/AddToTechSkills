@@ -1,0 +1,46 @@
+1] default constructor 
+
+ In Java, a default constructor is automatically provided by the compiler only 
+   if no constructors are explicitly defined in the class. Here's how it works:
+
+When is it generated?
+
+If you do not define any constructor in your class, the Java compiler automatically generates 
+   a default constructor during compilation.
+This default constructor is a no-argument constructor and initializes the object with default values 
+   (e.g., 0 for numeric types, false for boolean, and null for objects).
+When is it NOT generated?
+
+If you define any constructor (e.g., a parameterized constructor), 
+   the compiler does not generate a default constructor. In such cases, 
+   you must explicitly define a no-argument constructor if needed.
+
+   Example:
+Copy code
+// Case 1: No constructor defined
+class Example1 {
+    // Compiler automatically generates:
+    // Example1() { }
+}
+
+// Case 2: Parameterized constructor defined
+class Example2 {
+    Example2(String name) {
+        System.out.println("Hello, " + name);
+    }
+    // No default constructor is generated here!
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Example1 obj1 = new Example1(); // Works fine
+        // Example2 obj2 = new Example2(); // Compilation error: no default constructor
+    }
+}
+Key Notes:
+
+The default constructor is implicit and only exists if no other constructors are defined.
+If you need both a parameterized and a no-argument constructor, you must explicitly define the no-argument constructor.
+This behavior ensures that Java maintains flexibility while allowing developers to control object initialization. 
+
+  
