@@ -34,6 +34,7 @@ Security Problems: Assume we have a JAR and inside that jar we have 2 packages.
 
 Q4 : jvm /jre /jdk ?
 Q5 : Difference between ClassNotFoundException vs NoClassDefFoundError in Java ?
+     missing jar error . 
 https://javarevisited.blogspot.com/2011/07/classnotfoundexception-vs.html#google_vignette
 List 
 https://javagoal.com/copyonwritearraylist-in-java/
@@ -44,3 +45,5 @@ In the case of using Spring Cloud Config Server; Spring Cloud offers the followi
 By calling the /actuator/refresh endpoint exposed on the config client via the Spring Actuator.
 By calling the /actuator/bus-refresh endpoint exposed on the config client integrated with Spring Cloud Bus.
 By calling the /monitor endpoint exposed on the config server integrated with Spring Cloud Bus.
+
+
