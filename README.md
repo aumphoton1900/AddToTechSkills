@@ -35,6 +35,25 @@ Security Problems: Assume we have a JAR and inside that jar we have 2 packages.
 Q4 : jvm /jre /jdk ?
 Q5 : Difference between ClassNotFoundException vs NoClassDefFoundError in Java ?
      missing jar error . 
+     
+Exception vs Error
+ ClassNotFoundException is a checked Exception derived directly from 
+ java.lang.Exception class and you need to provide explicit handling 
+ for it while NoClassDefFoundError is an Error derived from LinkageError.
+
+NoClassDefFoundError
+This error happens when a class was available during compile time , 
+but cannot be found at runtime.Causes:
+         The class was deleted or moved.
+         ClassLoader issues, such as loading classes from different ClassLoaders.
+
+Solution:
+Check that the class is accessible and that you’re using the correct ClassLoader to load it.
+
+
+
+  
+     
 https://javarevisited.blogspot.com/2011/07/classnotfoundexception-vs.html#google_vignette
 List 
 https://javagoal.com/copyonwritearraylist-in-java/
