@@ -35,6 +35,7 @@ Security Problems: Assume we have a JAR and inside that jar we have 2 packages.
 Q4 : jvm /jre /jdk ?
 Q5 : Difference between ClassNotFoundException vs NoClassDefFoundError in Java ?
      missing jar error . 
+https://javarevisited.blogspot.com/2011/06/noclassdeffounderror-exception-in.html
      
 Exception vs Error
  ClassNotFoundException is a checked Exception derived directly from 
