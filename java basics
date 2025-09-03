@@ -259,5 +259,10 @@ public class Main {
 }
 Animal makes a sound
 Animal makes a sound
+
+Explanation
+The sound() method in the Dog class overrides the sound() method in the Animal class.
+When the myDog object is created with a reference of type Animal, 
+the overridden method in the Dog class is called due to runtime polymorphism.
 ---------------------------------
 
