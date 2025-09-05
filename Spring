@@ -249,6 +249,22 @@ it also works for JDBC access code in JPA transactions if our JDBC driver suppor
 
 https://medium.com/@yogendra.209/global-transactions-in-distributed-environment-using-spring-boot-and-atomikos-80ad3a51179a
 
+==================================
+7. JAXB-2 Maven Plugin 
+This plugin uses the Java API for XML Binding (JAXB), version 2+, to generate Java classes from XML Schemas 
+(and optionally binding files) or to create XML schema from an annotated Java class.
+Note that there are two fundamental approaches to building web services, Contract Last and Contract First. 
+For more details on these approaches, check out this link.
+
+7.1. Generating a Java Class From XSD
+The JAXB-2 Maven plugin uses the JDK-supplied tool XJC, a JAXB Binding compiler tool that 
+generates Java classes from XSD (XML Schema Definition).
+Let’s create a simple user.xsd file and use the JAXB-2 Maven plugin to generate Java classes from this XSD schema:
+
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
 
 [------------------ends-----------------------------]
 ===============================
