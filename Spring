@@ -362,6 +362,26 @@ com.sun.xml.ws : jaxws-ri
 plugin = com.sun.xml.ws : jaxws-maven-plugin 
 configuration : wsdlUrls , packageName - where java code generate
 
+
+https://stackoverflow.com/questions/54305193/how-to-run-xjc-with-java-11-and-maven
+I've just investigated the same topic. The best way for Java 11 is to use cxf-xjc-plugin. 
+It's a Maven plugin. No other Maven plugin is able to work under Java 11 without annoying workarounds.
+I've published a complete example with cxf-xjc-plugin here: 
+https://artofcode.wordpress.com/2019/02/28/generating-classes-from-xsd-under-java-11-the-right-way/
+https://stackoverflow.com/questions/54305193/how-to-run-xjc-with-java-11-and-maven
+
+[ ===============================]
+https://www.baeldung.com/jaxb
+Let’s use JAXB Unmarshaller to unmarshal our book.xml back to a Java object:
+
+public Book unmarshal() throws JAXBException, IOException {
+    JAXBContext context = JAXBContext.newInstance(Book.class);
+    return (Book) context.createUnmarshaller()
+      .unmarshal(new FileReader("./book.xml"));
+}
+
+
+
 Q6.1 : how to consume a soap webservice in java using JAX-WS RI and wsimport 
        utility for java 11.
 generated pojo annotated with annotation for xml marshaller , unmarshaller.
