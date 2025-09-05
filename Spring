@@ -253,6 +253,7 @@ https://medium.com/@yogendra.209/global-transactions-in-distributed-environment-
 [------------------ends-----------------------------]
 ===============================
 4. Transaction Isolation
+
 Isolation is one of the common ACID properties: Atomicity, Consistency, Isolation, and Durability. 
 Isolation describes how changes applied by concurrent transactions are visible to each other.
 
@@ -373,6 +374,7 @@ class A exptends javax.xml.ws.Service - provide method to interact with web serv
 6.2 alternatively u can use other jax-ws implementation like  , apache cxf , apache axis2 , spring to do same.
 https://www.baeldung.com/java-soap-web-service
 https://medium.com/@salmankhan_27014/consuming-soap-based-web-services-in-java-e6a1645606ca
+https://stackoverflow.com/questions/15903249/generate-classes-with-jaxb2-maven-plugin-from-wsdl?rq=3
 
 7. SOAP
 ========
