@@ -189,6 +189,8 @@ Eventual Consistency with Saga Pattern
 For microservices, consider the Saga pattern to manage distributed transactions. 
 Use tools like Spring Cloud or Axon Framework to orchestrate compensating actions.
 
+
+
 3. Combining Nested and Distributed Transactions
 
 Combining these two concepts requires careful design:
@@ -230,6 +232,8 @@ https://www.baeldung.com/spring-transactional-propagation-isolation
 The JTATransactionManager supports real transaction suspension out-of-the-box. 
 Others simulate the suspension by holding a reference to the existing one and then clearing it from the thread context.
 
+
+
 3.7. NESTED Propagation
 For NESTED propagation, Spring checks if a transaction exists, and if so, it marks a save point. 
 This means that if our business logic execution throws an exception, then the transaction rollbacks to this save point. 
@@ -241,6 +245,11 @@ Some implementations of JTATransactionManager may also support this.
 JpaTransactionManager supports NESTED only for JDBC connections. 
 However, if we set the nestedTransactionAllowed flag to true, 
 it also works for JDBC access code in JPA transactions if our JDBC driver supports save points.
+
+
+https://medium.com/@yogendra.209/global-transactions-in-distributed-environment-using-spring-boot-and-atomikos-80ad3a51179a
+
+
 [------------------ends-----------------------------]
 ===============================
 4. Transaction Isolation
