@@ -99,6 +99,8 @@ public class TestTransaction {
 }
 https://www.demo2s.com/java/spring-transactiontemplate-execute-transactioncallback-t-action.html
 https://www.demo2s.com/java/java-org-springframework-transaction-support-transactiontemplate.html
+
+
 [----------------------------notes on nested transaction-------------------]
 Implementing local distributed nested transactions in a Spring application can be complex, 
 as Spring's transaction management primarily supports local transactions within a single database or resource. 
@@ -142,6 +144,17 @@ public class NestedTransactionService {
 Key Points:
 The child transaction can roll back independently without affecting the parent.
 Ensure your database supports savepoints (e.g., PostgreSQL, MySQL with InnoDB).
+
+Solution
+---------
+Atomikos provides transaction management for distributed environments without using 
+any external application server. 
+Atomikos adheres to JTA specifications making it easier to implement with Java-based applications. 
+It uses a two-phase-commit protocol to maintain transactions spanning across multiple resources.
+
+
+
+
 2. Distributed Transactions
 
 For distributed transactions (spanning multiple databases or services),
