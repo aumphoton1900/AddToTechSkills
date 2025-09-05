@@ -145,12 +145,7 @@ Key Points:
 The child transaction can roll back independently without affecting the parent.
 Ensure your database supports savepoints (e.g., PostgreSQL, MySQL with InnoDB).
 
-Solution
----------
-Atomikos provides transaction management for distributed environments without using 
-any external application server. 
-Atomikos adheres to JTA specifications making it easier to implement with Java-based applications. 
-It uses a two-phase-commit protocol to maintain transactions spanning across multiple resources.
+
 
 
 
@@ -173,6 +168,14 @@ Copy the code
 </dependency>
 
 
+Solution
+---------
+Atomikos provides transaction management for distributed environments without using 
+any external application server. 
+Atomikos adheres to JTA specifications making it easier to implement with Java-based applications. 
+It uses a two-phase-commit protocol to maintain transactions spanning across multiple resources.
+
+
 Configure the JtaTransactionManager in Spring:
 
 Copy the code
@@ -192,14 +195,18 @@ Combining these two concepts requires careful design:
 
 Use nested transactions for operations within the same database.
 Use distributed transaction managers or event-driven approaches for cross-database or cross-service operations.
+
 Example Workflow:
 Start a parent transaction (local or distributed).
 Perform nested operations using PROPAGATION_NESTED.
 For distributed operations, use a Saga orchestrator or JTA.
+
 Challenges and Recommendations
 Performance: Distributed transactions can be slow due to network and coordination overhead.
-Complexity: Nested and distributed transactions add complexity; use them only when necessary.
-Database Support: Ensure your database supports the required features (e.g., savepoints for nested transactions).
+Complexity: Nested and distributed transactions add complexity; 
+            use them only when necessary.
+Database Support: Ensure your database supports the required features 
+                  (e.g., savepoints for nested transactions).
 
 By combining Spring's transaction management with external tools like JTA or Saga frameworks,
 you can implement robust local distributed nested transactions tailored to your application's needs.
@@ -247,7 +254,13 @@ Nonrepeatable read: get different value on re-read of a row if a concurrent tran
 Phantom read: get different rows after re-execution of a range query if another transaction adds or removes some rows 
 in the range and commits
 We can set the isolation level of a transaction by @Transactional::isolation. It has these five enumerations in 
-Spring: DEFAULT, READ_UNCOMMITTED, READ_COMMITTED, REPEATABLE_READ, SERIALIZABLE.
+
+Spring: 
+DEFAULT, 
+READ_UNCOMMITTED, 
+READ_COMMITTED, 
+REPEATABLE_READ, 
+SERIALIZABLE.
 
 ==========================
 (1.) How to test controller ?
