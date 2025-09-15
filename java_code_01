@@ -18,4 +18,26 @@ class Main {
     }
 }
 
-Q2 : 
+Q2 : static Collector<CharSequence,?,String>
+
+joining()
+Returns a Collector that concatenates the input elements into a String, in encounter order.
+static Collector<CharSequence,?,String>
+
+joining(CharSequence delimiter)
+Returns a Collector that concatenates the input elements, separated by the specified delimiter, in encounter order.
+static Collector<CharSequence,?,String>
+
+joining(CharSequence delimiter, CharSequence prefix, CharSequence suffix)
+Returns a Collector that concatenates the input elements, separated by the specified delimiter, with the specified prefix and suffix, in encounter order.
+
+
+Collectros.joining example -02 
+           // List of strings
+        List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+          // Using Collectors.joining() without delimiter
+        String result1 = names.stream().collect(Collectors.joining());
+        System.out.println("Joined without delimiter: " + result1);
+
+
+
