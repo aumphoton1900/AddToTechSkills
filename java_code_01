@@ -39,5 +39,61 @@ Collectros.joining example -02
         String result1 = names.stream().collect(Collectors.joining());
         System.out.println("Joined without delimiter: " + result1);
 
+Q3 : Serializable example ?
+
+import java.util.stream.Collectors;
+import java.util.*;
+
+import java.io.*;
+
+// Step 1: Create a class that implements Serializable
+class Student implements Serializable {
+    private static final long serialVersionUID = 1L; // Recommended for Serializable classes
+    String name;
+    int age;
+
+    // Constructor
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Display method
+    public void display() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+
+
+
+
+class Main {
+    
+        public static void main(String[] args) {
+        // Serialization
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("student.ser"))) {
+            Student student = new Student("John Doe", 20);
+            oos.writeObject(student); // Serialize the object
+            System.out.println("Serialization complete.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Deserialization
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("student.ser"))) {
+            Student deserializedStudent = (Student) ois.readObject(); // Deserialize the object
+            System.out.println("Deserialization complete.");
+            deserializedStudent.display();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+       // System.out.println("Try programiz.pro");
+    //}
+}
+
+Serialization complete.
+Deserialization complete.
+Name: John Doe, Age: 20
 
 
