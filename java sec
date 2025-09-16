@@ -25,6 +25,7 @@ trustStore store all trusted CA certificates. they never contain private key or 
 type of keystore 
 - JKS (java key store - store private keys and certificates ,should not be used in production)
 - JCEKS java cryptography extension ks
+           default keystore for java.
 - PKCS#12 - can be used with non java application . may use des-3 ,aes algorithm.
 - PKCS#11
 - windows-my/windows-root
