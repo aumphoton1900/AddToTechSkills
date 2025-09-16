@@ -21,6 +21,8 @@ they provide a way to manage , access , add or remove privileges , while securit
         5. sign in with okta
      
 
+identity -access management : saml ,ldap ,open id connect
+
 https://docs.spring.io/spring-authorization-server/reference/guides/how-to-social-login.html
 
 spring - ldap with authentication 
@@ -85,9 +87,11 @@ in corporate environment saml can be used to implement sso .
 you login once to your corporate n/w , to gain access to various services like email , internet applciations , cloud resources . 
 
 
-oauth - allow 3rd party app need  to access users data or perform action on their behalf , without exposing user credentials or without having 
+oauth - allow 3rd party app need  to access users data or perform action on their behalf , 
+without exposing user credentials or without having 
         full ctrl over users idenitity.
         an extension of oauth - oidc is used for authentication. 
+
 oauth 2.0 + json web token - 
  
 usage of saml : sso + idenity federation : govt org , healthcare 
