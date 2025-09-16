@@ -6,6 +6,7 @@ Example:
 web. xml defines mappings between URL paths and the servlets that handle requests with those paths. 
 The web server uses this configuration to identify the servlet to handle a given request and call the class 
 method that corresponds to the request method. For example: the doGet() method for HTTP GET requests.
+https://www.geeksforgeeks.org/advance-java/contextloaderlistener-vs-dispatcherservlet/
 
 
 when developing a j2ee (web) application , you declare contextloaderlistener in web.xml 
