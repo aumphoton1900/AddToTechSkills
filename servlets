@@ -21,6 +21,112 @@ spring-servlet.xml : act as front controller servlet and provide a single point 
 
 
 https://stackoverflow.com/questions/31931848/applicationcontext-and-servletcontext 
+
+ServletContext in Java Servlet
+
+ServletContext is an interface that provides a way for servlets to interact with the servlet container. 
+It is created by the web container when the web application is deployed and is available to all servlets 
+within the same application. This object can be used to get configuration information from the web.xml file, 
+set or get attributes, and provide inter-application communication.
+
+Key Features and Usage
+
+Configuration Information
+
+The ServletContext object can be used to retrieve initialization parameters defined in the web.xml file. 
+This is useful for sharing configuration information across multiple servlets. For example, 
+you can define a parameter in web.xml and retrieve it in your servlet as follows:
+
+// web.xml
+<context-param>
+   <param-name>websiteName</param-name>
+   <param-value>MyWebsite</param-value>
+</context-param>
+
+// Servlet code
+String websiteName = getServletContext().getInitParameter("websiteName");
+This allows you to change the parameter value in web.xml without modifying the servlet code.
+
+Attribute Management
+
+ServletContext also allows you to set, get, or remove attributes that can be shared across servlets. 
+This is useful for sharing data between different parts of the application. For example:
+
+// Setting an attribute
+getServletContext().setAttribute("attributeName", attributeValue);
+
+// Getting an attribute
+Object attributeValue = getServletContext().getAttribute("attributeName");
+
+// Removing an attribute
+getServletContext().removeAttribute("attributeName");
+This feature facilitates inter-application communication and data sharing
+1
+.
+
+Common Methods
+
+Some commonly used methods of the ServletContext interface include:
+
+public String getInitParameter(String name): Returns the parameter value for the specified parameter name.
+
+public Enumeration<String> getInitParameterNames(): Returns the names of the context's initialization parameters.
+
+public void setAttribute(String name, Object object): Sets the given object in the application scope.
+
+public Object getAttribute(String name): Returns the attribute for the specified name.
+
+public void removeAttribute(String name): Removes the attribute with the given name from the servlet context
+1
+.
+
+Example Usage
+
+Here is an example of how to use ServletContext to get initialization parameters and set attributes:
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class DemoServlet extends HttpServlet {
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
+throws ServletException, IOException {
+// Get initialization parameter
+String websiteName = getServletContext().getInitParameter("websiteName");
+
+// Set an attribute
+getServletContext().setAttribute("attributeName", "attributeValue");
+
+// Get the attribute
+String attributeValue = (String) getServletContext().getAttribute("attributeName");
+
+// Remove the attribute
+getServletContext().removeAttribute("attributeName");
+
+// Print the website name
+PrintWriter out = response.getWriter();
+out.println("Website Name: " + websiteName);
+}
+}
+In this example, the servlet retrieves an initialization parameter, sets an attribute, retrieves the attribute, 
+and then removes the attribute
+
+
+
+Important Considerations
+
+Scope: ServletContext is available to all servlets in the web application, making it suitable for sharing global information.
+
+Thread Safety: Be cautious when using ServletContext for storing attributes, as it is shared across multiple servlets and threads. 
+Ensure proper synchronization to avoid concurrency issues.
+Initialization Parameters: Use ServletContext for parameters that are common to all servlets. 
+For servlet-specific parameters, use ServletConfig
+2.
+By understanding and utilizing ServletContext, you can effectively manage configuration information and 
+facilitate communication between different parts of your web application.
+
+
+
 2.1 
 ContextLoaderListener vs DispatcherServlet
 ContextLoaderListener adds the web application's root context to the ServletContext after creating it. 
