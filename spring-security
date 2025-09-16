@@ -94,6 +94,34 @@ usage of saml : sso + idenity federation : govt org , healthcare
 
 open id vs saml 
 https://www.youtube.com/watch?v=A7GVeqFvqFM
+open id / saml used for single sign on.
+
+
+[federated identity]
+
+Federated identity is a system that links electronic identities across multiple, 
+separate identity management systems, enabling users to access different applications and 
+resources with a single set of credentials. It relies on an Identity Provider (IdP), 
+which authenticates the user, and a Service Provider (SP), the application or service requesting access. 
+Common protocols like SAML and OAuth 2.0 facilitate this trusted relationship, allowing for 
+Single Sign-On (SSO) and a more seamless, secure user experience.  
+
+How Federated Identity Works
+
+User Initiates Access: A user attempts to access a resource or application on a Service Provider's domain. 
+Redirection to IdP: The Service Provider redirects the user to the Identity Provider (IdP) to verify their identity. 
+User Authentication: The user provides their credentials to the IdP, which authenticates them. 
+Assertion is Sent: Once authenticated, the IdP sends a secure, encrypted assertion 
+(a statement of the user's identity) to the Service Provider. 
+Access Granted: The Service Provider trusts the assertion from the IdP and 
+grants the user access to the requested resource without requiring them to log in again. 
+
+Key Components
+
+Identity Provider (IdP): The trusted entity that authenticates the user and provides identity information. 
+Service Provider (SP): The application or service that relies on the IdP for user authentication. 
+Identity Federation: A network of linked organizations and identity systems that share identities and authentication. 
+Standard Protocols: Technologies like SAML, OAuth 2.0, and OIDC enable secure communication and data exchange between the IdP and SPs. 
 
 4]  sso 
 https://www.youtube.com/watch?v=O1cRJWYF-g4
