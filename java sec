@@ -10,7 +10,9 @@ keytool -genkeypair -alias <alias> -keypass <keypass> -validity <validity> -stor
 
 keytool used for key management , certificate. (creation , modification , deletion).
 store & protect keys (private keys , public keys , secret keys) & certificate using keystore.
-
+keystore a db file , that keytool uses , to store keys certificates.
+trustStore store all trusted CA certificates. they never contain private key or secret key.
+   -rule certificate from trusted certificate authority such as  digicert , entrust 
 
   
  1.1] 4. Listing Certificates in the Keystore
@@ -21,12 +23,28 @@ store & protect keys (private keys , public keys , secret keys) & certificate us
 2. https://www.youtube.com/watch?v=NH49dTEYPg0
 
 type of keystore 
-- JKS 
+- JKS (java key store - store private keys and certificates ,should not be used in production)
 - JCEKS java cryptography extension ks
-- PKCS#12
+- PKCS#12 - can be used with non java application . may use des-3 ,aes algorithm.
 - PKCS#11
 - windows-my/windows-root
-- 3rd party keystore (bouncy castle / iaik)
+- 3rd party keystore (bouncy castle / iaik) - bouncy castle ,
+
+
+Unique identifier for a digital certificate
+Definition and Purpose
+A certificate fingerprint, also known as a thumbprint, is a hash value that uniquely identifies a digital certificate. 
+It is not part of the certificate itself but is computed from the certificate's 
+data using cryptographic hash functions such as SHA-1, SHA-256, or MD5. 
+This fingerprint serves several important purposes:
+Verification: It allows users and systems to verify the authenticity of a certificate. 
+If even a small change is made to the certificate, the fingerprint will change completely, 
+indicating that the certificate may have been altered or is not valid.
+Identification: The fingerprint acts as a unique identifier for the certificate, 
+making it easier to manage and organize certificates, especially in environments with multiple certificates.
+
+
+
 
 Q2 : how to generate keys and store them in keystore ?
 $keytool -genkey 
