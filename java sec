@@ -44,8 +44,10 @@ indicating that the certificate may have been altered or is not valid.
 Identification: The fingerprint acts as a unique identifier for the certificate, 
 making it easier to manage and organize certificates, especially in environments with multiple certificates.
 
+https://www.youtube.com/watch?v=qXLD2UHq2vk
 
-
+$keytool -genseckey -alias myAesKey -keytool -keyalg AES -keysize 256 -keystore mystore.jce -storetype jceks 
+$keytool -importkeystore -src keystore  /home/auser/.keystore -destkeystore  /home/auser/.keysotre -dest storetype pkcs12"
 
 Q2 : how to generate keys and store them in keystore ?
 $keytool -genkey 
