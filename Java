@@ -355,5 +355,14 @@ Each thread accessing such a variable
 has its own independent copy, meaning changes made by one thread are not visible to other threads.
 
 ===========================
+he java.util.concurrent package contains several classes that help manage a set of threads that collaborate with each other. Some of these include:
+
+CyclicBarrier
+Phaser
+CountDownLatch
+Exchanger
+Semaphore
+SynchronousQueue
+
 
 
