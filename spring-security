@@ -7,9 +7,10 @@ they provide a way to manage , access , add or remove privileges , while securit
 - sso 
 - SAML / xml based - pass credential from IDP to service provider. 
 - openid - authentication layer for oauth , open std for access delegation that many web service provider use today - 
-  amazon webservices . 
-  active directory 
-  facebook login 
+        https://www.youtube.com/watch?v=eY0Qo5Rgs3M
+        amazon webservices . 
+        active directory 
+        facebook login 
 - user try to access the service provider , user is redirected to sso , ask to enter credentials , 
     then sso send saml request to idp , IDP send a saml reply validating identity of user . 
     then sso send saml assertion to service provider ,allowing access . 
