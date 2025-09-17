@@ -24,3 +24,14 @@ It defines the goals to execute during the project's lifecycle.
 classifier: This is an optional element used for technical reasons when 
 delivering the same code as several separate artifacts. For example, 
 you might have different classifiers for source code and JavaDoc.
+
+
+2. scope 
+
+3. lifecycle 
+Maven build life cycles are listed below as follows:
+
+Clean: Removes the artifacts produced from the preceding build processes.
+Default: The Deployment and build process is taken care of.
+Site: Project documentation is carried out in this cycle.
+
