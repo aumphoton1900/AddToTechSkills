@@ -54,6 +54,8 @@ dependency>
 </dependency>
 This will include the jaxws-api Jar file in your project when you will build your maven java project.
 
+https://www.baeldung.com/maven-goals-phases
+
 Getting Ready for Java 11/JDK 11 and Deprecated Java EE Modules JAXB, JAX-WS, JAF, JTA, CORBA.
 3.1
 ---
