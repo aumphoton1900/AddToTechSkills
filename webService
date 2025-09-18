@@ -415,5 +415,91 @@ Code
 After these steps, you can use the generated client stubs in your Java 11 
 application to interact with the web service defined by the WSDL.
 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+5. generate wsdl from java 11
 
+Generating a WSDL (Web Services Description Language) from Java 11 can be achieved using 
+JAX-WS (Java API for XML Web Services). While Java 11 removed JAX-WS from the default JDK modules, 
+it can be added as a dependency in your build tool (Maven or Gradle).
+
+Here's a general approach using Maven:
+
+1. Project Setup (pom.xml):
+Add the necessary JAX-WS dependencies to your pom.xml:
+Code
+
+<dependencies>
+    <dependency>
+        <groupId>jakarta.xml.ws</groupId>
+        <artifactId>jakarta.xml.ws-api</artifactId>
+        <version>2.3.3</version> <!-- Or a compatible version -->
+    </dependency>
+    <dependency>
+        <groupId>com.sun.xml.ws</groupId>
+        <artifactId>jaxws-rt</artifactId>
+        <version>2.3.3</version> <!-- Or a compatible version -->
+        <scope>runtime</scope>
+    </dependency>
+</dependencies>
+
+2. Create Your Web Service Class:
+Define your Java class that will expose the web service operations. Use JAX-WS annotations like @WebService and @WebMethod.
+Java
+
+import jakarta.jws.WebMethod;
+import jakarta.jws.WebService;
+
+@WebService
+public class MyWebService {
+
+    @WebMethod
+    public String sayHello(String name) {
+        return "Hello, " + name + "!";
+    }
+
+    @WebMethod
+    public int addNumbers(int a, int b) {
+        return a + b;
+    }
+}
+
+3. Generate WSDL using wsgen:
+While not ideal for a full build process, you can manually use the wsgen tool (part of the JAX-WS RI) to generate the WSDL.
+Code
+
+wsgen -cp . -wsdl:soap1.1 -d . -s . MyWebService
+-cp .: Specifies the classpath, assuming your compiled class is in the current directory.
+-wsdl:soap1.1: Generates a SOAP 1.1 WSDL.
+-d .: Specifies the output directory for the generated WSDL and schema files.
+-s .: Specifies the output directory for the generated source files (e.g., service endpoint interface).
+MyWebService: The fully qualified name of your web service implementation class.
+
+4. Integrate into Build Process (Maven Plugin):
+For a more robust solution, you can use the jaxws-maven-plugin to automate WSDL generation during your build.
+Code
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>jaxws-maven-plugin</artifactId>
+            <version>2.6</version> <!-- Or a compatible version -->
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>wsgen</goal>
+                    </goals>
+                    <configuration>
+                        <sei>MyWebService</sei>
+                        <genWsdl>true</genWsdl>
+                        <wsdlLocation>WEB-INF/wsdl/MyWebService.wsdl</wsdlLocation>
+                        <sourceDestDir>${project.build.directory}/generated-sources/wsgen</sourceDestDir>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+This plugin will automatically generate the WSDL and related files when you build your project with Maven. 
+The WSDL will be placed in the specified wsdlLocation. You can then deploy this WSDL along with your web service.
 
