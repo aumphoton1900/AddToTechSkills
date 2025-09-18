@@ -1,2 +1,11 @@
 1.https://www.youtube.com/watch?v=stGq8lnEFlM
 https://www.youtube.com/watch?v=oUE3xcBvJi4&list=PLzS3AYzXBoj9nn2k3AWoIqt13C9Lzdtmr&index=1
+
+With the adoption of the version 3.0 of Servlet APIs, the web.xml file has become optional, 
+and we can now use Java to configure the DispatcherServlet.
+
+3. Configuration With web.xml
+If you deal with legacy Spring projects it is very common to find XML configuration and 
+until Spring 3.1 the only way to configure the DispatcherServlet was with the WEB-INF/web.xml file. 
+In this case there are two steps required.
+Let’s see an example configuration – the first step is the Servlet declaration:
