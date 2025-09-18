@@ -9,3 +9,22 @@ If you deal with legacy Spring projects it is very common to find XML configurat
 until Spring 3.1 the only way to configure the DispatcherServlet was with the WEB-INF/web.xml file. 
 In this case there are two steps required.
 Let’s see an example configuration – the first step is the Servlet declaration:
+
+
+We can register a servlet implementing a WebApplicationInitializer. 
+This is the equivalent of the XML configuration above:
+
+public class MyWebAppInitializer implements WebApplicationInitializer {
+    @Override
+    public void onStartup(ServletContext container) {
+        XmlWebApplicationContext context = new XmlWebApplicationContext();
+        context.setConfigLocation("/WEB-INF/spring/dispatcher-config.xml");
+
+        ServletRegistration.Dynamic dispatcher = container
+          .addServlet("dispatcher", new DispatcherServlet(context));
+
+        dispatcher.setLoadOnStartup(1);
+        dispatcher.addMapping("/");
+    }
+}
+
