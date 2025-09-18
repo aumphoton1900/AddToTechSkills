@@ -261,3 +261,69 @@ public class MyService {
             System.out.println("Async Response: " + response);
         } catch (Exception e) {
 ===============================================
+>> how marshal and unmarshal java to xml 
+
+https://www.bing.com/videos/riverview/relatedvideo?q=xmlAccessorType+usage+in+xml+java&mid=9C9586CDB1409826667D9C9586CDB1409826667D&FORM=VIRE
+
+Yes, the @XmlAccessorType annotation in JAXB specifies how the JAXB 
+(Java Architecture for XML Binding) framework should access the properties 
+of a class when marshalling (converting Java objects to XML) or unmarshalling 
+(converting XML to Java objects). It determines whether JAXB should use fields, 
+getter/setter methods, or both for mapping.
+
+Usage
+The annotation is applied at the class level and takes a parameter of type XmlAccessType, 
+which can have one of the following values:
+
+XmlAccessType.FIELD
+JAXB will use all non-static, non-transient fields of the class for mapping, 
+regardless of whether they have public getter/setter methods.
+
+XmlAccessType.PROPERTY
+JAXB will use getter and setter methods for mapping. 
+Fields without corresponding getter/setter methods will be ignored.
+
+XmlAccessType.PUBLIC_MEMBER (Default)
+JAXB will use public fields and public getter/setter methods for mapping.
+
+XmlAccessType.NONE
+JAXB will not automatically map any fields or properties. 
+You must explicitly annotate the fields or methods you want to include in the mapping.
+
+Example
+Java
+
+Copy code
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD) // JAXB will use fields directly
+public class Person {
+    private String name; // Included in XML
+    private int age;     // Included in XML
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+In this example, JAXB will directly use the fields name and age for XML mapping, 
+ignoring the getter and setter methods because of XmlAccessType.FIELD.
+
+This annotation is particularly useful for resolving conflicts when both fields and 
+getter/setter methods exist, or when you want to control how JAXB processes your class.
+
+
