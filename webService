@@ -503,3 +503,8 @@ Code
 This plugin will automatically generate the WSDL and related files when you build your project with Maven. 
 The WSDL will be placed in the specified wsdlLocation. You can then deploy this WSDL along with your web service.
 
++++++++++++++++++++++++++++++++++++++++++++
+soap webservice example
+https://developers.lseg.com/en/article-catalog/article/how-to-use-wsdl2java-and-apache-cxf-to-generate-java-soap-client
+
+
