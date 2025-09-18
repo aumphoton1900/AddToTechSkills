@@ -325,5 +325,95 @@ ignoring the getter and setter methods because of XmlAccessType.FIELD.
 
 This annotation is particularly useful for resolving conflicts when both fields and 
 getter/setter methods exist, or when you want to control how JAXB processes your class.
++++++++++++++++++++++++++++++++++++++++++++++++
+Generating Java client stubs from a WSDL in Java 11
+
+
+Generating Java client stubs from a WSDL in Java 11 can be achieved using tools like Apache CXF or 
+by leveraging JAX-WS (Jakarta XML Web Services) implementations. 
+
+While wsimport and 
+wsgen tools were removed from the default JDK in Java 11, 
+they are available as part of JAX-WS implementations like Metro JAX-WS.
+Here's a common approach using Apache CXF's wsdl2java tool with Maven:
+
+1. Add CXF Codegen Plugin to your Maven pom.xml:
+Code
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-codegen-plugin</artifactId>
+            <version>3.5.0</version> <!-- Use a recent version -->
+            <executions>
+                <execution>
+                    <id>generate-sources</id>
+                    <phase>generate-sources</phase>
+                    <configuration>
+                        <sourceRoot>${project.build.directory}/generated-sources/cxf</sourceRoot>
+                        <wsdlOptions>
+                            <wsdlOption>
+                                <wsdl>${project.basedir}/src/main/resources/yourService.wsdl</wsdl>
+                                <extraargs>
+                                    <extraarg>-client</extraarg>
+                                    <extraarg>-verbose</extraarg>
+                                </extraargs>
+                                <bindingFiles>
+                                    <!-- Optional: Specify JAXB binding files for customization -->
+                                    <!-- <bindingFile>${project.basedir}/src/main/resources/bindings.xjb</bindingFile> -->
+                                </bindingFiles>
+                            </wsdlOption>
+                        </wsdlOptions>
+                    </configuration>
+                    <goals>
+                        <goal>wsdl2java</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+
+Explanation of wsdlOptions:
+
+<wsdl>: Specifies the path to your WSDL file. You can also use <wsdlUrl> to point to a remote WSDL.
+<extraargs>: Allows passing command-line arguments to wsdl2java.
+-client: Generates client-side code.
+-verbose: Provides detailed output during generation.
+
+<bindingFiles> (Optional): If you need to customize the generated classes (e.g., package names, class names), 
+you can provide JAXB binding files.
+
+2. Place your WSDL File:
+Place your yourService.wsdl file (and any associated XSDs) in the specified location, for example, src/main/resources/.
+3. Run Maven Build:
+Execute the Maven build from your project's root directory:
+Code
+
+mvn clean install
+This will trigger the cxf-codegen-plugin during the generate-sources phase, and 
+the generated Java stubs will be placed in the target/generated-sources/cxf directory (or the sourceRoot you configured).
+
+4. Add CXF Dependencies:
+You'll also need to include the necessary CXF dependencies in your pom.xml to use the generated stubs:
+Code
+
+<dependencies>
+    <dependency>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-rt-frontend-jaxws</artifactId>
+        <version>3.5.0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-rt-transports-http</artifactId>
+        <version>3.5.0</version>
+    </dependency>
+    <!-- Add other CXF modules if needed, e.g., for specific data bindings -->
+</dependencies>
+After these steps, you can use the generated client stubs in your Java 11 
+application to interact with the web service defined by the WSDL.
+
 
 
