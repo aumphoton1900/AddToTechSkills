@@ -56,6 +56,8 @@ persist, save, update, merge, and saveOrUpdate. To understand the difference bet
 we must first discuss the purpose of the Session as a persistence context, 
 and the difference between the states of entity instances in relation to the Session.
 
+. We can think of persistence context as a container or first-level cache for all the objects 
+that we loaded or saved to a database during a session.
 
 
 
