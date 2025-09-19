@@ -59,5 +59,7 @@ and the difference between the states of entity instances in relation to the Ses
 . We can think of persistence context as a container or first-level cache for all the objects 
 that we loaded or saved to a database during a session.
 
+In Hibernate, the persistence context is represented by the org.hibernate.Session instance. 
+For JPA, it’s the jakarta.persistence.EntityManager. 
 
-
+=======================================================
