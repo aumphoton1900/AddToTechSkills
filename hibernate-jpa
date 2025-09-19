@@ -85,3 +85,36 @@ In this example, the system locks the product row in the database when a user se
 Other users who try to purchase 
 the same product will either have to wait until the lock is released or receive an error.
 
+Session I : important methods 
+-------------------------------
+void	evict(java.lang.Object object)
+Remove this instance from the session cache.
+void	flush()
+
+Force this session to flush.
+
+<T> T	get(java.lang.Class<T> entityType, java.io.Serializable id)
+Return the persistent instance of the given entity class with the given identifier, 
+      or null if there is no such persistent instance.
+
+<T> T	get(java.lang.Class<T> entityType, java.io.Serializable id, LockMode lockMode)
+Return the persistent instance of the given entity class with the given identifier, or 
+       null if there is no such persistent instance.
+
+<T> T	get(java.lang.Class<T> entityType, java.io.Serializable id, LockOptions lockOptions)
+Return the persistent instance of the given entity class with the given identifier, or  
+      null if there is no such persistent instance.
+
+java.lang.Object	get(java.lang.String entityName, java.io.Serializable id)
+Return the persistent instance of the given named entity with the given identifier, or 
+         null if there is no such persistent instance.
+
+java.lang.Object	get(java.lang.String entityName, java.io.Serializable id, LockMode lockMode)
+Return the persistent instance of the given entity class with the given identifier, or 
+            null if there is no such persistent instance.
+
+java.lang.Object	get(java.lang.String entityName, java.io.Serializable id, LockOptions lockOptions)
+Return the persistent instance of the given entity class with the given identifier, or 
+   null if there is no such persistent instance.
+----------------------------
+
