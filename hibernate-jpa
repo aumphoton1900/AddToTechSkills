@@ -62,4 +62,23 @@ that we loaded or saved to a database during a session.
 In Hibernate, the persistence context is represented by the org.hibernate.Session instance. 
 For JPA, it’s the jakarta.persistence.EntityManager. 
 
+2.2. States of Entity Instances
+Any entity instance in our application appears in one of the three main states in relation to the Session persistence 
+context:
+
+transient — This instance isn’t, and never was, attached to a Session. This instance has no corresponding 
+    rows in the database; it’s usually just a new object that we created to save to the database.
+persistent — This instance is associated with a unique Session object. Upon flushing the Session to the database, 
+   this entity is guaranteed to have a corresponding consistent record in the database.
+detached — This instance was once attached to a Session (in a persistent state), but now it’s not. 
+     An instance enters this state if we evict it from the context, clear or close the Session, 
+    or put the instance through serialization/deserialization process.
+Here’s a simplified state diagram with comments on Session methods that make the state transitions happen:
 =======================================================
+LOCK : pessimistic vs optimistic 
+
+Product product = entityManager.find(Product.class, productId, LockModeType.PESSIMISTIC_WRITE);
+In this example, the system locks the product row in the database when a user selects an item to purchase. 
+Other users who try to purchase 
+the same product will either have to wait until the lock is released or receive an error.
+
