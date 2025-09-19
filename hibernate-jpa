@@ -118,3 +118,46 @@ Return the persistent instance of the given entity class with the given identifi
    null if there is no such persistent instance.
 ----------------------------
 
+In Hibernate, the flush() method is used to synchronize the in-memory state of the 
+session with the database. This means that any changes (inserts, updates, or deletes) 
+made to persistent objects in the session are written to the database immediately, 
+but without committing the transaction.
+
+Here’s a concise explanation of flush():
+
+Key Points about flush()
+Forces Synchronization: It ensures that the changes in the session are reflected in the database, 
+but the transaction remains open.
+Does Not Commit: Unlike commit(), flush() does not finalize the transaction. The changes can still be rolled back.
+Use Cases:
+When you need to ensure that the database reflects the current state of the session before executing 
+further operations (e.g., queries that depend on the updated data).
+
+In batch processing, to avoid memory overflow by flushing changes periodically without committing.
+Example Usage
+Java
+
+Copy code
+Session session = sessionFactory.openSession();
+Transaction transaction = session.beginTransaction();
+
+Entity entity = new Entity();
+entity.setName("Example");
+session.save(entity);
+
+// Force flush to synchronize with the database
+session.flush();
+
+transaction.commit();
+session.close();
++++++++++++++++++++++++++++++++++++++++
+Differences Between Save and Persist
+
+Return Type: save returns the generated identifier, while persist returns void
+Transaction Boundaries: save can save an object within and outside transaction boundaries, 
+while persist can only save an object within transaction boundaries
+
+Detached Object Handling: save will create a new row in the table for a detached object, 
+while persist will throw a persistence exception for a detached object
+Supported By: save is only supported by Hibernate, while persist is also supported by JPA
+==================================
