@@ -161,3 +161,49 @@ Detached Object Handling: save will create a new row in the table for a detached
 while persist will throw a persistence exception for a detached object
 Supported By: save is only supported by Hibernate, while persist is also supported by JPA
 ==================================
+cascade 
+
+Default Cascades in Hibernate and JPA
+In Hibernate and JPA, cascading refers to the automatic propagation of operations 
+(such as save, update, delete) from a parent entity to its associated child entities. 
+This simplifies managing relationships between entities by reducing the need for repetitive code.
+
+Default Cascade Behavior
+
+By default, no operations are cascaded in JPA or Hibernate. For example, 
+if you define a relationship like @OneToOne or @OneToMany without explicitly specifying a cascade attribute, 
+no cascading will occur. This means that operations 
+on the parent entity will not automatically affect the child entities.
+
+@OneToOne
+private Address address;
+Copy
+In this case, the Address entity will not be saved, updated, or deleted automatically 
+when the Person entity is manipulated. You must handle child entities explicitly unless you define a cascade type.
+
+Cascade Types
+
+To enable cascading, you can specify one or more cascade types using the cascade attribute. 
+Common cascade types include:
+
+CascadeType.ALL: Propagates all operations (persist, merge, remove, refresh, detach) to child entities.
+
+CascadeType.PERSIST: Automatically saves child entities when the parent is saved.
+CascadeType.MERGE: Updates child entities when the parent is updated.
+CascadeType.REMOVE: Deletes child entities when the parent is deleted.
+CascadeType.REFRESH: Reloads child entities when the parent is refreshed.
+CascadeType.DETACH: Detaches child entities when the parent is detached.
+
+For example:
+
+@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+private Set<Order> orders = new HashSet<>();
+Copy
+Here, any operation on the Customer entity will cascade to its associated Order entities.
+
+Important Considerations
+
+While cascading simplifies operations, it must be used carefully. 
+For instance, using CascadeType.REMOVE can unintentionally delete child entities, leading to data loss. 
+Always choose cascade types based on the specific requirements of your application.
+----------------------------
