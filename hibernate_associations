@@ -1,0 +1,6 @@
+1) Example with @OneToMany Mapping
+
+In a @OneToMany relationship, 
+the @JoinColumn annotation is used on the many side of the relationship to specify the foreign key column:
+
+
