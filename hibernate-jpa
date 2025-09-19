@@ -75,6 +75,9 @@ detached — This instance was once attached to a Session (in a persistent state
     or put the instance through serialization/deserialization process.
 Here’s a simplified state diagram with comments on Session methods that make the state transitions happen:
 =======================================================
+https://medium.com/@das.cse.kuet/optimistic-vs-pessimistic-locking-in-java-choosing-the-
+right-approach-for-your-application-cd6279409303
+
 LOCK : pessimistic vs optimistic 
 
 Product product = entityManager.find(Product.class, productId, LockModeType.PESSIMISTIC_WRITE);
