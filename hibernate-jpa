@@ -50,7 +50,11 @@ to embed the embeddable class inside entity class,
 instead of @Embedded we have to use @EmbeddedId annotation.
 
 ------------------------------------------------------------------
-
+5. how to save entity to db in hibernate
+The Session interface has several methods that eventually result in saving data to the database: 
+persist, save, update, merge, and saveOrUpdate. To understand the difference between these methods, 
+we must first discuss the purpose of the Session as a persistence context, 
+and the difference between the states of entity instances in relation to the Session.
 
 
 
