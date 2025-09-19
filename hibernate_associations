@@ -31,4 +31,8 @@ private Address address;
 
 This example creates two foreign keys pointing to the ID and ZIP columns in the Address entity
 
+The @JoinColumn annotation is a powerful tool for defining relationships between entities in JPA. 
+It allows you to specify the foreign key column used to join entities and provides several optional 
+elements for customization. Understanding how 
+to use @JoinColumn effectively can help you create robust and efficient database mappings in your Java applications
 
