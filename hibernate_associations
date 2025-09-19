@@ -3,4 +3,32 @@
 In a @OneToMany relationship, 
 the @JoinColumn annotation is used on the many side of the relationship to specify the foreign key column:
 
+Example with @OneToMany Mapping
+In a @OneToMany relationship, the @JoinColumn annotation is used on the many side of the relationship 
+to specify the foreign key column:
+
+@Entity
+public class Email {
+@ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "employee_id")
+private Employee employee;
+}
+
+Here, the Email entity has a foreign key column named employee_id that references the primary key of the Employee entity
+
+Multiple Join Columns
+In some cases, you may need to create multiple join columns. This can be achieved using the @JoinColumns annotation:
+
+@Entity
+public class Office {
+@ManyToOne(fetch = FetchType.LAZY)
+@JoinColumns({
+@JoinColumn(name = "ADDR_ID", referencedColumnName = "ID"),
+@JoinColumn(name = "ADDR_ZIP", referencedColumnName = "ZIP")
+})
+private Address address;
+}
+
+This example creates two foreign keys pointing to the ID and ZIP columns in the Address entity
+
 
