@@ -45,4 +45,37 @@ The method returns the new value associated with the key (either the newly compu
 default boolean replace​(K key, V oldValue, V newValue)
 Replaces the entry for the specified key only if currently mapped to the specified value.
 
+default V replace​(K key, V value)
+Replaces the entry for the specified key only if it is currently mapped to some value.
 
+5. remove 
+   V	remove​(Object key)	
+Removes the mapping for a key from this map if it is present (optional operation).
+
+default boolean	remove​(Object key, Object value)
+Removes the mapping for a key from this map if it is present (optional operation). 
+
+
+
+   Map<String, String> myMap = new HashMap<>();
+        myMap.put("fruit", "apple");
+        myMap.put("color", "red");
+     
+        myMap.put("color1", "red");
+        myMap.put("color1", "red1");
+        myMap.put("color2", "red2");
+        
+      String s =   myMap.remove("color1");
+      System.out.println( " == >  "+ s );  
+      
+        System.out.println("Original Map: " + myMap); // Output: Original Map: {color=red, fruit=apple}
+
+        // Attempt to remove "fruit" only if its value is "apple"
+        boolean removed1 = myMap.remove("fruit", "apple");
+        System.out.println("Removed 'fruit' (value 'apple'): " + removed1); // Output: Removed 'fruit' (value 'apple'): true
+        System.out.println("Map after first removal: " + myMap); // Output: Map after first removal: {color=red}
+
+        // Attempt to remove "color" only if its value is "blue" (will fail)
+        boolean removed2 = myMap.remove("color", "blue");
+        System.out.println("Removed 'color' (value 'blue'): " + removed2); // Output: Removed 'color' (value 'blue'): false
+        System.out.println("Map after second removal: " + myMap); // Output: Map after second removal: {color=red}
