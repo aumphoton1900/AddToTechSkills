@@ -120,3 +120,49 @@ fixed-content maps compared to traditional HashMap initialization.
 
 
 7. 
+Map<K,​V> copyOf​(Map<? extends K,​? extends V> map)
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class MapCopyOfExample {
+    public static void main(String[] args) {
+        Map<String, Integer> originalMap = new HashMap<>();
+        originalMap.put("Apple", 1);
+        originalMap.put("Banana", 2);
+
+        // Create an immutable copy
+        Map<String, Integer> immutableMap = Map.copyOf(originalMap);
+
+        System.out.println("Original Map: " + originalMap);
+        System.out.println("Immutable Map: " + immutableMap);
+
+        // Attempting to modify the immutable map will throw an exception
+        try {
+            immutableMap.put("Orange", 3); // This will throw UnsupportedOperationException
+        } catch (UnsupportedOperationException e) {
+            System.out.println("Cannot modify immutable map: " + e.getMessage());
+        }
+
+        // Modifying the original map does not affect the immutable copy (in terms of structure)
+        originalMap.put("Grape", 4);
+        System.out.println("Original Map after modification: " + originalMap);
+        System.out.println("Immutable Map after original modification: " + immutableMap);
+    }
+}
+
+Here's a breakdown of its characteristics and usage:
+Immutability: The key feature of copyOf() is that it returns an unmodifiable Map. Any attempt to modify this returned map 
+   (e.g., by calling put(), remove(), or clear()) will result in an UnsupportedOperationException.
+Shallow Copy: It performs a shallow copy. This means that while the map itself is a new instance, 
+    the keys and values within the new map are the same objects as in the original map. 
+    If the keys or values are mutable objects, changes to those objects in the original 
+    map will be reflected in the copied map, and vice-versa.
+Null Handling: The copyOf() method does not permit null keys or null values in the input map. 
+          If the provided map contains any null keys or values, a NullPointerException will be thrown.
+Performance: These copyOf() methods are generally optimized for performance and memory efficiency, 
+        especially when dealing with smaller collections.
+
+
+
+
