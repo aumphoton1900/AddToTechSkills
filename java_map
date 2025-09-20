@@ -85,6 +85,8 @@ Removes the mapping for a key from this map if it is present (optional operation
 
 6.1)
 
+Java 9 introduced the Map.of() method, which makes it easier to create immutable maps, and the Map.ofEntries() method, 
+
 import static java.util.Map.entry; // Static import for convenience
 import java.util.Map;
 
