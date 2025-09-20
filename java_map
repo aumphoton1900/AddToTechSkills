@@ -83,4 +83,38 @@ Removes the mapping for a key from this map if it is present (optional operation
 6. ofEntries
 @SafeVarargs static <K,​V> Map<K,​V> ofEntries​(Map.Entry<? extends K,​? extends V>... entries)
 
+6.1)
+
+import static java.util.Map.entry; // Static import for convenience
+import java.util.Map;
+
+public class MapOfEntriesExample {
+    public static void main(String[] args) {
+        // Creating an immutable Map using Map.ofEntries()
+        Map<String, Integer> scores = Map.ofEntries(
+            entry("Alice", 95),
+            entry("Bob", 88),
+            entry("Charlie", 72)
+        );
+
+        System.out.println(scores); // Output: {Bob=88, Charlie=72, Alice=95} (order may vary)
+
+        // Attempting to modify the map will result in an UnsupportedOperationException
+        try {
+            scores.put("David", 60);
+        } catch (UnsupportedOperationException e) {
+            System.out.println("Cannot modify immutable map: " + e.getMessage());
+        }
+    }
+}
+
+Key Characteristics:
+Immutability: The Map returned by ofEntries() is immutable. Any attempt to modify it (e.g., put, remove, clear) 
+will result in an UnsupportedOperationException.
+Null Handling: Keys and values cannot be null. Passing a null key or value will result in a NullPointerException.
+Duplicate Keys: Duplicate keys are not allowed. If duplicate keys are provided, an IllegalArgumentException will be thrown.
+Convenience: It offers a more readable and concise way to create small, 
+fixed-content maps compared to traditional HashMap initialization.
+
+
 7. 
