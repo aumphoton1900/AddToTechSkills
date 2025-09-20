@@ -79,3 +79,8 @@ Removes the mapping for a key from this map if it is present (optional operation
         boolean removed2 = myMap.remove("color", "blue");
         System.out.println("Removed 'color' (value 'blue'): " + removed2); // Output: Removed 'color' (value 'blue'): false
         System.out.println("Map after second removal: " + myMap); // Output: Map after second removal: {color=red}
+
+6. ofEntries
+@SafeVarargs static <K,​V> Map<K,​V> ofEntries​(Map.Entry<? extends K,​? extends V>... entries)
+
+7. 
