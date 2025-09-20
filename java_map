@@ -8,6 +8,9 @@ If the remapping function returns null, the mapping is removed (or remains absen
 If the remapping function itself throws an (unchecked) exception, the exception is rethrown, and the current mapping is left unchanged.
 The remapping function should not modify this map during computation.
 return new value
+
+--> you can add new key and value if fun not throw nullpointer expection
+
 2.
 Integer computeIfPresent(String key, BiFunction<? super String, ? super Integer, ? extends Integer> remappingFunction)
 default V computeIfPresent(K key,BiFunction<? super K,? super V,? extends V> remappingFunction)
@@ -17,4 +20,10 @@ attempts tocompute a new mapping given the key and its current mapped value.
 If the function returns null, the mapping is removed. 
 If thefunction itself throws an (unchecked) exception, the exception isrethrown, and the current mapping is left unchanged.
 
+Map<String, Integer> scores = new HashMap<>();
+		scores.put("Alice", 100);
+		scores.put("Bob", 85);
+		scores.put("null", 85);
+		scores.put("null", 85);
+{Bob=85, null=85, Alice=100}
 
