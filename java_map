@@ -27,3 +27,18 @@ Map<String, Integer> scores = new HashMap<>();
 		scores.put("null", 85);
 {Bob=85, null=85, Alice=100}
 
+3. 
+default V computeIfAbsent(K key,Function<? super K,? extends V> mappingFunction)
+If the specified key is not already associated with a value 
+(or is mapped to null), attempts to compute its value using the given mapping function and enters it into this map unless null.
+
+How it works:
+The method first checks if the key exists in the map and if its associated value is not null.
+If the key is present and its value is not null, the existing value is returned, and the mappingFunction is not executed.
+If the key is absent (not in the map) or its associated value is null, 
+    the mappingFunction is executed with the key as its argument.
+The value returned by the mappingFunction is then associated with the key in the map, 
+    unless the mappingFunction returns null, in which case no mapping is recorded.
+The method returns the new value associated with the key (either the newly computed value or the existing non-null value).
+
+
