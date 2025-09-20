@@ -41,4 +41,8 @@ The value returned by the mappingFunction is then associated with the key in the
     unless the mappingFunction returns null, in which case no mapping is recorded.
 The method returns the new value associated with the key (either the newly computed value or the existing non-null value).
 
+4. replace 
+default boolean replace​(K key, V oldValue, V newValue)
+Replaces the entry for the specified key only if currently mapped to the specified value.
+
 
