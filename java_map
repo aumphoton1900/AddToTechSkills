@@ -1,1 +1,20 @@
+1.default V compute​(K key, BiFunction<? super K,​? super V,​? extends V> remappingFunction)
+Attempts to compute a mapping for the specified key and its current mapped value 
+(or null if there is no current mapping). For example, to either create or append a String msg to a value mapping:
+ 
+ map.compute(key, (k, v) -> (v == null) ? msg : v.concat(msg))
+(Method merge() is often simpler to use for such purposes.)
+If the remapping function returns null, the mapping is removed (or remains absent if initially absent). 
+If the remapping function itself throws an (unchecked) exception, the exception is rethrown, and the current mapping is left unchanged.
+The remapping function should not modify this map during computation.
+return new value
+2.
+Integer computeIfPresent(String key, BiFunction<? super String, ? super Integer, ? extends Integer> remappingFunction)
+default V computeIfPresent(K key,BiFunction<? super K,? super V,? extends V> remappingFunction)
+
+If the value for the specified key is present and non-null, 
+attempts tocompute a new mapping given the key and its current mapped value. 
+If the function returns null, the mapping is removed. 
+If thefunction itself throws an (unchecked) exception, the exception isrethrown, and the current mapping is left unchanged.
+
 
