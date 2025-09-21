@@ -61,5 +61,17 @@ int nthLargest = numbers.stream()
     .orElseThrow();
 System.out.println(nthLargest); // Output: 30
 
+10.
+26. Find the Most Frequent Character in a String
+Question: Find the most frequent character in a string.
 
+String input = "success";
+char mostFrequent = input.chars()
+    .mapToObj(c -> (char) c)
+    .collect(Collectors.groupingBy(c -> c, Collectors.counting()))
+    .entrySet().stream()
+    .max(Map.Entry.comparingByValue())
+    .map(Map.Entry::getKey)
+    .orElseThrow();
+System.out.println(mostFrequent); // Output: s
 
