@@ -1,1 +1,16 @@
-j
+1. 
+//1.8 
+public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		Path path = Paths.get("D:\\a.txt");
+
+        // read file into a stream of lines
+        Stream<String> lines = Files.lines(path, StandardCharsets.UTF_8);
+        Stream<String> words = lines.flatMap(line -> Stream.of(line.split(" +")));
+
+        // count the number of words.
+        long noOfWords = words.count();
+
+        System.out.println(noOfWords);  // 16
+	}
+
