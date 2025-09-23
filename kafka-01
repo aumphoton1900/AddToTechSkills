@@ -94,4 +94,8 @@ consumer.commitSync(); // commit offsets manually
 } finally {
 consumer.close();
 }
+================================================
+3.
+https://www.devopsschool.com/blog/kafka-concept-of-kafka-partition-kafka-consumer-kafka-consumer-group/
+
 
