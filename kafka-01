@@ -79,4 +79,19 @@ Error Handling: Implement error handling to manage scenarios like broker unavail
 This example demonstrates a simple and effective way to subscribe a Kafka consumer to topics and 
 process messages dynamically.
 
+==========================================
+2]
+props.put("enable.auto.commit", "false"); 
+// disable auto commitKafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+consumer.subscribe(Collections.singletonList("demo-topic"));try {
+while (true) {
+ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
+for (ConsumerRecord<String, String> record : records) {
+System.out.printf("Processing record: value=%s, offset=%d%n", record.value(), record.offset());
+}
+consumer.commitSync(); // commit offsets manually
+}
+} finally {
+consumer.close();
+}
 
