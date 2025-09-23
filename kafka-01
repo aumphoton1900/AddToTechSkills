@@ -98,4 +98,6 @@ consumer.close();
 3.
 https://www.devopsschool.com/blog/kafka-concept-of-kafka-partition-kafka-consumer-kafka-consumer-group/
 
+Kafka stores the committed offsets from all partitions inside an internal topic named __consumer_offsets. 
+We can safely trust its information since topics are durable and fault-tolerant for replicated brokers.
 
