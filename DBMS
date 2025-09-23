@@ -1,3 +1,39 @@
 1. https://www.javatpoint.com/transaction-isolation-levels-in-dbms
 Among these four properties, with the help of isolation, the database can determine 
 how the transaction integrity is visible to the system and the user.
+
+Here’s a concise comparison of DELETE, DROP, and TRUNCATE in SQL:
+
+1. DELETE
+Purpose: Removes specific rows from a table based on a condition.
+Usage: Includes a WHERE clause to filter rows.
+Impact: Only deletes data; table structure remains intact.
+Rollback: Supports rollback (transaction-safe).
+Performance: Slower for large datasets as it logs each row deletion.
+Example:
+Sql
+
+Copy code
+DELETE FROM employees WHERE department = 'HR';
+2. DROP
+Purpose: Deletes the entire table (data + structure).
+Usage: Removes the table permanently.
+Impact: Completely removes the table and its metadata.
+Rollback: Cannot be rolled back.
+Performance: Fast, as it removes the table directly.
+Example:
+Sql
+
+Copy code
+DROP TABLE employees;
+3. TRUNCATE
+Purpose: Removes all rows from a table but retains the structure.
+Usage: Clears the table without logging individual row deletions.
+Impact: Resets table data but keeps the table for reuse.
+Rollback: Cannot be rolled back in most databases.
+Performance: Faster than DELETE for clearing all rows.
+Example:
+Sql
+
+Copy code
+TRUNCATE TABLE employees;
