@@ -64,4 +64,50 @@ Cron expressions follow the format: second minute hour day-of-month month day-of
 For example, "0 * 19 * * ?" runs every minute during the 19th hour.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2] dynamic 
+==========
 
+Dynamic Scheduling
+
+By default, @Scheduled values are static and initialized at application startup. To dynamically configure schedules, you can use SchedulingConfigurer:
+
+@Configuration
+@EnableScheduling
+public class DynamicSchedulerConfig implements SchedulingConfigurer {
+
+@Override
+public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
+taskRegistrar.addTriggerTask(
+() -> System.out.println("Dynamic task executed"),
+triggerContext -> {
+// Dynamically calculate the next execution time
+return new Date(System.currentTimeMillis() + 5000); // 5-second delay
+}
+);
+}
+}
+
+
+Parallel Execution of Tasks
+By default, Spring uses a single-threaded scheduler, meaning tasks run sequentially. 
+To enable parallel execution, configure a TaskScheduler bean with a thread pool:
+
+@Bean
+public TaskScheduler taskScheduler() {
+ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+scheduler.setPoolSize(5); // Number of threads
+scheduler.setThreadNamePrefix("TaskScheduler-");
+return scheduler;
+}
+
+
+Alternatively, in Spring Boot, you can set the pool size in application.properties:
+spring.task.scheduling.pool.size=5
+
+Key Considerations
+Fixed Delay vs Fixed Rate: Use fixedDelay for dependent tasks and fixedRate for independent tasks.
+Cron Time Zone: By default, cron expressions use the server's time zone. 
+    You can specify a time zone using the zone attribute.
+Thread Safety: Ensure thread safety when tasks share resources, especially with parallel execution.
+Spring's scheduling capabilities, combined with cron expressions and dynamic configurations, 
+    make it a powerful tool for automating tasks in enterprise applications.
