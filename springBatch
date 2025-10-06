@@ -1,1 +1,67 @@
+1]
+Spring Task Scheduler and Cron Jobs
+
+Spring provides robust support for scheduling tasks using the @Scheduled annotation, 
+enabling developers to execute tasks at fixed intervals, delays, or based on cron expressions. 
+This feature is particularly useful for automating repetitive tasks like sending emails, generating reports, 
+or cleaning up logs.
+
+Enabling Scheduling in Spring
+
+To use scheduling, you need to enable it in your Spring application. 
+This can be done by adding the @EnableScheduling annotation to your configuration class:
+
+@Configuration
+@EnableScheduling
+public class AppConfig {
+// Configuration code
+}
+Copy
+Alternatively, in a Spring Boot application, you can add @EnableScheduling to the main application class.
+
+Scheduling Tasks with @Scheduled
+
+The @Scheduled annotation allows you to define when a specific method should run. 
+Below are the common scheduling options:
+
+Fixed Delay
+
+Executes a task with a fixed delay between the end of the last execution and the start of the next.
+
+@Scheduled(fixedDelay = 3000) // Executes every 3 seconds after the previous task completes
+public void runWithFixedDelay() {
+System.out.println("Task executed with fixed delay: " + System.currentTimeMillis());
+}
+Copy
+Fixed Rate
+
+Executes a task at a fixed interval, regardless of the previous task's completion.
+
+@Scheduled(fixedRate = 2000) // Executes every 2 seconds
+public void runAtFixedRate() {
+System.out.println("Task executed at fixed rate: " + System.currentTimeMillis());
+}
+
+Initial Delay
+
+Adds an initial delay before the first execution, combined with fixedDelay or fixedRate.
+
+@Scheduled(fixedDelay = 3000, initialDelay = 5000) // Starts after 5 seconds, then every 3 seconds
+public void runWithInitialDelay() {
+System.out.println("Task executed with initial delay: " + System.currentTimeMillis());
+}
+
+Cron Expressions
+
+Allows fine-grained control over task execution using cron syntax.
+
+@Scheduled(cron = "0 0 12 * * ?") // Executes every day at 12 PM
+public void runWithCronExpression() {
+System.out.println("Task executed using cron: " + System.currentTimeMillis());
+}
+
+Cron expressions follow the format: second minute hour day-of-month month day-of-week. 
+For example, "0 * 19 * * ?" runs every minute during the 19th hour.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
