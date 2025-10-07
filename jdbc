@@ -1,1 +1,25 @@
 
+Types of Statements in JDBC
+Last Updated : 15 Sep, 2025
+In Java, the Statement interface in JDBC (Java Database Connectivity) is used to create and execute SQL queries in Java applications. JDBC provides three types of statements to interact with the database:
+
+Statement -> For executing static SQL queries.
+PreparedStatement -> For executing parameterized queries.
+CallableStatement -> For executing stored procedures.
+
+https://stackoverflow.com/questions/17089301/working-with-resultsets-in-java
+
+
+2.
+ResultSet.TYPE_SCROLL_INSENSITIVE is a constant defined in the java.sql.ResultSet interface in JDBC 
+(Java Database Connectivity). 
+It represents a specific type of ResultSet object with the following characteristics:
+Scrollable: Unlike TYPE_FORWARD_ONLY ResultSets, TYPE_SCROLL_INSENSITIVE allows for navigation both forward and 
+backward through the rows of the result set. This includes moving to specific rows, 
+moving relative to the current position, and checking for the first or last row.
+Insensitive to Database Changes: This type of ResultSet is insensitive 
+to changes made to the underlying data in the database after the ResultSet has been created. 
+If another transaction modifies or deletes rows that are part of the ResultSet, 
+these changes will not be reflected in the TYPE_SCROLL_INSENSITIVE object. 
+The ResultSet essentially holds a snapshot of the data at the time it was generated.
+
