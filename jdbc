@@ -51,4 +51,8 @@ checking for database changes.
 Choose TYPE_SCROLL_SENSITIVE when you need your result set to stay synchronized with the live database, 
 showing all changes as they happen. 
 
+4.
+What is the difference between execute(), executeQuery() and executeUpdate() methods in JDBC?
+https://www.tutorialspoint.com/what-is-the-difference-between-execute-executequery-and-executeupdate-methods-in-jdbc
+
 
