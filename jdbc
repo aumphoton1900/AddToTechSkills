@@ -1,4 +1,8 @@
 
+- batch 
+- rowset & resultset
+- callable , prepared , statement
+
 Types of Statements in JDBC
 Last Updated : 15 Sep, 2025
 In Java, the Statement interface in JDBC (Java Database Connectivity) is used to create and execute SQL 
@@ -159,5 +163,10 @@ public class RowSetPagingExample {
         }
     }
 }
+
+7. 
+https://www.tutorialspoint.com/jdbc/jdbc-batch-processing.htm
+
+
 
 
