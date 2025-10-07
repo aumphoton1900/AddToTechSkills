@@ -120,3 +120,44 @@ JoinRowSet
 FilteredRowSet
 https://www.tutorialspoint.com/jdbc/jdbc-rowset.htm
 
+6.
+import javax.sql.rowset.CachedRowSet;
+import javax.sql.rowset.RowSetProvider;
+
+public class RowSetPagingExample {
+    public static void main(String[] args) {
+        try {
+            // Create a CachedRowSet instance
+            CachedRowSet rowSet = RowSetProvider.newFactory().createCachedRowSet();
+
+            // Assume database connection properties and SQL command are set
+            rowSet.setUrl("jdbc:derby:memory:myDB;create=true");
+            rowSet.setUsername("test");
+            rowSet.setPassword("test");
+            rowSet.setCommand("SELECT ID, NAME FROM EMPLOYEES");
+            
+            // Set the page size to 2 records
+            rowSet.setPageSize(2);
+
+            // Execute the query and populate the rowset
+            rowSet.execute();
+
+            int pageNumber = 1;
+            while (rowSet.nextPage()) {
+                System.out.println("--- Page: " + pageNumber + " ---");
+                // Iterate through the records in the current page
+                while (rowSet.next()) {
+                    System.out.println("ID: " + rowSet.getInt("ID") + ", Name: " + rowSet.getString("NAME"));
+                }
+                pageNumber++;
+            }
+
+            rowSet.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
