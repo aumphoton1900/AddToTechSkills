@@ -97,4 +97,26 @@ It returns an object of the class ResultSet.
       }
 
 
+5.
+RowSet is an interface, which is like ResultSet, which resides in javax.sql.rowset under java.sql. 
+It inherits from ResultSet, and has more capabilities than a ResultSet. RowSets can be scrollable and updatable. 
+Some DBMS do not support scrollability and updatability of ResultSets. In that case, RowSets have to be used. 
+Also, RowSets have Java Beans functionality. They have properties. Properties can be set or retrieved using setter and getter methods. 
+RowSet uses event model, where events are propagated to when certain events occur.
+
+The events are of following three types:
+
+Update, insert, or deletion of a row
+Cursor movement
+Change in RowSet contents
+
+Types of RowSet Interfaces
+There are 5 major types sub-interfaces of RowSet interface.
+
+JdbcRowSet
+CachedRowSet
+WebRowSet
+JoinRowSet
+FilteredRowSet
+https://www.tutorialspoint.com/jdbc/jdbc-rowset.htm
 
