@@ -1,7 +1,8 @@
 
 Types of Statements in JDBC
 Last Updated : 15 Sep, 2025
-In Java, the Statement interface in JDBC (Java Database Connectivity) is used to create and execute SQL queries in Java applications. JDBC provides three types of statements to interact with the database:
+In Java, the Statement interface in JDBC (Java Database Connectivity) is used to create and execute SQL 
+queries in Java applications. JDBC provides three types of statements to interact with the database:
 
 Statement -> For executing static SQL queries.
 PreparedStatement -> For executing parameterized queries.
@@ -22,4 +23,32 @@ to changes made to the underlying data in the database after the ResultSet has b
 If another transaction modifies or deletes rows that are part of the ResultSet, 
 these changes will not be reflected in the TYPE_SCROLL_INSENSITIVE object. 
 The ResultSet essentially holds a snapshot of the data at the time it was generated.
+
+3.
+TYPE_SCROLL_INSENSITIVE result sets are scrollable but do not reflect changes 
+made to the underlying database while the result set is open, whereas TYPE_SCROLL_SENSITIVE 
+result sets are scrollable and do reflect those changes. The key difference 
+is the sensitivity to database modifications: insensitive types provide a static snapshot of data, 
+while sensitive types offer a dynamic view of the live database. 
+Here's a breakdown of the characteristics of each:
+ResultSet.TYPE_SCROLL_INSENSITIVE
+Scrollability: The cursor can move forward and backward through the rows.
+
+Sensitivity: It is insensitive to changes in the underlying database that occur after the result set was created.
+Data View: Provides a snapshot of the data as it was when the query was processed.
+Use Case: Useful for efficient navigation through query results where real-time updates to the data are not necessary. 
+ResultSet.TYPE_SCROLL_SENSITIVE 
+Scrollability: The cursor can move forward and backward through the rows.
+Sensitivity: It is sensitive to changes made to the database while the result set is open.
+Data View: The data in the result set directly reflects the changes (like inserts, updates, or deletes) 
+occurring in the database.
+Use Case: Ideal when you need to view live updates made by other transactions or statements in the same database. 
+
+In Summary
+Choose TYPE_SCROLL_INSENSITIVE for a fixed view of data, which can be more efficient as it doesn't require constant 
+checking for database changes.
+
+Choose TYPE_SCROLL_SENSITIVE when you need your result set to stay synchronized with the live database, 
+showing all changes as they happen. 
+
 
