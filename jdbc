@@ -195,6 +195,15 @@ try{
    conn.rollback(savepoint1);
 }
 
+8.
+need for connection pool
+===========================
+>>Popular Connection Pooling Libraries
+Following are popular connection pooling libraries.
+
+HikariCP − Known for its performance and efficiency.
+Apache Commons DBCP − Widely used and well-established.
+c3p0 − Another popular option with a focus on stability.
 
 
 
