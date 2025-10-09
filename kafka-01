@@ -1,5 +1,5 @@
 Kafka Consumer Subscribe Example
-
+https://it-korea-class.blogspot.com/2025/01/kafka-polling-vs-listen.html
 1) 
 In Apache Kafka, subscribing a consumer to topics allows it to receive messages 
 from those topics dynamically. Below is an example of how to use the Kafka Consumer 
