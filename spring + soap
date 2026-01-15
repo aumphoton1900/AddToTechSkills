@@ -1,6 +1,15 @@
-To configure client-side security for SOAP web services in Spring using Java 11+, specifically involving client-provided certificates for authentication (Mutual TLS) without using Google-specific APIs, you will primarily rely on Spring-WS, Apache WSS4J, and standard Java SSL/TLS capabilities.
+1)
+configure client side security with soap in spring java 11 without using Google apis / library , use client provided certificate for authentication
 
-Since Java 11, the javax.xml.ws (JAX-WS) and javax.xml.bind (JAXB) modules are no longer part of the JDK, so you must include them as third-party dependencies.
+content_copy
+
+
+To configure client-side security for SOAP web services in Spring using Java 11+, 
+specifically involving client-provided certificates for authentication (Mutual TLS) without 
+using Google-specific APIs, you will primarily rely on Spring-WS, Apache WSS4J, and standard Java SSL/TLS capabilities.
+
+Since Java 11, the javax.xml.ws (JAX-WS) and javax.xml.bind (JAXB) modules are no longer part of the JDK, 
+so you must include them as third-party dependencies.
 
 Here's how to set up client-side security, including Mutual TLS (mTLS) and optional WS-Security signing:
 
@@ -33,9 +42,13 @@ java_library(
     ],
 )
 Configure Mutual TLS (mTLS) with Apache HttpClient:
-Mutual TLS involves the client presenting a certificate to the server during the TLS handshake. This requires configuring an SSLContext with the client's private key and certificate.
+Mutual TLS involves the client presenting a certificate to the server during the TLS handshake. 
+This requires configuring an SSLContext with the client's private key and certificate.
 
-WARNING on Key Management: The following example loads keystore files from the filesystem. In Google's production environment, this is highly discouraged and generally not permitted. Sensitive credentials like private keys and keystore passwords must be managed and accessed via Google Keystore (go/keystore). Using filesystem-based keystores should only be for local development or in environments where Keystore integration is absolutely impossible.
+WARNING on Key Management: The following example loads keystore files from the filesystem. 
+In Google's production environment, this is highly discouraged and generally not permitted. 
+Sensitive credentials like private keys and keystore passwords must be managed and accessed via Google Keystore (go/keystore). 
+Using filesystem-based keystores should only be for local development or in environments where Keystore integration is absolutely impossible.
 
 JAVA
 
@@ -154,7 +167,8 @@ public class MySecureSoapClientConfig {
 
     // 5. Configure WebServiceTemplate with mTLS Sender and WS-Security Interceptor
     @Bean
-    public WebServiceTemplate webServiceTemplate(Jaxb2Marshaller marshaller, HttpComponentsMessageSender messageSender, Wss4jSecurityInterceptor securityInterceptor) {
+    public WebServiceTemplate webServiceTemplate(Jaxb2Marshaller marshaller, HttpComponentsMessageSender messageSender, 
+Wss4jSecurityInterceptor securityInterceptor) {
         WebServiceTemplate template = new WebServiceTemplate();
         template.setDefaultUri(soapServiceUri);
         template.setMarshaller(marshaller);
@@ -204,4 +218,6 @@ public class MySecureSoapClient {
         }
     }
 }
-By following this setup, you are using standard Java and open-source libraries (Spring-WS, Apache WSS4J, Apache HttpClient) to achieve client certificate-based authentication (mTLS) and message signing for your SOAP client in a Java 11+ environment, without relying on Google-specific internal libraries for the core security logic.
+By following this setup, you are using standard Java and open-source libraries (Spring-WS, Apache WSS4J, Apache HttpClient) 
+to achieve client certificate-based authentication (mTLS) and message signing for your SOAP client in a Java 11+ environment, 
+without relying on Google-specific internal libraries for the core security logic.
