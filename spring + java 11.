@@ -167,3 +167,162 @@ response body.
 
 In summary, while javax.xml.bind is no longer in the JDK by default, you can seamlessly continue using JAXB for XML marshalling and 
 unmarshalling in Spring applications on Java 11+ by adding //third_party/java/jaxb to your build dependencies.
+
+
+++++++++++++++++++++++++++++++++++++++++
+
+With the removal of java.xml.bind from the JDK in Java 11, you need to include third-party libraries for XML marshalling 
+(Java to XML) and unmarshalling (XML to Java). Here are the primary options available within Google3:
+
+JAXB (Java Architecture for XML Binding) as a Third-Party Library:
+
+The most direct replacement is to continue using JAXB. The APIs (javax.xml.bind.*) and their implementations 
+are now distributed as separate artifacts.
+Google3 Dependency: You can add JAXB to your BUILD file:
+
+PYTHON
+
+java_library(
+    name = "my_jaxb_xml_lib",
+    # ...
+    deps = [
+        "//third_party/java/jaxb",  # Provides javax.xml.bind APIs and an implementation
+        # Optional: May need activation if using certain JAXB features
+        # "//third_party/java/activation",
+    ],
+)
+Usage: You can use the standard JAXB APIs (JAXBContext, Marshaller, Unmarshaller) as you would have in Java 8. 
+If using Spring, Jaxb2Marshaller (from //third_party/java/spring:oxm) will automatically use this third-party JAXB.
+Jackson XML Module (jackson-dataformat-xml):
+
+While commonly known for JSON, the Jackson library also provides a module for XML. This allows you to use Jackson's ObjectMapper 
+with an XML-specific factory to marshal Java objects to and from XML.
+Google3 Dependency:
+
+PYTHON
+
+java_library(
+    name = "my_jackson_xml_lib",
+    # ...
+    deps = [
+        "//third_party/java/jackson2:jackson2-databind",
+        "//third_party/java/jackson2:jackson2-dataformat-xml", # Jackson XML module
+        # ... other Jackson modules if needed
+    ],
+)
+Usage Example:
+JAVA
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+
+// Your JAXB-like annotated class (Jackson uses similar annotations or can infer)
+// Example: class MyFooResponse { public String message; public int code; }
+
+ObjectMapper xmlMapper = new XmlMapper();
+
+// Marshalling (Java to XML)
+MyFooResponse response = new MyFooResponse("Hello XML", 100);
+String xmlOutput = xmlMapper.writeValueAsString(response);
+System.out.println(xmlOutput);
+
+// Unmarshalling (XML to Java)
+String xmlInput = "<MyFooResponse><message>Test</message><code>200</code></MyFooResponse>";
+MyFooResponse parsedResponse = xmlMapper.readValue(xmlInput, MyFooResponse.class);
+System.out.println(parsedResponse.getMessage());
+Security Warning: Be cautious when unmarshalling XML from untrusted sources using Jackson. 
+XML parsing can be vulnerable to XXE attacks and other issues, potentially leading to information disclosure or Denial of Service. 
+The security guidelines for Jackson (often discussed in the context of JSON) also apply to its XML usage. 
+Ensure proper configuration to mitigate risks when handling external XML.
+Google's Secure XML Parsing:
+
+For general secure XML parsing within Google3, especially when dealing with potentially untrusted XML, consider using libraries 
+recommended by the ISE Team. While not always focused on direct object marshalling/unmarshalling, they provide secure parsing foundations:
+com.google.common.xml.parsing.SecureXMLParsing: This library provides hardened XML parsers built on the JDK's in-built Xerces, 
+configured to prevent common vulnerabilities like XXE. See XXE attacks and other XML parser issues for details on secure usage.
+Recommendation:
+
+For most cases migrating from Java 8 where you were using JAXB, the most straightforward approach in Java 11+ is 
+to add the //third_party/java/jaxb dependency. This allows you to continue using the standard JAXB APIs and 
+Spring's Jaxb2Marshaller without significant code changes.
+
+If you are starting a new project or prefer the Jackson ecosystem, using //third_party/java/jackson2:jackson2-dataformat-xml 
+is a viable alternative, but you must pay close attention to security guidelines for parsing XML from external sources 
+to prevent vulnerabilities.With the removal of java.xml.bind from the JDK in Java 11, you need to include third-party 
+libraries for XML marshalling (Java to XML) and unmarshalling (XML to Java). Here are the primary options available within Google3:
+
+JAXB (Java Architecture for XML Binding) as a Third-Party Library:
+
+The most direct replacement is to continue using JAXB. The APIs (javax.xml.bind.*) and their implementations are now distributed as separate artifacts.
+Google3 Dependency: You can add JAXB to your BUILD file:
+PYTHON
+
+java_library(
+    name = "my_jaxb_xml_lib",
+    # ...
+    deps = [
+        "//third_party/java/jaxb",  # Provides javax.xml.bind APIs and an implementation
+        # Optional: May need activation if using certain JAXB features
+        # "//third_party/java/activation",
+    ],
+)
+Usage: You can use the standard JAXB APIs (JAXBContext, Marshaller, Unmarshaller) 
+as you would have in Java 8. If using Spring, Jaxb2Marshaller (from //third_party/java/spring:oxm) 
+will automatically use this third-party JAXB.
+Jackson XML Module (jackson-dataformat-xml):
+
+While commonly known for JSON, the Jackson library also provides a module for XML. This allows you 
+to use Jackson's ObjectMapper with an XML-specific factory to marshal Java objects to and from XML.
+Google3 Dependency:
+
+PYTHON
+
+java_library(
+    name = "my_jackson_xml_lib",
+    # ...
+    deps = [
+        "//third_party/java/jackson2:jackson2-databind",
+        "//third_party/java/jackson2:jackson2-dataformat-xml", # Jackson XML module
+        # ... other Jackson modules if needed
+    ],
+)
+Usage Example:
+JAVA
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+
+// Your JAXB-like annotated class (Jackson uses similar annotations or can infer)
+// Example: class MyFooResponse { public String message; public int code; }
+
+ObjectMapper xmlMapper = new XmlMapper();
+
+// Marshalling (Java to XML)
+MyFooResponse response = new MyFooResponse("Hello XML", 100);
+String xmlOutput = xmlMapper.writeValueAsString(response);
+System.out.println(xmlOutput);
+
+// Unmarshalling (XML to Java)
+String xmlInput = "<MyFooResponse><message>Test</message><code>200</code></MyFooResponse>";
+MyFooResponse parsedResponse = xmlMapper.readValue(xmlInput, MyFooResponse.class);
+System.out.println(parsedResponse.getMessage());
+Security Warning: Be cautious when unmarshalling XML from untrusted sources using Jackson. 
+
+XML parsing can be vulnerable to XXE attacks and other issues, potentially leading to information disclosure or Denial of Service. 
+The security guidelines for Jackson (often discussed in the context of JSON) also apply to its XML usage. 
+Ensure proper configuration to mitigate risks when handling external XML.
+Google's Secure XML Parsing:
+
+For general secure XML parsing within Google3, especially when dealing with potentially untrusted XML, 
+consider using libraries recommended by the ISE Team. While not always focused on direct object marshalling/unmarshalling, 
+they provide secure parsing foundations:
+com.google.common.xml.parsing.SecureXMLParsing: This library provides hardened XML parsers built on the JDK's in-built Xerces, 
+configured to prevent common vulnerabilities like XXE. See XXE attacks and other XML parser issues for details on secure usage.
+Recommendation:
+
+For most cases migrating from Java 8 where you were using JAXB, the most straightforward approach in Java 11+ is 
+to add the //third_party/java/jaxb dependency. This allows you to continue using the standard JAXB APIs and Spring's 
+Jaxb2Marshaller without significant code changes.
+If you are starting a new project or prefer the Jackson ecosystem, using //third_party/java/jackson2:jackson2-dataformat-xml 
+is a viable alternative, but you must pay close attention to security guidelines for parsing XML from external sources to prevent vulnerabilities.
+
