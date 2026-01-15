@@ -100,6 +100,47 @@ issues, and finally consider modularization.
 
 Testing:
 Thoroughly test your application after migration to ensure all functionalities work 
+
+=====================
+With the release of Java 11, several Java EE (now Jakarta EE) and CORBA modules were removed from the Java Development Kit (JDK). 
+This change was introduced in Java 9 by JEP 320: Remove the CORBA and Java EE Modules and fully executed in JDK 11.
+
+The primary modules and their associated packages that were removed are:
+
+java.xml.bind: Contains the Java Architecture for XML Binding (JAXB) APIs.
+
+Packages: javax.xml.bind.*
+java.xml.ws: Contains the Java API for XML-Based Web Services (JAX-WS) APIs.
+
+Packages: javax.xml.ws.*, javax.xml.soap.*, javax.xml.ws.handler.*
+java.activation: Contains the JavaBeans Activation Framework (JAF) APIs, often used by JAX-WS and JAXB.
+
+Packages: javax.activation.*
+java.xml.ws.annotation: Contains annotations used by JAX-WS.
+
+Packages: javax.jws.*, javax.xml.ws.annotation.*
+java.corba: Contains the CORBA APIs.
+
+Packages: org.omg.CORBA.*, javax.rmi.CORBA.*, etc.
+java.transaction: Contains the Java Transaction API (JTA).
+
+Packages: javax.transaction.*, javax.transaction.xa.*
+Although not strictly removed from the JDK in the same way, classes under javax.annotation (Common Annotations) 
+are also part of Java EE and are often discussed in this context. While the API still exists, its binding might require an explicit dependency.
+
+Impact and Migration in Google3:
+
+If your application, when migrating from Java 8 to Java 11 (or later Google JDK versions like JDK 21), 
+uses classes from these packages, you will encounter ClassNotFoundException or similar errors. 
+To resolve this, you need to add explicit dependencies to your BUILD file, pointing to the third-party libraries that provide these APIs.
+
+Here are some common //third_party/java dependencies:
+
+For javax.xml.bind.*: //third_party/java/jaxb
+For javax.xml.ws.*: //third_party/java/jaxws
+For javax.activation.*: //third_party/java/activation
+For javax.annotation.*: //third_party/java/javax_annotation_api
+
 as expected and there are no regressions in behavior.
 https://medium.com/globant/migrating-to-java-11-from-java-8-bd6343107ea6
 
