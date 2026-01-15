@@ -1,0 +1,207 @@
+To configure client-side security for SOAP web services in Spring using Java 11+, specifically involving client-provided certificates for authentication (Mutual TLS) without using Google-specific APIs, you will primarily rely on Spring-WS, Apache WSS4J, and standard Java SSL/TLS capabilities.
+
+Since Java 11, the javax.xml.ws (JAX-WS) and javax.xml.bind (JAXB) modules are no longer part of the JDK, so you must include them as third-party dependencies.
+
+Here's how to set up client-side security, including Mutual TLS (mTLS) and optional WS-Security signing:
+
+Add Dependencies to Your BUILD File:
+Include Spring-WS, Spring-OXM, the necessary JAX-WS/JAXB/SAAJ libraries, and Apache WSS4J:
+
+PYTHON
+
+# BUILD file example for a secure Spring-WS client on Java 11+ without Google APIs
+java_library(
+    name = "my_secure_soap_client_lib",
+    srcs = glob(["*.java"]),
+    deps = [
+        # Spring-WS Core for SOAP client functionality
+        "//third_party/java/spring:ws",
+        "//third_party/java/spring:oxm",  # For Marshalling/Unmarshalling
+
+        # JAX-WS, JAXB, SAAJ APIs (removed from JDK 11+, must be added)
+        "//third_party/java/jaxws_rt",      # Core JAX-WS runtime (javax.xml.ws.*)
+        "//third_party/java/jaxb",          # JAXB for XML binding (javax.xml.bind.*)
+        "//third_party/java/saaj_impl",     # SAAJ for SOAP Message handling (javax.xml.soap.*)
+        "//third_party/java/javax_annotation_api", # Common annotations
+
+        # Apache WSS4J for WS-Security implementation
+        "//third_party/java/apache_wss4j",
+
+        # Apache HttpClient for underlying HTTP transport with SSL/TLS support
+        "//third_party/java/apache_httpclient",
+        "//third_party/java/apache_httpcore",
+    ],
+)
+Configure Mutual TLS (mTLS) with Apache HttpClient:
+Mutual TLS involves the client presenting a certificate to the server during the TLS handshake. This requires configuring an SSLContext with the client's private key and certificate.
+
+WARNING on Key Management: The following example loads keystore files from the filesystem. In Google's production environment, this is highly discouraged and generally not permitted. Sensitive credentials like private keys and keystore passwords must be managed and accessed via Google Keystore (go/keystore). Using filesystem-based keystores should only be for local development or in environments where Keystore integration is absolutely impossible.
+
+JAVA
+
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.ssl.SSLContextBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.ws.client.core.WebServiceTemplate;
+import org.springframework.ws.client.support.interceptor.ClientInterceptor;
+import org.springframework.ws.soap.security.wss4j2.Wss4jSecurityInterceptor;
+import org.springframework.ws.transport.http.HttpComponentsMessageSender;
+
+import javax.net.ssl.SSLContext;
+import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
+import java.util.Collections;
+import java.util.Properties;
+
+@Configuration
+public class MySecureSoapClientConfig {
+
+    // --- Client-side Certificate & Truststore Configuration ---
+    // WARNING: FileSystemResource is INSECURE for production at Google. Use go/keystore.
+    private final String clientKeystorePath = "/path/to/your/client-keystore.jks";
+    private final String clientKeystorePassword = "CLIENT_KEYSTORE_PASSWORD";
+    private final String clientKeyAlias = "myclientkeyalias";
+    private final String clientKeyPassword = "CLIENT_KEY_PASSWORD"; // Often same as keystore password
+
+    private final String truststorePath = "/path/to/your/server-truststore.jks";
+    private final String truststorePassword = "TRUSTSTORE_PASSWORD";
+
+    private final String soapServiceUri = "https://secure-soap.example.com/services/myservice";
+
+    // 1. Configure Jaxb2Marshaller for SOAP Body marshalling/unmarshalling
+    @Bean
+    public Jaxb2Marshaller marshaller() {
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setPackagesToScan("com.google.myproject.soapclient.schemas");
+        return marshaller;
+    }
+
+    // 2. Create SSLContext configured for Mutual TLS
+    @Bean
+    public SSLContext sslContext() {
+        try {
+            Resource clientKeystore = new FileSystemResource(clientKeystorePath);
+            Resource truststore = new FileSystemResource(truststorePath);
+
+            return SSLContextBuilder.create()
+                // Load client's private key and certificate for client authentication (mTLS)
+                .loadKeyMaterial(
+                    clientKeystore.getURL(),
+                    clientKeystorePassword.toCharArray(),
+                    clientKeyPassword.toCharArray()
+                )
+                // Load trusted certificates to validate the server's certificate
+                .loadTrustMaterial(
+                    truststore.getURL(),
+                    truststorePassword.toCharArray()
+                )
+                .build();
+        } catch (NoSuchAlgorithmException | KeyManagementException | KeyStoreException | CertificateException | IOException | UnrecoverableKeyException e) {
+            throw new IllegalStateException("Failed to create SSLContext for mTLS. Check keystore/truststore paths and passwords.", e);
+        }
+    }
+
+    // 3. Configure HttpComponentsMessageSender to use the mTLS SSLContext
+    @Bean
+    public HttpComponentsMessageSender httpComponentsMessageSender(SSLContext sslContext) {
+        HttpComponentsMessageSender sender = new HttpComponentsMessageSender();
+        HttpClient httpClient = HttpClientBuilder.create()
+            .setSSLContext(sslContext)
+            // Optional: Disable follow redirects for security
+            .disableRedirectHandling()
+            .build();
+        sender.setHttpClient(httpClient);
+        // Optional: Set timeouts
+        // sender.setConnectionTimeout(5000);
+        // sender.setReadTimeout(10000);
+        return sender;
+    }
+
+    // 4. Configure Wss4jSecurityInterceptor for WS-Security Headers (e.g., Signing)
+    @Bean
+    public Wss4jSecurityInterceptor securityInterceptor() {
+        Wss4jSecurityInterceptor interceptor = new Wss4jSecurityInterceptor();
+        // Example: Sign the SOAP Body. Other actions like Timestamp can be added.
+        interceptor.setSecurementActions("Signature Timestamp");
+
+        // Configure WSS4J to use the same client keystore for signing
+        Properties sigProps = new Properties();
+        sigProps.setProperty("org.apache.ws.security.crypto.provider", "org.apache.ws.security.util.Loader");
+        sigProps.setProperty("org.apache.ws.security.crypto.merlin.keystore.type", "JKS");
+        sigProps.setProperty("org.apache.ws.security.crypto.merlin.keystore.password", clientKeystorePassword);
+        sigProps.setProperty("org.apache.ws.security.crypto.merlin.keystore.file", clientKeystorePath);
+
+        try {
+             Wss4jSecurityInterceptor.Crypto signatureCrypto = new Wss4jSecurityInterceptor.Crypto(sigProps);
+             interceptor.setSecurementSignatureCrypto(signatureCrypto);
+             interceptor.setSecurementSignatureUsername(clientKeyAlias); // Alias of the client key in the keystore
+             // Specify which parts of the SOAP message to sign. Example: the entire SOAP Body.
+             interceptor.setSecurementSignatureParts("{Content}{http://schemas.xmlsoap.org/soap/envelope/}Body");
+        } catch (Exception e) {
+            throw new IllegalStateException("Failed to configure WSS4j Signature Crypto", e);
+        }
+        return interceptor;
+    }
+
+    // 5. Configure WebServiceTemplate with mTLS Sender and WS-Security Interceptor
+    @Bean
+    public WebServiceTemplate webServiceTemplate(Jaxb2Marshaller marshaller, HttpComponentsMessageSender messageSender, Wss4jSecurityInterceptor securityInterceptor) {
+        WebServiceTemplate template = new WebServiceTemplate();
+        template.setDefaultUri(soapServiceUri);
+        template.setMarshaller(marshaller);
+        template.setUnmarshaller(marshaller);
+        // Use the HttpComponentsMessageSender configured with the mTLS SSLContext
+        template.setMessageSender(messageSender);
+        // Add the WSS4jSecurityInterceptor to apply WS-Security headers
+        template.setInterceptors(new ClientInterceptor[]{securityInterceptor});
+        return template;
+    }
+}
+Using the WebServiceTemplate:
+Inject the WebServiceTemplate into your client service to make SOAP calls. Each call will now:
+
+Perform a TLS handshake where your client presents its certificate (mTLS).
+Validate the server's certificate against your truststore.
+(If configured) Add WS-Security headers, including a digital signature of the SOAP message body using your client certificate's private key.
+JAVA
+
+package com.google.myproject.soapclient;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.ws.client.core.WebServiceTemplate;
+// Assume MyFooRequest and MyFooResponse are JAXB-generated classes
+
+@Service
+public class MySecureSoapClient {
+
+    private final WebServiceTemplate webServiceTemplate;
+
+    @Autowired
+    public MySecureSoapClient(WebServiceTemplate webServiceTemplate) {
+        this.webServiceTemplate = webServiceTemplate;
+    }
+
+    public MyFooResponse callSecureFoo(MyFooRequest request) {
+        System.out.println("Sending secure SOAP request with mTLS and WS-Security...");
+        try {
+            MyFooResponse response = (MyFooResponse) webServiceTemplate.marshalSendAndReceive(request);
+            System.out.println("Received secure SOAP response.");
+            return response;
+        } catch (Exception e) {
+            System.err.println("Error during secure SOAP call: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("SOAP call failed", e);
+        }
+    }
+}
+By following this setup, you are using standard Java and open-source libraries (Spring-WS, Apache WSS4J, Apache HttpClient) to achieve client certificate-based authentication (mTLS) and message signing for your SOAP client in a Java 11+ environment, without relying on Google-specific internal libraries for the core security logic.
