@@ -1,1 +1,169 @@
+1. 
 
+please tell how marshalling and unmarshalling happen in java 11 onwaards , 
+let framework be spring , since the java.xml.bind module was removed from java 11
+
+content_copy
+With the removal of the java.xml.bind module from the standard Java SE distribution in Java 11, 
+applications using JAXB (Java Architecture for XML Binding) for marshalling (Java object to XML) and 
+unmarshalling (XML to Java object) need to include the JAXB API and implementation as explicit dependencies.
+
+When using the Spring Framework, specifically for XML handling in web services or REST controllers, 
+you can continue to use Spring's Object/XML Mapping (OXM) support, 
+such as Jaxb2Marshaller, by adding the necessary JAXB libraries to your BUILD file.
+
+Here's how marshalling and unmarshalling work in Java 11+ with Spring:
+
+Add JAXB Dependencies to Your BUILD File:
+The core change is to declare dependencies on the JAXB API and a JAXB implementation in your java_library rule. 
+The Google3 //third_party/java/jaxb target provides the necessary javax.xml.bind classes.
+
+PYTHON
+
+# BUILD file example
+java_library(
+    name = "my_spring_xml_lib",
+    srcs = glob(["*.java"]),
+    deps = [
+        # Spring Core and Web MVC
+        "//third_party/java/spring:context",
+        "//third_party/java/spring:webmvc",
+        # Spring OXM module for JAXB integration
+        "//third_party/java/spring:oxm",
+        # Explicitly add JAXB API which was removed from JDK 11+
+        "//third_party/java/jaxb",
+        # JAXB may sometimes require Activation Framework
+        # "//third_party/java/activation",
+    ],
+)
+Define Your XML-Mappable Java Objects:
+Use standard JAXB annotations (@XmlRootElement, @XmlElement, etc.) on your Java classes (POJOs).
+
+JAVA
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "myResponse")
+public class MyFooResponse {
+    private String message;
+    private int code;
+
+    public MyFooResponse() {}
+
+    public MyFooResponse(String message, int code) {
+        this.message = message;
+        this.code = code;
+    }
+
+    @XmlElement
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @XmlElement
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    @Override
+    public String toString() {
+        return "MyFooResponse{message='" + message + "', code=" + code + '}';
+    }
+}
+Configure Spring's Jaxb2Marshaller:
+
+In your Spring configuration (e.g., using @Configuration), you'll set up a Jaxb2Marshaller. 
+This marshaller uses the JAXB API found on the classpath (provided by //third_party/java/jaxb).
+
+JAVA
+
+import java.util.Collections;
+import java.util.List;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class MyXmlConfig implements WebMvcConfigurer {
+
+    @Bean
+    public Jaxb2Marshaller jaxb2Marshaller() {
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        // Specify the packages where your JAXB-annotated classes are located.
+        marshaller.setPackagesToScan("com.google.myproject.xml");
+        return marshaller;
+    }
+
+    @Bean
+    public MarshallingHttpMessageConverter marshallingHttpMessageConverter() {
+        MarshallingHttpMessageConverter converter = new MarshallingHttpMessageConverter();
+        converter.setMarshaller(jaxb2Marshaller());
+        converter.setUnmarshaller(jaxb2Marshaller());
+        // Optionally set supported media types, defaults include application/xml
+        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.APPLICATION_XML));
+        return converter;
+    }
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(marshallingHttpMessageConverter());
+    }
+}
+jaxb2Marshaller(): Creates and configures the Jaxb2Marshaller. setPackagesToScan tells JAXB where to find your @XmlRootElement classes.
+marshallingHttpMessageConverter(): This Spring MVC HttpMessageConverter uses the Jaxb2Marshaller for both marshalling 
+(writing Java objects to the HTTP response body as XML) and unmarshalling (reading XML from the HTTP request body into Java objects).
+configureMessageConverters(): Registers the MarshallingHttpMessageConverter with Spring MVC.
+
+Using in a Spring MVC Controller:
+With the converter configured, Spring MVC can automatically handle XML marshalling/unmarshalling in your controllers:
+
+JAVA
+
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/foo")
+public class MyFooController {
+
+    // Unmarshalling: Converts incoming XML to MyFooResponse object
+    @PostMapping(path = "/process", consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> processXml(@RequestBody MyFooResponse request) {
+        System.out.println("Received XML Request: " + request);
+        // ... process request ...
+        return ResponseEntity.ok("Received code: " + request.getCode());
+    }
+
+    // Marshalling: Converts MyFooResponse object to XML in the response
+    @GetMapping(path = "/get", produces = MediaType.APPLICATION_XML_VALUE)
+    public MyFooResponse getXml() {
+        System.out.println("Returning XML Response");
+        return new MyFooResponse("Success from Java 11!", 200);
+    }
+}
+
+consumes = MediaType.APPLICATION_XML_VALUE: Spring uses the MarshallingHttpMessageConverter to unmarshal the incoming XML request body 
+into a MyFooResponse object.
+produces = MediaType.APPLICATION_XML_VALUE: Spring uses the MarshallingHttpMessageConverter to marshal the returned MyFooResponse object into an XML 
+response body.
+
+In summary, while javax.xml.bind is no longer in the JDK by default, you can seamlessly continue using JAXB for XML marshalling and 
+unmarshalling in Spring applications on Java 11+ by adding //third_party/java/jaxb to your build dependencies.
