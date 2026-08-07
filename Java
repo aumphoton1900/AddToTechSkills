@@ -1,3 +1,5 @@
+https://medium.com/@brijesh.sriv.misc/complete-list-of-features-in-java-17-lts-5f4f1fa5fe67
+
 Files
 1. public static Stream<String> lines​(Path path) throws IOException
 Read all lines from a file as a Stream. Bytes from the file are decoded into characters using the UTF-8 charset.
