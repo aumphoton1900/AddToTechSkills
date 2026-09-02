@@ -1,0 +1,19 @@
+Java 5 (released in 2004 as J2SE 5.0) introduced major language 
+changes that fundamentally modernized how developers write Java code.
+
+Generics: Added compile-time type safety to collections, removing the need for manual casting.
+Autoboxing and Unboxing: Automated conversions between primitive types (like int) and wrapper classes (like Integer).
+Enhanced For-Loop: Provided a clean for-each syntax to iterate through arrays and collections easily.
+Enumerations (enum): Upgraded enums from simple integer constants to full, type-safe classes with fields and methods.
+Varargs: Allowed methods to accept a variable number of comma-separated arguments using an array under the hood.
+Annotations: Introduced metadata (@Override, @Deprecated, @SuppressWarnings) to tag code for compilers and tools.
+Enabled direct access to static members of a class without prefixing the class name every time.
+
+Core Library ChangesConcurrency Utilities (java.util.concurrent): 
+------------------------------------------------------------------
+Added high-performance threading tools like 
+thread pools, locks, BlockingQueue, and concurrent collections.  
+  
+Formatting and Scanning: Introduced java.util.Scanner for 
+input parsing and C-style formatting via System.out.printf()
+  
