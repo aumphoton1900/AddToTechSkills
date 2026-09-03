@@ -28,7 +28,24 @@ Concurrent collections use fine-grained locking or lock-free atomic operations t
 simultaneously.
 They prevent runtime errors like ConcurrentModificationException by using weakly consistent or fail-safe iterators.
 
+Common Types of Concurrent Collections
+----------------------------------------
 
+Different programming platforms provide built-in namespaces for these data structures 
+(such as java.util.concurrent in Java or System.Collections.Concurrent in .NET):
+
+ Maps keys to values while allowing simultaneous reads and 
+segmented writes (e.g., ConcurrentHashMap in Java or ConcurrentDictionary in C#).
+
+Concurrent Queues: First-in, first-out (FIFO) data structures optimized for producer-consumer 
+workflows where multiple threads add or remove elements
+
+Concurrent Stacks: Last-in, first-out (LIFO) structures built for safe concurrent pushing and popping
+
+Blocking Collections: Queues or collections that automatically block or time out if you try 
+to pull from an empty space or push into a full capacity.
+
+============================================================
 
 
 
