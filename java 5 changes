@@ -17,3 +17,19 @@ thread pools, locks, BlockingQueue, and concurrent collections.
 Formatting and Scanning: Introduced java.util.Scanner for 
 input parsing and C-style formatting via System.out.printf()
   
+----------------------------------------
+What are Concurrent Collections?
+
+Concurrent collections allow multiple threads to read and write shared data at the same time.
+
+Traditional synchronized collections lock the entire data structure for every operation, causing thread contention.
+
+Concurrent collections use fine-grained locking or lock-free atomic operations to let multiple threads work 
+simultaneously.
+They prevent runtime errors like ConcurrentModificationException by using weakly consistent or fail-safe iterators.
+
+
+
+
+
+
