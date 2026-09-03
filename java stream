@@ -53,6 +53,8 @@
 	}
 
 9.
+This code finds the 3rd largest number in your list by sorting the values from highest to lowest and skipping the top two elements.
+
 List<Integer> numbers = Arrays.asList(10, 20, 50, 40, 30);
 int nthLargest = numbers.stream()
     .sorted(Comparator.reverseOrder())
