@@ -77,3 +77,11 @@ char mostFrequent = input.chars()
     .orElseThrow();
 System.out.println(mostFrequent); // Output: s
 
+11.
+	public static void sum() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        int sum = numbers.stream()
+                        .mapToInt(Integer::intValue)
+                        .sum();
+        System.out.println("Sum: " + sum);
+    }
