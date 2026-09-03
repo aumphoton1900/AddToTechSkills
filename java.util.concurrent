@@ -1,1 +1,16 @@
+The java.util.concurrent.atomic package was added in Java 5 (JDK 1.5) in 2004 as part of the JSR 166 concurrency 
+utilities developed by Doug Lea.
+
+It provides a small toolkit of lock-free, thread-safe programming primitives 
+on single variables and arrays using hardware-level Compare-And-Swap (CAS) operations.
+
+Key Features Added in 1.5
+Basic Types: AtomicInteger, AtomicLong, AtomicBoolean, and AtomicReference.
+Arrays: AtomicIntegerArray, AtomicLongArray, and AtomicReferenceArray.
+Field Updaters: AtomicIntegerFieldUpdater, AtomicLongFieldUpdater, and AtomicReferenceFieldUpdater.
+Reference State: AtomicStampedReference and AtomicMarkableReference to help solve the ABA problem.
+
+---------------------------------------------------------------------------
+
+
 
