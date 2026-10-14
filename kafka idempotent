@@ -1,0 +1,4 @@
+When we enable idempotency for the Kafka producer, 
+it guarantees that retrying a send operation doesn’t result in duplicate records being written into a topic.
+
+
