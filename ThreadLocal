@@ -1,0 +1,15 @@
+
+1. Thread-Local Storage (The Imperative Paradigm)
+
+In traditional, synchronous frameworks where one thread handles one request from start to finish (e.g., Spring Boot with Spring MVC, Java Servlets), 
+Thread-Local Storage is the standard approach.
+• How it works: Data is stored in a thread-specific global map. 
+Because the execution flows entirely on a single thread 
+from the Controller through the Service to the DAO, any layer can fetch the data from the thread context.
+
+• Common implementations:
+	• Java's ThreadLocal or InheritableThreadLocal
+	• Spring's RequestContextHolder or SecurityContextHolder
+	• Python's threading.local
+
+
